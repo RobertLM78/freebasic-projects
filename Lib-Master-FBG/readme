@@ -1,0 +1,194 @@
+===============================================================================
+| Library Master FBG 0.1; Port of the RBL classic to FreeBASIC - graphic ver. |
+|      readme file                                                            |
+===============================================================================
+This package contains 14 FreeBASIC files:
+
+1 Main Program (./):
+LibMasterFBG.bas
+
+13 Translation Units (./units):
+browseTitle.bas
+deleteRec.bas
+fileLoad.bas
+fileSave.bas
+fileSort
+fileUpdate.bas
+helpFile.bas
+searchAuthor.bas
+searchSubject.bas
+searchTitle.bas
+splash.bas   (generic)
+strCat.bas
+strDiv.bas
+
+###### Headers ################################################################
+' -----------------------------------------------------------------------------
+' Title: LibMasterFBG.bas - A port of the RBL classic program to FreeBASIC
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: FBG == FreeBASIC 'Console' version
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: browseTitle.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: search for title - no outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: deleteRec.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs CAT(),RecNUM
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: fileLoad.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs CAT(), RecNum
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: fileSave.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: No Outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: fileSort.bas - translation unit for LibMasterFBG.bas
+' Version: 0.2 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs CAT()
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: fileUpdate.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs CAT(),RecNUM
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: helpFile.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: No Outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: searchAuthor.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: search for author - no outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: searchSubject.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: search for title - no outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: searchTitle.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: search for title - no outputs
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: splash.bas - generic splash
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: strCat.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs CAT()
+' -----------------------------------------------------------------------------
+' -----------------------------------------------------------------------------
+' Title: strDiv.bas - translation unit for LibMasterFBG.bas
+' Version: 0.1 - May 2017
+' Author: Robert Lock - beannachtai@homtail.com
+' License: GPL v3
+' About: Outputs TIT(),AUT(),SUBJ(), NTS()
+' -----------------------------------------------------------------------------
+###############################################################################
+
+===============================================================================
+| User guide                                                                  |
+===============================================================================
+#####################
+#   Installation    #
+#####################
+The binary released with this package was compiled on 64-bit Linux using Free-
+BASIC compiler version 1.02.1.  A 32-bit version is also available.  Purely
+FreeBASIC in code, this program should readily compile on any platform
+available to FreeBASIC with no changes necessary.
+
+#########################
+#  General Information  #
+#########################
+A fork of the classic TI-Extended-BASIC/Myarc-BASIC (TIXB/MXB) program,
+LIBRARY-x. This one however introduces some new functions, such as custom file-
+names and a record deleting ability (rather than having to overwrite a record).
+Also noteworthy is the fact that the search abilities are much more powerful
+given the string comparing abilities of FreeBASIC.
+Combined, this program makes up ~1300 lines of code (7.0 kB of source).
+
+######################
+#  Navigation Notes  #
+######################
+If a menu option is selected by accident, to return to the main menu TYPE
+'<back>' (no quotes) IF THE INPUT IS supposed to be A STRING, OTHERWISE for
+NUMERIC INPUT, TYPE '-1' (no quotes).
+
+##########################
+#  Updating the Catalog  #
+##########################
+This program no longer relies on a built-in filename, though one still exists.
+Enter '<def>' (no quotes) for the default filename (catalog.dat).  Otherwise
+enter the name desired, if no path is given, then the path will be the one the
+main program was launched from.
+Updating is fairly straightforward,  just enter the number of records to add,
+then enter the data.  Up to three authors per title may be entered.  The FILE
+IS *APPENDED* when finished.
+
+##########################################
+#  Sorting Catalog and Deleting Records  #
+##########################################
+Sorting the catalog will sort by title (TIT), which is the first field of each
+record in CAT.  Starting with version 0.1, all preceeding articles are ignored
+while sorting, giving a truly alphabetized catalog.dat.  The FILE IS NOT SAVED
+when finished.
+To delete a record, enter the record number.  That can be found by searching
+the title (the last number printed before an item is displayed is the record
+number).  The FILE IS NOT SAVED when finished.
+
+####################
+#  About Subjects  #
+####################
+This section of the program will take some adjustments to suite personal needs.
+Since this is much more flexible than any previous versions in TIXB/MXB, the
+sky is the limit.  By default, a three character system is deployed, for
+example:  MUSic, ART, PoeTrY, REFerence.  However anything could be used, as
+long as a convention is followed.  To display your own subjects, see lines 12-
+14 of the Subject Search unit (searchSubject.bas) and recompile.
+
+#######################
+#  General searching  #
+#######################
+As previously stated, this FreeBASIC version of Library Master is much more power-
+ful when it comes to searching.  While previously an exact phrase match had to
+exist, now one can enter 'calculus' and get all the books with the word
+'calculus' in the title.  This does mean however that one has to be careful not
+to enter some single word like 'the' without expecting a lot of results!  ;DD
+
+===============================================================================
