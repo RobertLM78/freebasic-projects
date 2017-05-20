@@ -231,7 +231,6 @@ ElseIf	Asc(inK) = 106 Then
 		#include "./units/fileSave.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Cls
-		Print "Quitting to shell..."
 		CONT = 0
 	End If
 ElseIf	Asc(inK) = 107 Then
@@ -239,7 +238,6 @@ ElseIf	Asc(inK) = 107 Then
 	'  OPTION K - Quit   '
 	'=====================
 	Cls
-	Print "Quitting to shell..."
 	CONT = 0
 ElseIf	Asc(inK) = 108 Then
 	'====================================
