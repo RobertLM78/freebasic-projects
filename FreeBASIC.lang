@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of GtkSourceView
+
+ Author: Robert Lock <beannachtai@hotmail.com>
+
+ GtkSourceView is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Lesser General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+
+ GtkSourceView is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public
+ License along with this library; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+
+-->
+
+<language id="freebasic" _name="FreeBASIC" version="2.0" _section="Sources">
+  <metadata>
+    <property name="mimetypes">text/x-freebasic</property>
+    <property name="globs">*.bas;*.bi</property>
+    <property name="line-comment-start">'</property>
+    <property name="block-comment-start">/'</property>
+    <property name="block-comment-end">'/</property>
+  </metadata>
+
+  <styles>
+    <style id="comment" _name="Comment" map-to="def:comment"/>
+    <style id="string" _name="String" map-to="def:string"/>
+    <style id="keyword" _name="Keyword" map-to="def:keyword"/>
+    <style id="type" _name="Data Type" map-to="def:type"/>
+    <style id="operator" _name="Operator" map-to="def:operator"/>
+    <style id="storage-class" _name="Storage class" map-to="def:type"/>
+    <style id="special-constant" _name="Special constant" map-to="def:special-constant"/>
+    <style id="preprocessor" _name="Preprocessor" map-to="def:preprocessor"/> <!-- New -->
+    <style id="function" _name="Function" map-to="def:function"/>             <!-- New -->
+  </styles>
+
+
+
+ <default-regex-options case-sensitive="false"/>
+
+  <definitions>
+
+    <context id="line-comment" style-ref="comment" end-at-line-end="true" class="comment" class-disabled="no-spell-check">
+      <start>'</start>
+      <include>
+        <context ref="def:in-line-comment"/>
+      </include>
+    </context>
+
+    <context id="block-comment" style-ref="comment" class="comment" class-disabled="no-spell-check">
+      <start>/'</start>
+      <end>'/</end>
+      <include>
+        <context ref="def:in-comment"/>
+      </include>
+    </context>
+
+    <context id="old-style-comment" style-ref="comment" end-at-line-end="true" class="comment" class-disabled="no-spell-check">
+      <start>^rem</start>
+      <include>
+        <context ref="def:in-line-comment"/>
+      </include>
+    </context>
+
+    <context id="string" style-ref="string" end-at-line-end="true" class="string" class-disabled="no-spell-check">
+      <start>"</start>
+      <end>"</end>
+    </context>
+
+    <context id="built-in" style-ref="function">
+    <suffix>(?![\w\d_-])</suffix>
+	<keyword>abs</keyword>
+	<keyword>access</keyword>
+	<keyword>acos</keyword>
+	<keyword>add</keyword>
+	<keyword>alias</keyword>
+	<keyword>allocate</keyword>
+	<keyword>alpha</keyword>
+	<keyword>append</keyword>
+	<keyword>asc</keyword>
+	<keyword>asin</keyword>
+	<keyword>asm</keyword>
+	<keyword>assertwarn</keyword>
+	<keyword>atan2</keyword>
+	<keyword>atn</keyword>
+	<keyword>base</keyword>
+	<keyword>beep</keyword>
+	<keyword>bin\$</keyword>
+	<keyword>binary</keyword>
+	<keyword>bit</keyword>
+	<keyword>bitreset</keyword>
+	<keyword>bitset</keyword>
+	<keyword>bload</keyword>
+	<keyword>bsave</keyword>
+	<keyword>yte</keyword>
+	<keyword>callocate</keyword>
+	<keyword>calls</keyword>
+	<keyword>cast</keyword>
+	<keyword>cdecl</keyword>
+	<keyword>chain</keyword>
+	<keyword>chdir</keyword>
+	<keyword>chr\$</keyword>
+	<keyword>circle</keyword>
+	<keyword>clear</keyword>
+	<keyword>close</keyword>
+	<keyword>cls</keyword>
+	<keyword>color</keyword>
+	<keyword>om</keyword>
+	<keyword>command</keyword>
+	<keyword>common</keyword>
+	<keyword>condbroadcast</keyword>
+	<keyword>condcreate</keyword>
+	<keyword>conddestroy</keyword>
+	<keyword>condsignal</keyword>
+	<keyword>condwait</keyword>
+	<keyword>cons</keyword>
+	<keyword>cos</keyword>
+	<keyword>cptr</keyword>
+	<keyword>csign</keyword>
+	<keyword>csrlin</keyword>
+	<keyword>cubyte</keyword>
+	<keyword>cuint</keyword>
+	<keyword>culng</keyword>
+	<keyword>culngint</keyword>
+	<keyword>cunsg</keyword>
+	<keyword>curdir</keyword>
+	<keyword>cushort</keyword>
+	<keyword>custom</keyword>
+	<keyword>cvd</keyword>
+	<keyword>cvi</keyword>
+	<keyword>cvl</keyword>
+	<keyword>cvlongint</keyword>
+	<keyword>cvs</keyword>
+	<keyword>cvshort</keyword>
+	<keyword>data</keyword>
+	<keyword>date</keyword>
+	<keyword>dateadd</keyword>
+	<keyword>datediff</keyword>
+	<keyword>datepart</keyword>
+	<keyword>dateserial</keyword>
+	<keyword>datevalue</keyword>
+	<keyword>day</keyword>
+	<keyword>deallocate</keyword>
+	<keyword>defbyte</keyword>
+	<keyword>defdbl</keyword>
+	<keyword>defined</keyword>
+	<keyword>defint</keyword>
+	<keyword>deflng</keyword>
+	<keyword>deflongint</keyword>
+	<keyword>defshort</keyword>
+	<keyword>defsng</keyword>
+	<keyword>defstr</keyword>
+	<keyword>defubyte</keyword>
+	<keyword>defuint</keyword>
+	<keyword>defulongint</keyword>
+	<keyword>defushort</keyword>
+	<keyword>def</keyword>
+	<keyword>delete</keyword>
+	<keyword>dir</keyword>
+	<keyword>draw</keyword>
+	<keyword>draw string</keyword>
+	<keyword>dylibfree</keyword>
+	<keyword>dylibload</keyword>
+	<keyword>dylibsymbol</keyword>
+	<keyword>dynamic</keyword>
+	<keyword>ynamic</keyword>
+	<keyword>encoding</keyword>
+	<keyword>endmacro</keyword>
+	<keyword>environ</keyword>
+	<keyword>eof</keyword>
+	<keyword>eqv</keyword>
+	<keyword>erase</keyword>
+	<keyword>erfn</keyword>
+	<keyword>erl</keyword>
+	<keyword>ermn</keyword>
+	<keyword>err</keyword>
+	<keyword>err</keyword>
+	<keyword>escape</keyword>
+	<keyword>exec</keyword>
+	<keyword>exepath</keyword>
+	<keyword>exp</keyword>
+	<keyword>export</keyword>
+	<keyword>field</keyword>
+	<keyword>fileattr</keyword>
+	<keyword>filecopy</keyword>
+	<keyword>filedatetime</keyword>
+	<keyword>fileexists</keyword>
+	<keyword>filelen</keyword>
+	<keyword>fix</keyword>
+	<keyword>flip</keyword>
+	<keyword>format</keyword>
+	<keyword>frac</keyword>
+	<keyword>fre</keyword>
+	<keyword>freefile</keyword>
+	<keyword>get</keyword>
+	<keyword>get</keyword>
+	<keyword>getjoystick</keyword>
+	<keyword>getkey</keyword>
+	<keyword>getmouse</keyword>
+	<keyword>hex\$</keyword>
+	<keyword>hibyte</keyword>
+	<keyword>hiword</keyword>
+	<keyword>hour</keyword>
+	<keyword>ifdef</keyword>
+	<keyword>ifndef</keyword>
+	<keyword>iif</keyword>
+	<keyword>imageconvertrow</keyword>
+	<keyword>imagecreate</keyword>
+	<keyword>imagedestroy</keyword>
+	<keyword>imageinfo</keyword>
+	<keyword>imp</keyword>
+	<keyword>import</keyword>
+	<keyword>include</keyword>
+	<keyword>inkey\$</keyword>
+	<keyword>inp</keyword>
+	<keyword>input</keyword>
+	<keyword>instr</keyword>
+	<keyword>instrrev</keyword>
+	<keyword>int</keyword>
+	<keyword>is</keyword>
+	<keyword>isdate</keyword>
+	<keyword>kill</keyword>
+	<keyword>lbound</keyword>
+	<keyword>lcase\$</keyword>
+	<keyword>left\$</keyword>
+	<keyword>len</keyword>
+	<keyword>line</keyword>
+	<keyword>lobyte</keyword>
+	<keyword>loc</keyword>
+	<keyword>local</keyword>
+	<keyword>lock</keyword>
+	<keyword>lof</keyword>
+	<keyword>log</keyword>
+	<keyword>long</keyword>
+	<keyword>loword</keyword>
+	<keyword>lpos</keyword>
+	<keyword>lprint</keyword>
+	<keyword>using</keyword>
+	<keyword>lpt</keyword>
+	<keyword>lset</keyword>
+	<keyword>ltrim\$</keyword>
+	<keyword>mid\$</keyword>
+	<keyword>minute</keyword>
+	<keyword>mkd\$</keyword>
+	<keyword>mkdir</keyword>
+	<keyword>mki\$</keyword>
+	<keyword>mkl\$</keyword>
+	<keyword>mklongint\$</keyword>
+	<keyword>mks\$</keyword>
+	<keyword>mkshort\$</keyword>
+	<keyword>month</keyword>
+	<keyword>monthname</keyword>
+	<keyword>multikey</keyword>
+	<keyword>mutexcreate</keyword>
+	<keyword>mutexdestroy</keyword>
+	<keyword>mutexlock</keyword>
+	<keyword>mutexunlock</keyword>
+	<keyword>naked</keyword>
+	<keyword>name</keyword>
+	<keyword>new</keyword>
+	<keyword>nogosub</keyword>
+	<keyword>nokeyword</keyword>
+	<keyword>now</keyword>
+	<keyword>oct\$</keyword>
+	<keyword>offsetof</keyword>
+	<keyword>once</keyword>
+	<keyword>open</keyword>
+	<keyword>com</keyword>
+	<keyword>cons</keyword>
+	<keyword>err</keyword>
+	<keyword>lpt</keyword>
+	<keyword>pipe</keyword>
+	<keyword>scrn</keyword>
+	<keyword>operator</keyword>
+	<keyword>out</keyword>
+	<keyword>output</keyword>
+	<keyword>overload</keyword>
+	<keyword>paint</keyword>
+	<keyword>palette</keyword>
+	<keyword>palette get</keyword>
+	<keyword>pascal</keyword>
+	<keyword>pcopy</keyword>
+	<keyword>peek</keyword>
+	<keyword>pipe</keyword>
+	<keyword>pmap</keyword>
+	<keyword>point</keyword>
+	<keyword>poke</keyword>
+	<keyword>pos</keyword>
+	<keyword>preset</keyword>
+	<keyword>preset</keyword>
+	<keyword>print</keyword>
+	<keyword>using</keyword>
+	<keyword>procptr</keyword>
+	<keyword>protected</keyword>
+	<keyword>pset</keyword>
+	<keyword>put</keyword>
+	<keyword>random</keyword>
+	<keyword>randomize</keyword>
+	<keyword>read</keyword>
+	<keyword>reallocate</keyword>
+	<keyword>reset</keyword>
+	<keyword>restore</keyword>
+	<keyword>rgb</keyword>
+	<keyword>rgba</keyword>
+	<keyword>right\$</keyword>
+	<keyword>rmdir</keyword>
+	<keyword>rnd</keyword>
+	<keyword>rset</keyword>
+	<keyword>rtrim\$</keyword>
+	<keyword>run</keyword>
+	<keyword>sadd</keyword>
+	<keyword>scope</keyword>
+	<keyword>screencontrol</keyword>
+	<keyword>screencopy</keyword>
+	<keyword>screenevent</keyword>
+	<keyword>screenglproc</keyword>
+	<keyword>screeninfo</keyword>
+	<keyword>screenlist</keyword>
+	<keyword>screenlock</keyword>
+	<keyword>screenptr</keyword>
+	<keyword>screenres</keyword>
+	<keyword>screenset</keyword>
+	<keyword>screensync</keyword>
+	<keyword>screenunlock</keyword>
+	<keyword>scrn</keyword>
+	<keyword>second</keyword>
+	<keyword>seek</keyword>
+	<keyword>setdate</keyword>
+	<keyword>setenviron</keyword>
+	<keyword>setmouse</keyword>
+	<keyword>settime</keyword>
+	<keyword>sgn</keyword>
+	<keyword>shell</keyword>
+	<keyword>shl</keyword>
+	<keyword>shr</keyword>
+	<keyword>sin</keyword>
+	<keyword>sleep</keyword>
+	<keyword>space\$</keyword>
+	<keyword>spc</keyword>
+	<keyword>sqr</keyword>
+	<keyword>stdcall</keyword>
+	<keyword>stick</keyword>
+	<keyword>str\$</keyword>
+	<keyword>strig</keyword>
+	<keyword>string\$</keyword>
+	<keyword>strptr</keyword>
+	<keyword>swap</keyword>
+	<keyword>system</keyword>
+	<keyword>tab</keyword>
+	<keyword>tan</keyword>
+	<keyword>this</keyword>
+	<keyword>threadcreate</keyword>
+	<keyword>threadwait</keyword>
+	<keyword>time</keyword>
+	<keyword>timer</keyword>
+	<keyword>timeserial</keyword>
+	<keyword>timevalue</keyword>
+	<keyword>trans</keyword>
+	<keyword>trim\$</keyword>
+	<keyword>typeof</keyword>
+	<keyword>ubound</keyword>
+	<keyword>ucase\$</keyword>
+	<keyword>union</keyword>
+	<keyword>unlock</keyword>
+	<keyword>unsigned</keyword>
+	<keyword>using</keyword>
+	<keyword>val</keyword>
+	<keyword>val64</keyword>
+	<keyword>valint</keyword>
+	<keyword>vallng</keyword>
+	<keyword>valuint</keyword>
+	<keyword>valulng</keyword>
+	<keyword>var</keyword>
+	<keyword>varptr</keyword>
+	<keyword>va_arg</keyword>
+	<keyword>va_first</keyword>
+    <keyword>va_next</keyword>
+	<keyword>view</keyword>
+	<keyword>wait</keyword>
+	<keyword>wbin</keyword>
+	<keyword>wchr</keyword>
+	<keyword>weekday</keyword>
+	<keyword>weekdayname</keyword>
+	<keyword>whex</keyword>
+	<keyword>width</keyword>
+	<keyword>width</keyword>
+	<keyword>window</keyword>
+	<keyword>windowtitle</keyword>
+	<keyword>winput</keyword>
+	<keyword>woct</keyword>
+	<keyword>write</keyword>
+	<keyword>wspace</keyword>
+	<keyword>wstr</keyword>
+	<keyword>year</keyword>
+    </context>
+
+    <context id="primitives" style-ref="type">
+      <keyword>any</keyword>
+      <keyword>byte</keyword>
+      <keyword>double</keyword>
+      <keyword>integer</keyword>
+      <keyword>longint</keyword>
+      <keyword>object</keyword>
+      <keyword>pointer</keyword>
+      <keyword>ptr</keyword>
+      <keyword>short</keyword>
+      <keyword>single</keyword>
+      <keyword>string</keyword>
+      <keyword>ubyte</keyword>
+      <keyword>uinteger</keyword>
+      <keyword>ulongint</keyword>
+      <keyword>ushort</keyword>
+      <keyword>wstring</keyword>
+      <keyword>zstring</keyword>
+    </context>
+
+    <context id="storage-class" style-ref="storage-class">
+      <keyword>class</keyword>
+      <keyword>const</keyword>
+      <keyword>enum</keyword>
+      <keyword>extern</keyword>
+      <keyword>friend</keyword>
+      <keyword>private</keyword>
+      <keyword>property</keyword>
+      <keyword>protected</keyword>
+      <keyword>public</keyword>
+      <keyword>shared</keyword>
+      <keyword>static</keyword>
+      <keyword>type</keyword>
+    </context>
+
+    <context id="flow-control" style-ref="keyword">
+      <keyword>case</keyword>
+      <keyword>continue</keyword>
+      <keyword>do</keyword>
+      <keyword>else</keyword>
+      <keyword>elseif</keyword>
+      <keyword>end</keyword>
+      <keyword>endif</keyword>
+      <keyword>exit</keyword>
+      <keyword>for</keyword>
+      <keyword>goto</keyword>
+	  <keyword>gosub</keyword>
+      <keyword>if</keyword>
+      <keyword>is</keyword>
+      <keyword>loop</keyword>
+      <keyword>next</keyword>
+      <keyword>select</keyword>
+      <keyword>step</keyword>
+      <keyword>then</keyword>
+      <keyword>to</keyword>
+      <keyword>until</keyword>
+      <keyword>wend</keyword>
+      <keyword>while</keyword>
+    </context>
+
+    <context id="subroutine" style-ref="keyword">
+      <keyword>byref</keyword>
+      <keyword>byval</keyword>
+      <keyword>call</keyword>
+      <keyword>constructor</keyword>
+      <keyword>declare</keyword>
+      <keyword>destructor</keyword>
+      <keyword>function</keyword>
+      <keyword>return</keyword>
+      <keyword>sub</keyword>
+    </context>
+
+    <context id="operator" style-ref="operator">
+      <keyword>and</keyword>
+      <keyword>andalso</keyword>
+      <keyword>mod</keyword>
+      <keyword>not</keyword>
+      <keyword>or</keyword>
+      <keyword>orelse</keyword>
+      <keyword>xor</keyword>
+    </context>
+
+    <context id="keywords" style-ref="keyword">
+      <keyword>alias</keyword>
+      <keyword>ansi</keyword>
+      <keyword>as</keyword>
+      <keyword>binary</keyword>
+      <keyword>cbyte</keyword>
+      <keyword>cdbl</keyword>
+      <keyword>cint</keyword>
+      <keyword>clng</keyword>
+      <keyword>clngint</keyword>
+      <keyword>cshort</keyword>
+      <keyword>csng</keyword>
+      <keyword>dim</keyword>
+      <keyword>error</keyword>
+      <keyword>event</keyword>
+      <keyword>explicit</keyword>
+      <keyword>let</keyword>
+      <keyword>lib</keyword>
+      <keyword>namespace</keyword>
+      <keyword>on</keyword>
+      <keyword>option</keyword>
+	  <keyword>option()</keyword>
+      <keyword>optional</keyword>
+      <keyword>preserve</keyword>
+      <keyword>redim</keyword>
+      <keyword>rem</keyword>
+      <keyword>resume</keyword>
+      <keyword>sizeof</keyword>
+      <keyword>stop</keyword>
+      <keyword>with</keyword>
+      <keyword>locate</keyword>
+      <keyword>screen</keyword>
+    </context>
+
+    <context id="preprocessor" style-ref="preprocessor">
+    <prefix>(^#)</prefix>
+	<keyword>assert</keyword>
+	<keyword>define</keyword>
+	<keyword>inclib</keyword>
+	<keyword>include</keyword>
+	<keyword>lang</keyword>
+	<keyword>libpath</keyword>
+	<keyword>line</keyword>
+	<keyword>macro</keyword>
+	<keyword>pragma</keyword>
+	<keyword>undef</keyword>
+    </context>
+
+   <context id="function" style-ref="function">
+	<keyword>__DATE__</keyword>
+	<keyword>__FB_ARGC__</keyword>
+	<keyword>__FB_ARGV__</keyword>
+	<keyword>__FB_BIGENDIAN__</keyword>
+	<keyword>__FB_BUILD_DATE__</keyword>
+	<keyword>__FB_CYGWIN__</keyword>
+	<keyword>__FB_DARWIN__</keyword>
+	<keyword>__FB_DEBUG__</keyword>
+	<keyword>__FB_DOS__</keyword>
+	<keyword>__FB_ERR__</keyword>
+	<keyword>__FB_FPMODE__</keyword>
+	<keyword>__FB_FREEBSD__</keyword>
+	<keyword>__FB_LANG__</keyword>
+	<keyword>__FB_LINUX__</keyword>
+	<keyword>__FB_MAIN__</keyword>
+	<keyword>__FB_MIN_VERSION__</keyword>
+	<keyword>__FB_MT__</keyword>
+	<keyword>__FB_NETBSD__</keyword>
+	<keyword>__FB_OPENBSD__</keyword>
+	<keyword>__FB_OPTION_BYVAL__</keyword>
+	<keyword>__FB_OPTION_DYNAMIC__</keyword>
+	<keyword>__FB_OPTION_ESCAPE__</keyword>
+	<keyword>__FB_OPTION_EXPLICIT__</keyword>
+	<keyword>__FB_OPTION_GOSUB__</keyword>
+	<keyword>__FB_OPTION_PRIVATE__</keyword>
+	<keyword>__FB_OUT_DLL__</keyword>
+	<keyword>__FB_OUT_EXE__</keyword>
+	<keyword>__FB_OUT_LIB__</keyword>
+	<keyword>__FB_OUT_OBJ__</keyword>
+	<keyword>__FB_SIGNATURE__</keyword>
+	<keyword>__FB_SSE__</keyword>
+	<keyword>__FB_VECTORIZE__</keyword>
+	<keyword>__FB_VERSION__</keyword>
+	<keyword>__FB_VER_MAJOR__</keyword>
+	<keyword>__FB_VER_MINOR__</keyword>
+	<keyword>__FB_VER_PATCH__</keyword>
+	<keyword>__FB_WIN32__</keyword>
+	<keyword>__FB_XBOX__</keyword>
+	<keyword>__FILE_NQ__</keyword>
+	<keyword>__FILE__</keyword>
+	<keyword>__FUNCTION_NQ__</keyword>
+	<keyword>__FUNCTION__</keyword>
+	<keyword>__LINE__</keyword>
+	<keyword>__PATH__</keyword>
+	<keyword>__TIME__</keyword>
+    </context>
+
+    <context id="freebasic" class="no-spell-check">
+      <include>
+        <context ref="line-comment"/>
+        <context ref="block-comment"/>
+        <context ref="old-style-comment"/>
+        <context ref="string"/>
+        <context ref="preprocessor"/>
+        <context ref="built-in"/>
+        <context ref="primitives"/>
+        <context ref="storage-class"/>
+        <context ref="flow-control"/>
+        <context ref="subroutine"/>
+        <context ref="operator"/>
+        <context ref="keywords"/>
+      </include>
+    </context>
+
+  </definitions>
+
+</language>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
