@@ -27,6 +27,7 @@ Locate 4,1 : Input "Search for subject: ",SUBJsrch
 While SUBJsrch = ""
 	Locate 4,1 : Input "Search for subject: ",SUBJsrch
 Wend
+SUBJsrch = Trim$(SUBJsrch)
 ' Check to see if we want to go back to main menu
 If	Lcase$(SUBJsrch) = "<back>" Then
 	Cls

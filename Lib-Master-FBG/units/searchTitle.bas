@@ -17,6 +17,7 @@ Locate 4,1 : Input "Search for title: ",TITsrch
 While TITsrch = ""
 	Locate 4,1 : Input "Search for title: ",TITsrch
 Wend
+TITsrch = Trim$(TITsrch)
 ' Check to see if we want to go back to main menu
 If	Lcase$(TITsrch) = "<back>" Then
 	Cls

@@ -17,6 +17,7 @@ Locate 4,1 : Input "Search for author: ",AUTsrch
 While AUTsrch = ""
 	Locate 4,1 : Input "Search for author: ",AUTsrch
 Wend
+AUTsrch = Trim$(AUTsrch)
 ' Check to see if we want to go back to main menu
 If	Lcase$(AUTsrch) = "<back>" Then
 	Cls
