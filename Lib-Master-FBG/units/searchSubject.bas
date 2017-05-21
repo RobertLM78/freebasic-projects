@@ -65,7 +65,7 @@ For i = 1 to RecNum
 	End If
 Next
 Print
-Print"Finsihed searching.  Press any key to continue. ";
+Locate 8,5 : Print"Finsihed searching.  Press any key to continue. ";
 Sleep
 Cls
 ' ============================
