@@ -15,6 +15,7 @@ Input "Search for author: ",AUTsrch
 While AUTsrch = ""
 	Input "Search for author: ",AUTsrch
 Wend
+AUTsrch = Trim$(AUTsrch)
 ' Check to see if we want to go back to main menu
 If	Lcase$(AUTsrch) = "<back>" Then
 	Cls

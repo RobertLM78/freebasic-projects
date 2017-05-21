@@ -15,6 +15,7 @@ Input "Search for title: ",TITsrch
 While TITsrch = ""
 	Input "Search for title: ",TITsrch
 Wend
+TITsrch = Trim$(TITsrch)
 ' Check to see if we want to go back to main menu
 If	Lcase$(TITsrch) = "<back>" Then
 	Cls
