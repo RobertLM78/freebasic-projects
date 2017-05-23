@@ -104,9 +104,14 @@ Color RGB(255, 255, 255), RGB(0, 0, 0) 'White on Black
 
 inK = InKey$
 Sleep 20 ' Take a little nap waiting for input
-While Asc(InK) < 97 or Asc(InK) > 97+12-1 '+12 menu items
+While Asc(InK) < 97 or Asc(InK) > 97+12-1 and CONT <> 0 '+12 menu items
 	inK = InKey$
 	Sleep 20 ' Take a little nap waiting for input
+    If Len(inK)=0 Then
+        Sleep 20 ' Take a little nap waiting for input
+    ElseIf inK = chr$(255)+"k" Then ' If the 'X' was clicked
+        CONT = 0                    ' quit the program
+    End If
 Wend
 ' ======================
 
