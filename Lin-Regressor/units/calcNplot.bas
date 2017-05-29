@@ -65,29 +65,38 @@ End If
 ' X
 dMinX = dXarray(1,1)
 If dMinX >= 0 Then
-	dMinX = -2
+	dMinX = -2 ' Make sure the window always contains a Y-axis
 End If
 dMaxX = dXarray(NumDataPts,1) + .1*dXarray(NumDataPts,1)
-
+If dMaxX <= 0 Then
+	dMaxX = 2 ' Make sure the window always contains a Y-axis
+End If
 ' Y
 If dSlope < 0 Then
 	dMinY = dSlope * dMaxX + dIntercept
 	dMinY = dMinY - .1*dMinY
 	If dMinY > 0 Then
-		dMinY = -2
+		dMinY = -2 ' Make sure the window always contains an X-axis
 	End If
 	dMaxY = dSlope * dMinX + dIntercept
 	dMaxY = dMaxY + .1*dMaxY
+	If dMaxY <= 0 Then
+		dMaxY = 2 ' Make sure the window always contains an X-axis
+	End If
 End If
 If dSlope > 0 Then
 	dMinY = dSlope * dMinX + dIntercept
 	dMinY = dMinY - .1*dMinY
 	If dMinY > 0 Then
-		dMinY = -2
+		dMinY = -2 ' Make sure the window always contains an X-axis
 	End If
 	dMaxY = dSlope * dMaxX + dIntercept
 	dMaxY = dMaxY + .1*dMaxY
+	If dMaxY <= 0 Then
+		dMaxY = 2 ' Make sure the window always contains an X-axis
+	End If
 End If
+
 '' define clipping area starting at row 5, ending at row 40
 View (10, 64) - (630, 624),RGB(0,0,0),RGB(0,255,255)
 
