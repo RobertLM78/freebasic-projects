@@ -64,7 +64,7 @@ End If
 ' Define the min and max values
 ' X
 dMinX = dXarray(1,1)
-If dMinX > 0 Then
+If dMinX >= 0 Then
 	dMinX = -2
 End If
 dMaxX = dXarray(NumDataPts,1) + .1*dXarray(NumDataPts,1)
