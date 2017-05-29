@@ -1,0 +1,42 @@
+===============================================================================
+|  fgConvertFBC 0.1 - A FightGear conversion utility; console version         |
+|      readme file                                                            |
+===============================================================================
+This package contains 8 FreeBASIC files:
+
+1 Main Program (./):
+fgConvertFBC.bas
+
+7 Translation Units (./units/):
+dec2dms.bas
+descentCalc.bas
+dms2dec.bas
+ft2m.bas
+km2mi.bas
+m2ft.bas
+mi2km.bas
+
+===============================================================================
+| User guide                                                                  |
+===============================================================================
+################
+# Installation #
+################
+Included are Linux x86 and amd64 binaries.  Should readily compile on any plat-
+form.  (Binaries compiled with FBC version 1.02.1)
+
+###########
+#  Usage  #
+###########
+Since so much aviation data are split between SI and BS systems, it is nice to
+have something to facilitate such conversions.   This is where fgConvert comes
+in handy.
+
+Designed with FGFS in mind, and all the tools used with it, such as Marble,
+which gives elevations in meters and distances in kilometers.  Converts degrees
+in decimal to degrees in DMS form and from DMS to decimal.
+
+Also helps calculate the descent distance for angles of descent between 5⁹ and
+10⁰.
+===============================================================================
+
