@@ -1,0 +1,102 @@
+===============================================================================
+| Lin-Regressor-0.1 ; A simple linear regression calculator                   |
+|      readme file                                                            |
+===============================================================================
+This package contains 12 FreeBASIC files:
+
+1 Main Program (./):
+Lin-Regressor.bas
+
+11 Translation Units (./units):
+calcNplot.bas
+dataDelete.bas
+dataEntry.bas
+dataView.bas
+fileLoad.bas
+fileSave.bas
+helpFile.bas
+splash.bas
+strCat.bas
+strDiv.bas
+subMenuFileIO.bas
+
+
+By Robert Lock (RobertLM78, beannachtai@hotmail.com)
+June 2017
+License: GPL 3.0
+
+===============================================================================
+| User guide                                                                  |
+===============================================================================
+*********************
+*   Installation    *
+*********************
+Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
+repository (Lin-Regressor-x86,Lin-Regressor-amd64,and Lin-Regressor.exe,
+respectively).
+
+To compile on Linux:
+fbc ./Lin-Regressor.bas ./Lin-Regressor.xpm
+
+To compile on Windows:
+fbc -s gui Lin-Regressor.bas Lin-Regressor.rc
+
+(Binaries compiled with FBG version 1.02.1)
+
+It may come up that the window is too tall.  In that case make the following 3
+changes:
+
+1) & 2) from Lin-Regress.bas; Lines 56 & 57 change to:
+ScreenRes 640,480,32                                   ' Short window
+Width 640\8, 480\8 ' 8x8 characters, 80columnsx60rows  ' Short window
+
+3) from calcNplot.bas; Line 92 change to:
+View (10, 64) - (630, 312),RGB(0,0,0),RGB(0,255,255)  ' Short window
+
+***************************
+*** GENERAL INFORMATION ***
+***************************
+Thank you for taking a look at Lin-Regressor-0.1.  Lin-Regressor-0.1 can
+perform a least squares linear regression on data points that you enter or load
+from a plain text file.
+
+**************************
+*** WRITING DATA FILES ***
+**************************
+If you decide to write a data file to load, there must be at least *one* space
+between the independent and dependent variables, and the independent variable
+must start at column 2 (single space), and not exceed column 40. The last digit
+of the dependent variable should not exceed column 80.
+
+For example:
+
+ 5.034 10.3
+ 6.73  15.23
+ 7.54  18.65
+...etc
+
+would be three acceptable rows, while:
+
+   5.034 10.3
+   6.73 15.23
+   7.54 18.65
+   ...etc
+
+	* OR *
+
+5.0340203289834793240093908913090120212131 10.30840239809342342343984
+6.730034324239483209840392843902803928402398439 15.2309843732790342
+7.540980398403893209374093740374932748362387 18.65039473473289739873343
+...etc
+
+would not be acceptable.  (The latter example being rather pointless anyway).
+
+Other than to follow those rules for data files, you can pretty much be as
+sloppy as you'd like in making them, the program will figure out the rest :).
+
+******************************
+*** EXPORTING OUTPUT FILES ***
+******************************
+When the program has finished calculating the regression, it will give you the
+option to export an output file.
+===============================================================================
