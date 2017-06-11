@@ -1,16 +1,13 @@
 ' -----------------------------------------------------------------------------
 ' Title: GematriaFBC.bas - a simple gemtria calculator
-' Version: 0.1 - June 2017
+' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
 ' -----------------------------------------------------------------------------
-Dim As Long CONT = 1
 Dim As Long i
-
 Dim As String        sWordIn
 Dim As zString *256  zWordIn
-
 Dim As uLong lWordLen
 Dim As Integer Ptr ipAscII
 Dim As uLong lSum
@@ -18,12 +15,11 @@ Dim As uLong lSumLength
 Dim As uLong lSumReduce
 Dim As Integer Ptr ipSumDigits
 
-Print "GematriaFBC 0.1 - Enter !q to quit"
+Print "GematriaFBC 0.2 - Enter !q to quit"
 Print "----------------------------------"
 Print
-
 ' ==============================================================================
-While CONT <> -1
+Do
 
 Input ":> ", sWordIn
 zWordIn = Ucase$(sWordIn)
@@ -32,7 +28,7 @@ While Len(zWordIn) = 0
 	zWordIn = Ucase$(sWordIn)
 Wend
 If zWordIn = "!Q" Then
-	CONT = -1 : Exit While
+	Exit Do
 End If
 
 lWordLen = Len(zWordIn)
@@ -92,5 +88,5 @@ Print "Reduced English:     ";lSum
 
 DeAllocate(ipAscII)
 Print
-Wend
+Loop
 ' ==============================================================================
