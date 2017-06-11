@@ -1,0 +1,31 @@
+===============================================================================
+| GematriaFBC 0.1; A simple gematria calculator - console ver.                |
+|      readme file                                                            |
+===============================================================================
+This package contains 1 FreeBASIC file:
+
+1 Main Program (./):
+GematriaFBC.bas
+
+===============================================================================
+| User guide                                                                  |
+===============================================================================
+#####################
+#   Installation    #
+#####################
+Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
+repository.
+
+To compile on Linux:
+fbc ./GematriaFBC.bas
+
+To compile on Windows:
+fbc GematriaFBC.bas
+
+(Binaries compiled with FBG version 1.02.1)
+
+#########################
+#  General Information  #
+#########################
+Enter a phrase to find the gematria.  Enter !q to quit.
+===============================================================================
