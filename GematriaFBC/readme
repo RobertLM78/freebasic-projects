@@ -22,7 +22,7 @@ fbc ./GematriaFBC.bas
 To compile on Windows:
 fbc GematriaFBC.bas
 
-(Binaries compiled with FBG version 1.02.1)
+(Binaries compiled with FB version 1.02.1)
 
 #########################
 #  General Information  #
