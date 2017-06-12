@@ -240,7 +240,6 @@
 	<keyword>lock</keyword>
 	<keyword>lof</keyword>
 	<keyword>log</keyword>
-	<keyword>long</keyword>
 	<keyword>loword</keyword>
 	<keyword>lpos</keyword>
 	<keyword>lprint</keyword>
@@ -408,6 +407,7 @@
       <keyword>byte</keyword>
       <keyword>double</keyword>
       <keyword>integer</keyword>
+	  <keyword>long</keyword>
       <keyword>longint</keyword>
       <keyword>object</keyword>
       <keyword>pointer</keyword>
@@ -417,6 +417,7 @@
       <keyword>string</keyword>
       <keyword>ubyte</keyword>
       <keyword>uinteger</keyword>
+	  <keyword>ulong</keyword>
       <keyword>ulongint</keyword>
       <keyword>ushort</keyword>
       <keyword>wstring</keyword>
@@ -425,7 +426,6 @@
 
     <context id="storage-class" style-ref="storage-class">
       <keyword>class</keyword>
-      <keyword>const</keyword>
       <keyword>enum</keyword>
       <keyword>extern</keyword>
       <keyword>friend</keyword>
@@ -435,7 +435,6 @@
       <keyword>public</keyword>
       <keyword>shared</keyword>
       <keyword>static</keyword>
-      <keyword>type</keyword>
     </context>
 
     <context id="flow-control" style-ref="keyword">
@@ -495,6 +494,7 @@
       <keyword>cint</keyword>
       <keyword>clng</keyword>
       <keyword>clngint</keyword>
+      <keyword>const</keyword>
       <keyword>cshort</keyword>
       <keyword>csng</keyword>
       <keyword>dim</keyword>
@@ -514,6 +514,7 @@
       <keyword>resume</keyword>
       <keyword>sizeof</keyword>
       <keyword>stop</keyword>
+      <keyword>type</keyword>
       <keyword>with</keyword>
       <keyword>locate</keyword>
       <keyword>screen</keyword>
