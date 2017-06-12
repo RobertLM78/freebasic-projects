@@ -1,5 +1,5 @@
 ===============================================================================
-| GematriaFBC 0.2; A simple gematria calculator - console ver.                |
+| GematriaFBC 0.4; A simple gematria calculator - console ver.                |
 |      readme file                                                            |
 ===============================================================================
 This package contains 1 FreeBASIC file:
@@ -28,6 +28,6 @@ fbc GematriaFBC.bas
 #  General Information  #
 #########################
 Enter a phrase to find the gematria.  Enter !q to quit.
-Gives Simple English, Regular English, Pythagorian and Reduced.  No Chaledean
-(yet).
+Gives Simple English, Regular English, Jewish, Chaldean, Pythagorian and
+Reduced.
 ===============================================================================
