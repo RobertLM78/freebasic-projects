@@ -41,7 +41,7 @@ fbc ./Lin-Regressor.bas ./Lin-Regressor.xpm
 To compile on Windows:
 fbc -s gui Lin-Regressor.bas Lin-Regressor.rc
 
-(Binaries compiled with FBG version 1.02.1)
+(Binaries compiled with FB version 1.02.1)
 
 It may come up that the window is too tall.  In that case make the following 3
 changes:
