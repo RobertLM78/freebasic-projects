@@ -30,4 +30,13 @@ fbc GematriaFBC.bas
 Enter a phrase to find the gematria.  Enter !q to quit.
 Gives Simple English, Regular English, Jewish, Chaldean, Pythagorian and
 Reduced.
+
+Example:
+:> GematriaFBC
+Simple:      85
+Regular:     510
+Jewish:      244
+Chaldean:    34
+Pythagorian: 49
+Reduced:     4
 ===============================================================================
