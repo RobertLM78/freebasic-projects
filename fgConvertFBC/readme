@@ -23,7 +23,7 @@ mi2km.bas
 # Installation #
 ################
 Included are Linux x86 and amd64 binaries.  Should readily compile on any plat-
-form.  (Binaries compiled with FBC version 1.02.1)
+form.  (Binaries compiled with FB version 1.02.1)
 
 ###########
 #  Usage  #
