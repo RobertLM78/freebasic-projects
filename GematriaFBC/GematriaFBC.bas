@@ -34,19 +34,20 @@ End If
 lWordLen = Len(zWordIn)
 ipAscII = Allocate(lWordLen*SizeOf(Integer))
 
+' Load memory of ASCII codes
+For i = 1 to lWordLen
+	ipAscII[i-1] = Asc(zWordIn,i)
+Next
+
 ' Simple and Regular English gematria
 lSum = 0
 For i = 1 to lWordLen
-	ipAscII[i-1] = Asc(zWordIn,i)
-	'Print ipAscII[i-1] - 64
-Next
-
-For i = 1 to lWordLen
 	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
 		lSum += 0
-		'Print "non-alpha char @ position";i
+		'Print "non-alpha char @";i
 	Else
 		lSum += ipAscII[i-1] - 64
+		'Print ipAscII[i-1] - 64
 		'Print lSum
 	End If
 Next
