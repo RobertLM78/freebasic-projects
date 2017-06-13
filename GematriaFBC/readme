@@ -14,7 +14,7 @@ GematriaFBC.bas
 #   Installation    #
 #####################
 Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
-repository.
+repository.  (-x86,-amd64, and .exe respectively)
 
 To compile on Linux:
 fbc ./GematriaFBC.bas
