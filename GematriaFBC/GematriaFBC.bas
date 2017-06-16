@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: GematriaFBC.bas - a simple gemtria calculator
-' Version: 0.5 - June 2017
+' Version: 0.6 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
@@ -45,7 +45,7 @@ If iNumArgs >= 1 Then
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
-		Print "GematriaFBC - version 0.5"
+		Print "GematriaFBC - version 0.6"
 		System 0
 	Else
 		Print Command$(i) &"  is not a vaild parameter"
@@ -60,7 +60,7 @@ If iNumArgs >= 1 Then
 End If
 ' ======================================
 
-Print "GematriaFBC 0.5 - Enter !q to quit"
+Print "GematriaFBC 0.6 - Enter !q to quit"
 Print "----------------------------------"
 Print
 ' ==============================================================================
@@ -147,6 +147,31 @@ Next
 Print "Jewish:      ";lSum
 If bState = 1 Then
 	Print #lFileHandle, "Jewish:      ";lSum
+End If
+
+' Septenary
+lSum = 0
+For i = 1 to lWordLen
+	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
+		lSum += 0
+		'Print "non-alpha char @";i
+	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 71 Then 'A-G
+		lSum += ipAscII[i-1] - 64
+		'Print ipAscII[i-1] - 64,"A - G"
+	ElseIf Abs(ipAscII[i-1]) >= 72 and Abs(ipAscII[i-1]) <= 77 Then 'H-M
+		lSum += 78 - ipAscII[i-1]
+		'Print 78 - ipAscII[i-1],"H - M"
+	ElseIf Abs(ipAscII[i-1]) >= 78 and Abs(ipAscII[i-1]) <= 84 Then 'N-T
+		lSum += ipAscII[i-1] - 77
+		'Print ipAscII[i-1] - 77,"N - T"
+	ElseIf Abs(ipAscII[i-1]) >= 85 and Abs(ipAscII[i-1]) <= 90 Then 'U-Z
+		lSum += 91 - ipAscII[i-1]
+		'Print 91 - ipAscII[i-1],"U - Z"
+	End If
+Next
+Print "Septenary:   ";lSum
+If bState = 1 Then
+	Print #lFileHandle, "Septenary:   ";lSum
 End If
 
 ' Chaldean

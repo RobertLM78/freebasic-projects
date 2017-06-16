@@ -1,5 +1,5 @@
 ===============================================================================
-| GematriaFBC 0.5; A simple gematria calculator - console ver.                |
+| GematriaFBC 0.6; A simple gematria calculator - console ver.                |
 |      readme file                                                            |
 ===============================================================================
 This package contains 1 FreeBASIC file:
@@ -14,7 +14,8 @@ GematriaFBC.bas
 #   Installation    #
 #####################
 Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
-repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.
+repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.   If
+you are unsure which Linux binary you need, download the -x86 version.
 
 To compile on Linux:
 fbc ./GematriaFBC.bas
@@ -42,14 +43,15 @@ There are three possible option parameters
 #  General Information  #
 #########################
 Enter a phrase to find the gematria.  Enter !q to quit.
-Gives Simple English, Regular English, Jewish, Chaldean, Pythagorian and
-Reduced.
+Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
+and Reduced.
 
 Example:
 :> GematriaFBC
 Simple:      85
 Regular:     510
 Jewish:      244
+Septenary:   43
 Chaldean:    34
 Pythagorian: 49
 Reduced:     4
