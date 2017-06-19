@@ -9,24 +9,24 @@
 Cls
 Print
 ' =====================
-RowNum = 0
+bRowNum = 0
 ' ==== Load and print readme file ====
-fileName = "readme"
-fileHandle = FreeFile() ' grab a free filehandle number
-Open fileName For Input As #fileHandle
-While Eof(fileHandle) = 0
-	RowNum += 1
-	Line Input #fileHandle, ReadMeText
-	Print ReadMeText
-	If RowNum = 45 Then
-		RowNum = 0
+sFileName = "readme"
+wFileHandle = FreeFile() ' grab a free filehandle number
+Open sFileName For Input As #wFileHandle
+While Eof(wFileHandle) = 0
+	bRowNum += 1
+	Line Input #wFileHandle, zReadMeText
+	Print zReadMeText
+	If bRowNum = 45 Then
+		bRowNum = 0
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Print "Press any key to continue. ";
 		Sleep
 		Cls
 	End If
 Wend
-Close #fileHandle
+Close #wFileHandle
 Print
 Print "Press any key to continue. ";
 Sleep

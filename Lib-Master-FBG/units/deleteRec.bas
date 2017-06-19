@@ -1,76 +1,79 @@
 ' -----------------------------------------------------------------------------
 ' Title: deleteRec.bas - translation unit for LibMasterFBG.bas
-' Version: 0.1 - May 2017
+' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT(),RecNUM
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Color RGB(0, 255, 255), RGB(0, 0, 0) 'Cyan on Black
-Print "LibMasterFBG-0.1  -  Delete a Record (no changes written)"
+Color rgbCyan, rgbBlack 'Cyan on Black
+Print "LibMasterFBG-0.2  -  Delete a Record (no changes written)"
 Print "---------------------------------------------------------"
-Color RGB(255, 255, 255), RGB(0, 0, 0) 'White on Black
+Color rgbWhite, rgbBlack 'White on Black
 Print
 ' Input number of records
 Input "Record to Delete?: ",sDelRec
-iDelRec = Val(sDelRec)
-If iDelRec = -1 Then
+lDelRec = Val(sDelRec)
+If lDelRec = -1 Then
 	Cls
-	Goto Menu: 'Since there's no 'Return' from a translation unit :(
+	Goto Menu:
 End If
-While sDelRec = "" or iDelRec < 1 or iDelRec > RecNum
+While sDelRec = "" or lDelRec < 1 or lDelRec > wRecNum
 	Print "Enter a positive integer. "
 	Input "Record to Delete?: ",sDelRec
-	iDelRec = Val(sDelRec)
-	If iDelRec = -1 Then
+	lDelRec = Val(sDelRec)
+	If lDelRec = -1 Then
 		Cls
-		Goto Menu: 'Since there's no 'Return' from a translation unit :(
+		Goto Menu:
 	End If
 Wend
 ' ==============================
 
 ' Confirm delete
 Print
-Color RGB(0, 255, 255), RGB(0, 0, 0) 'Cyan on Black
-Print "     Record #"&Str$(iDelRec)&" selected:"
-Color RGB(255, 255, 255), RGB(0, 0, 0) 'White on Black
+Color rgbCyan, rgbBlack 'Cyan on Black
+Print "     Record #"&Str$(lDelRec)&" selected:"
+Color rgbWhite, rgbBlack 'White on Black
 Print
 Print
-Print "       "&TIT(iDelRec,1)
-Print "       "&AUT(iDelRec,1)
-Print "       "&AUT(iDelRec,2)
-Print "       "&AUT(iDelRec,3)
+Print "       "&zpTIT[(lDelRec-1)*bTITmax]
+Print "       "&zpAUT0[(lDelRec-1)*bAUTmax]
+Print "       "&zpAUT1[(lDelRec-1)*bAUTmax]
+Print "       "&zpAUT2[(lDelRec-1)*bAUTmax]
 Print
-Input "Are you sure?(Y/N): ",confirmD
-While confirmD = "" or confirmD <> "y" and confirmD <> "Y" and confirmD <> "n" and confirmD <> "N"
-	Input "Are you sure?(Y/N): ",confirmD
+Input "Are you sure?(Y/N): ",sConfirmDel
+While sConfirmDel = "" or sConfirmDel <> "y" and sConfirmDel <> "Y" and sConfirmDel <> "n" and sConfirmDel <> "N"
+	Input "Are you sure?(Y/N): ",sConfirmDel
 Wend
-confirmD = Lcase$(confirmD)
+sConfirmDel = Lcase$(sConfirmDel)
 Print
 
-Select Case confirmD
+Select Case sConfirmDel
 	Case "n"
 		Print "No record deleted.  Press any key to continue. ";
 		Sleep
 		Cls
-		Goto Menu: 'Since there's no 'Return' from a translation unit :(
+		Goto Menu:
 	Case "y"
-		CAT(iDelRec,1) = ""
-		For i = iDelRec to RecNum - 1
-			CAT(i,1) = CAT(i+1,1)
+		zpCAT[(lDelRec-1)*bCATmax] = ""
+		For i = lDelRec to wRecNum - 1
+			zpCAT[(i-1)*bCATmax] = zpCAT[i*bCATmax]
 		Next
-		RecNum -= 1
+		wRecNum -= 1
 		' Break off record numbers
-		For i = 1 to RecNum
-			sortDelim = Instr(CAT(i,1),";")
-			CAT(i,1) = Mid$(CAT(i,1),1,sortDelim-1)
+		For i = 1 to wRecNum
+			iSortDelim = Instr(zpCAT[(i-1)*bCATmax],";")
+			zpCAT[(i-1)*bCATmax] = Mid$(zpCAT[(i-1)*bCATmax],1,iSortDelim-1)
 		Next
 		' Add the record numbers back
-		For i = 1 to RecNum
-			CAT(i,1) = CAT(i,1)&";"&Str$(i)
+		For i = 1 to wRecNum
+			zpCAT[(i-1)*bCATmax] = zpCAT[(i-1)*bCATmax]&";"&Str$(i)
 		Next
-		#include "./units/strDiv.bas"   'Outputs TIT(),AUT(),SUBJ(),NTS()
+		' Reallocate memory
+		wRecNumMem = wRecNum
+		#include "./units/allocate.bas"
+		#include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 		Print "Record deleted.  Press any key to continue. ";
 		Sleep
 		Cls
