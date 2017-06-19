@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBG.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.1 - May 2017
+' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: FBG == FreeBASIC 'Graphic' version (windowed)
@@ -13,55 +13,73 @@ Dim As String clrLine =_
 Dim As String Blnk =_
 !"                                                           "_
 !"                                                           "
+Const rgbCyan = RGB(0, 255, 255)
+Const rgbWhite = RGB(255, 255, 255)
+Const rgbBlack = RGB(0, 0, 0)
 
-Dim As Integer CONT = 1 ' CONTinue with program
-Dim As String *4 inK ' InKey$ variable
-Dim As Integer getK 'GetKey variable
+Dim As Byte bCONT = 1 ' CONTinue with program
+Dim As String *4 sKey ' InKey$ variable
+Dim As Short wKey     'GetKey variable
 ' -------------------------------------
-Dim Shared As Zstring *205 CAT(5000,1) ' Main data arrays - up to 5000 books
-Dim Shared As Zstring *110 TIT(5000,1)
-Dim Shared As Zstring *20 AUT(5000,3)
-Dim Shared As Zstring *5 SUBJ(5000,1)
-Dim Shared As Zstring *30 NTS(5000,1)
+Dim As zString Ptr zpCAT, zpCtmp     ' Data pointers - up to 65000 books (about 27 MBytes)
+Dim As zString Ptr zpTIT, zpTtmp
+Dim As zString Ptr zpAUT0, zpA0tmp
+Dim As zString Ptr zpAUT1, zpA1tmp
+Dim As zString Ptr zpAUT2, zpA2tmp
+Dim As zString Ptr zpSUBJ, zpStmp
+Dim As zString Ptr zpNTS, zpNtmp
+zpCAT = Allocate(1)
+zpAUT0 = Allocate(1)
+zpAUT1 = Allocate(1)
+zpAUT2 = Allocate(1)
+zpSUBJ = Allocate(1)
+zpNTS = Allocate(1)
+
+Const As uByte bCATmax  = 205 ' max length of CAT string
+Const As uByte bTITmax  = 110
+Const As uByte bAUTmax  = 20
+Const As uByte bSUBJmax = 5
+Const As uByte bNTSmax  = 30
+
+Dim As zString *bCATmax  zCAT
+Dim As zString *bTITmax  zTIT
+Dim As zString *bAUTmax  zAUT
+Dim As zString *bSUBJmax zSUBJ
+Dim As zString *bNTSmax  zNTS
 ' -------------------------------------
-Dim Shared As Integer RecNum ' No. records
+Dim As uShort wRecNum        ' No. records
+Dim As uShort wRecNumMem     ' For memory allocation
 ' -------------------------------------
-Dim As Integer i ' For loop indexers
-Dim As Integer k
+Dim As uShort i              ' For loop indexers
+Dim As uShort k
 ' -------------------------------------
-Dim As Integer fileHandle ' File load and save
-Dim As String fileName
+Dim As Short  wFileHandle    ' File load and save
+Dim As String sFileName
 ' -------------------------------------
-Dim As Integer Delim(1,6) ' String divide routine
+Dim As uByte  bDelim(1,6)    ' String divide routine
 ' -------------------------------------
-Dim As Zstring *20 AUTsrch ' Search variables
-Dim As Zstring *110 TITsrch
-Dim As Zstring *5 SUBJsrch
+Dim As uByte   bRowNum = 0   ' Title browser variables
+Dim As uShort  wPageN
+Dim As uShort  wRecMat(1,35) ' 35 rows per screen page - change accordingly (no more than 127)
+Dim As Byte    bQuery        ' (may be negative)
 ' -------------------------------------
-Dim As Integer RowNum = 0' Title browser variables
-Dim As Integer PageN
-Dim As Integer RecMat(1,35) ' 35 rows per screen page - change accordingly
-Dim As Integer queryDisp
+Dim As Long    lHowMuch      ' File update variables  (may be negative while still needing to be <= 65000, so Long)
+Dim As String  sHowMuch
 ' -------------------------------------
-Dim As Integer iHowMuch ' File update variables
-Dim As String sHowMuch
-Dim As Zstring *110 TITtmp ' Also used in file sort
+Dim As Integer      n, P, M, SS, X, iSortDelim ' File sort variables
+Dim As uShort       wColm = 16                 ' column number - GFX vers.
 ' -------------------------------------
-Dim As Zstring *205 CATtmp ' File sort variables
-Dim As Integer n,P,M,SS,X,sortDelim
-Dim As Integer Colm = 16 ' column number - GFX vers.
-' -------------------------------------
-Dim As Integer iDelRec ' Delete record variables
+Dim As Long   lDelRec        ' Delete record variables  (may be negative while still needing to be <= 65000, so Long)
 Dim As String sDelRec
-Dim As String confirmD
+Dim As String sConfirmDel
 ' -------------------------------------
-Dim As Zstring *90 ReadMeText ' Help/readme variable
+Dim As Zstring *90 zReadMeText ' Help/readme variable
 ' -------------------------------------
 '#include once "./inc/dir.bi" ' Only if using the file attribute definitions
 'Screen Attributes --------------------
 'Mode 20	1024x768	 	128x48 or 128x96	8x16 or 8x8		256K colors
 Screen 20,32
-WindowTitle "Library Master FBG 0.1"
+WindowTitle "Library Master FbGfx"
 ' =========================
 
 ' ==== Splash ====
@@ -70,17 +88,17 @@ WindowTitle "Library Master FBG 0.1"
 
 Cls ' Clear the screen before starting the loop
 ' ==== Start Main Program Loop ================================================
-While CONT <> 0
+While bCONT <> 0
 
 Menu:
 ' ==== Menu & Input ====
-Color RGB(0, 255, 255), RGB(0, 0, 0) 'Cyan on Black
+Color rgbCyan, rgbBlack 'Cyan on Black
 Locate 1,1 : Print clrLine
-Locate 3,56 : Print "LibMasterFBG-0.1"
+Locate 3,56 : Print "LibMasterFBG-0.2"
 Locate 4,56 : Print "----------------"
 Locate 5,1 : Print clrLine
 
-Color RGB(255, 255, 255), RGB(0, 0, 0) 'White on Black
+Color rgbWhite, rgbBlack 'White on Black
 Locate 9,50 : Print "[A] Author Search"
 Locate 11,50 : Print "[B] Title Search"
 Locate 13,50 : Print "[C] Title Browser"
@@ -96,31 +114,31 @@ Locate 31,50 : Print "[L] Help: display readme"
 
 Locate 40,50 : Print "Press a menu item letter. ";
 
-Color RGB(0, 255, 255), RGB(0, 0, 0) 'Cyan on Black
+Color rgbCyan, rgbBlack 'Cyan on Black
 Locate 44,1 : Print clrLine
 Locate 46,59 : Print Date
 Locate 47,60 : Print Time
-Color RGB(255, 255, 255), RGB(0, 0, 0) 'White on Black
+Color rgbWhite, rgbBlack 'White on Black
 
-inK = InKey$
+sKey = InKey$
 Sleep 20 ' Take a little nap waiting for input
-While Asc(InK) < 97 or Asc(InK) > 97+12-1 and CONT <> 0 '+12 menu items
-	inK = InKey$
+While Asc(sKey) < 97 or Asc(sKey) > 97+12-1 and bCONT <> 0 '+12 menu items
+	sKey = InKey$
 	Sleep 20 ' Take a little nap waiting for input
-    If Len(inK)=0 Then
+    If Len(sKey)=0 Then
         Sleep 20 ' Take a little nap waiting for input
-    ElseIf inK = chr$(255)+"k" Then ' If the 'X' was clicked
-        CONT = 0                    ' quit the program
+    ElseIf sKey = chr$(255)+"k" Then ' If the 'X' was clicked
+        bCONT = 0                    ' quit the program
     End If
 Wend
 ' ======================
 
 ' ==== Selections ====
-If Asc(inK) = 97 Then
+If Asc(sKey) = 97 Then
 	'==============================
 	'  OPTION A - Author Search   '
 	'==============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
@@ -129,11 +147,11 @@ If Asc(inK) = 97 Then
 		#include "./units/searchAuthor.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf Asc(inK) = 98 Then
+ElseIf Asc(sKey) = 98 Then
 	'=============================
 	'  OPTION B - Title Search   '
 	'=============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
@@ -142,11 +160,11 @@ ElseIf Asc(inK) = 98 Then
 		#include "./units/searchTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 99 Then
+ElseIf	Asc(sKey) = 99 Then
 	'=============================
 	'  OPTION C - Title Browse   '
 	'=============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
@@ -155,11 +173,11 @@ ElseIf	Asc(inK) = 99 Then
 		#include "./units/browseTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 100 Then
+ElseIf	Asc(sKey) = 100 Then
 	'===============================
 	'  OPTION D - Subject Search   '
 	'===============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
@@ -168,11 +186,11 @@ ElseIf	Asc(inK) = 100 Then
 		#include "./units/searchSubject.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 101 Then
+ElseIf	Asc(sKey) = 101 Then
 	'==============================
 	'  OPTION E - Sort by Title   '
 	'==============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
@@ -181,70 +199,84 @@ ElseIf	Asc(inK) = 101 Then
 		#include "./units/fileSort.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 102 Then
+ElseIf	Asc(sKey) = 102 Then
 	'================================
 	'  OPTION F - Data Entry Mode   '
 	'================================
-	#include "./units/fileUpdate.bas" 'Outputs CAT(),RecNum
-	#include "./units/strDiv.bas"   'Outputs TIT(),AUT(),SUBJ(),NTS()
+	#include "./units/fileUpdate.bas" 'Outputs zpCAT[ ],wRecNum
+	#include "./units/strDiv.bas"   '   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(inK) = 103 Then
+ElseIf	Asc(sKey) = 103 Then
 	'================================
 	'  OPTION G - Delete a Record   '
 	'================================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
 	Else
-		#include "./units/deleteRec.bas" 'Outputs CAT(),RecNUM
+		#include "./units/deleteRec.bas" 'Outputs zpCAT[ ],RecNUM
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 104 Then
+ElseIf	Asc(sKey) = 104 Then
 	'==========================
 	'  OPTION H - Load File   '
 	'==========================
-	#include "./units/fileLoad.bas" 'Outputs CAT(),RecNum
-	#include "./units/strDiv.bas"   'Outputs TIT(),AUT(),SUBJ(),NTS()
+	#include "./units/fileLoad.bas" 'Outputs zpCAT[ ],wRecNum
+	#include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(inK) = 105 Then
+ElseIf	Asc(sKey) = 105 Then
 	'=========================
 	'  OPTION I - Save File  '
 	'=========================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
 	Else
-		#include "./units/strCat.bas"   'Outputs CAT()
+		#include "./units/strCat.bas"   'Outputs zpCAT[ ]
 		#include "./units/fileSave.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(inK) = 106 Then
+ElseIf	Asc(sKey) = 106 Then
 	'============================
 	'  OPTION J - Save & Quit   '
 	'============================
-	If CAT(1,1) = "" Then
+	If zpCAT[0] = "" Then
 		Locate 33,40 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
 	Else
-		#include "./units/strCat.bas"   'Outputs CAT()
+		#include "./units/strCat.bas"   'Outputs zpCAT[ ]
 		#include "./units/fileSave.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Cls
-		CONT = 0
+		DeAllocate(zpCAT)
+		DeAllocate(zpTIT)
+		DeAllocate(zpAUT0)
+		DeAllocate(zpAUT1)
+		DeAllocate(zpAUT2)
+		DeAllocate(zpSUBJ)
+		DeAllocate(zpNTS)
+		bCONT = 0
 	End If
-ElseIf	Asc(inK) = 107 Then
+ElseIf	Asc(sKey) = 107 Then
 	'=====================
 	'  OPTION K - Quit   '
 	'=====================
 	Cls
-	CONT = 0
-ElseIf	Asc(inK) = 108 Then
+	DeAllocate(zpCAT)
+	DeAllocate(zpTIT)
+	DeAllocate(zpAUT0)
+	DeAllocate(zpAUT1)
+	DeAllocate(zpAUT2)
+	DeAllocate(zpSUBJ)
+	DeAllocate(zpNTS)
+	bCONT = 0
+ElseIf	Asc(sKey) = 108 Then
 	'====================================
 	'  OPTION L - Help: display readme  '
 	'====================================

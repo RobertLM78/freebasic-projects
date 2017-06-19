@@ -1,5 +1,5 @@
 ===============================================================================
-| Library Master FBG 0.1; Port of the RBL classic to FreeBASIC - graphic ver. |
+| Library Master FBG 0.2; Port of the RBL classic to FreeBASIC - graphic ver. |
 |      readme file                                                            |
 ===============================================================================
 This package contains 14 FreeBASIC files:
@@ -7,7 +7,8 @@ This package contains 14 FreeBASIC files:
 1 Main Program (./):
 LibMasterFBG.bas
 
-13 Translation Units (./units):
+14 Translation Units (./units):
+allocate.bas
 browseTitle.bas
 deleteRec.bas
 fileLoad.bas
@@ -38,16 +39,23 @@ fbc ./LibMasterFBG.bas ./LibMasterFBG.xpm
 To compile on Windows:
 fbc -s gui LibMasterFBG.bas LibMasterFBG.rc
 
+(Binaries compiled with FB version 1.02.1)
 
 #########################
 #  General Information  #
 #########################
-A fork of the classic TI-Extended-BASIC/Myarc-BASIC (TIXB/MXB) program,
+A port of the classic TI-Extended-BASIC/Myarc-BASIC (TIXB/MXB) program,
 LIBRARY-x. This one however introduces some new functions, such as custom file-
 names and a record deleting ability (rather than having to overwrite a record).
 Also noteworthy is the fact that the search abilities are much more powerful
 given the string comparing abilities of FreeBASIC.
-Combined, this program makes up ~1300 lines of code (7.0 kB of source).
+
+As of version 0.2, up to ~65000 books can be entered.  The following limitations
+still apply to the lengths of fields in each record (book):
+TITLES may be up to 109 characters in length
+AUTHORS may be up to 19 characters in length (individually)
+SUBJECTS may be up to 4 characters in length
+NOTES may be up to 29 characters in length
 
 ######################
 #  Navigation Notes  #
