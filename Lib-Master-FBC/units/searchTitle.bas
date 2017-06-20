@@ -11,33 +11,33 @@ Print "LibMasterFBC-0.1  -  Title Search"
 Print "---------------------------------"
 Print
 ' Input title
-Input "Search for title: ",TITsrch
-While TITsrch = ""
-	Input "Search for title: ",TITsrch
+Input "Search for title: ",zTIT
+While zTIT = ""
+	Input "Search for title: ",zTIT
 Wend
-TITsrch = Trim$(TITsrch)
+zTIT = Trim$(zTIT)
 ' Check to see if we want to go back to main menu
-If	Lcase$(TITsrch) = "<back>" Then
+If	Lcase$(zTIT) = "<back>" Then
 	Cls
 	Goto Menu: 'Since there's no 'Return' from a translation unit :(
 End If
 ' ==============================
 
 ' ==== Perform the search ====
-For i = 1 to RecNum
-	Print i;
-	Sleep 25
-	If Instr(Lcase$(TIT(i,1)),Lcase$(TITsrch)) >= 1 Then
+For i = 1 to wRecNum
+	Print i &" ";
+	Sleep 5
+	If Instr(Lcase$(zpTIT[(i-1)*bTITmax]),Lcase$(zTIT)) >= 1 Then
 		Print
-		Print "Title:  "&TIT(i,1)
-		Print "Author 1:   "&AUT(i,1)
-		Print "Author 2:   "&AUT(i,2)
-		Print "Author 3:   "&AUT(i,3)
-		Print "Subject:    "&SUBJ(i,1)
-		Print "Notes:      "&NTS(i,1)
+		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
+		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
+		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
+		Print "Subject:    "&zpSUBJ[(i-1)*bSUBJmax]
+		Print "Notes:      "&zpNTS[(i-1)*bNTSmax]
 		Print "Press any key to continue or 'Esc' to menu. ";
-		getK = GetKey
-		If getK = 27 Then 'Press 'Esc' to return to menu
+		wKey = GetKey
+		If wKey = 27 Then 'Press 'Esc' to return to menu
 			Cls
 			Goto Menu:
 		End If

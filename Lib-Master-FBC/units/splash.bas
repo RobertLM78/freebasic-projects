@@ -4,23 +4,21 @@
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' -----------------------------------------------------------------------------
-Dim As Ubyte KbIN
-
 Cls
-Print "LibMasterFBC-0.1; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+Print "LibMasterFBC-0.2; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
 Print "This program comes with ABSOLUTELY NO WARRANTY; for details press 'w'."
 Print "This is free software, and you are welcome to redistribute it"
 Print "under certain conditions; press `c' for details.  Otherwise press any key. ";
 
-KbIN = GetKey
+wKey = GetKey
 
-If KbIN = 99 Then
+If wKey = 99 Then
 	'#######################
     '# OPTION C Conditions #
 	'#######################
 	Print
 	Print
-	Print "Library Master FBC 0.1 - A port of the RBL classic program to FreeBASIC"
+	Print "Library Master FBC 0.2 - A port of the RBL classic program to FreeBASIC"
 	Print "Copyright (C) 2017  Robert Lock (RobertLM78)"
 	Print
 	Print
@@ -31,8 +29,8 @@ If KbIN = 99 Then
 	Print
 	Print
 	Print "Press 'w' for warranty or any key to continue. ";
-	KbIN = GetKey
-	If KbIN = 119 Then
+	wKey = GetKey
+	If wKey = 119 Then
 		'######################
 		'# OPTION W Warranty  #
 		'######################
@@ -49,9 +47,9 @@ If KbIN = 99 Then
 		Print
 		Print
 		Print "Press any key to continue. ";
-		KbIN = GetKey
+		wKey = GetKey
 	End If
-ElseIf KbIN = 119 Then
+ElseIf wKey = 119 Then
 	'######################
 	'# OPTION W Warranty  #
 	'######################
@@ -68,14 +66,14 @@ ElseIf KbIN = 119 Then
 	Print
 	Print
 	Print "Press 'c' for conditions or any key to continue. ";
-	KbIN = GetKey
-	If KbIN = 99 Then
+	wKey = GetKey
+	If wKey = 99 Then
 		'#######################
  	   '# OPTION C Conditions #
 		'#######################
 		Print
 		Print
-		Print "Library Master FBC 0.1 - A port of the RBL classic program to FreeBASIC"
+		Print "Library Master FBC 0.2 - A port of the RBL classic program to FreeBASIC"
 		Print "Copyright (C) 2017  Robert Lock (RobertLM78)"
 		Print
 		Print
@@ -86,7 +84,7 @@ ElseIf KbIN = 119 Then
 		Print
 		Print
 		Print "Press any key to continue. ";
-		KbIN = GetKey
+		wKey = GetKey
 	End If
 End If
 ' -----------------------------------------------------------------------------

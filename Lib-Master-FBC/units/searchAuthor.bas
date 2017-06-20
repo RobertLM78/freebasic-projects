@@ -1,50 +1,78 @@
 ' -----------------------------------------------------------------------------
 ' Title: searchAuthor.bas - translation unit for LibMasterFBC.bas
-' Version: 0.1 - May 2017
+' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for author - no outputs
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print "LibMasterFBC-0.1  -  Author Search"
+Print "LibMasterFBC-0.2  -  Author Search"
 Print "----------------------------------"
 Print
 ' Input author
-Input "Search for author: ",AUTsrch
-While AUTsrch = ""
-	Input "Search for author: ",AUTsrch
+Input "Search for author: ",zAUT
+While zAUT = ""
+	Input "Search for author: ",zAUT
 Wend
-AUTsrch = Trim$(AUTsrch)
+zAUT = Trim$(zAUT)
 ' Check to see if we want to go back to main menu
-If	Lcase$(AUTsrch) = "<back>" Then
+If	Lcase$(zAUT) = "<back>" Then
 	Cls
-	Goto Menu: 'Since there's no 'Return' from a translation unit :(
+	Goto Menu:
 End If
 ' ==============================
 
 ' ==== Perform the search ====
-For i = 1 to RecNum
-	Print i;
-	Sleep 25
-	For k = 1 to 3
-	If Instr(Lcase$(AUT(i,k)),Lcase$(AUTsrch)) >= 1 Then
+For i = 1 to wRecNum
+	Print i &" ";
+	Sleep 5
+	If Instr(Lcase$(zpAUT0[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
 		Print
-		Print "Title:  "&TIT(i,1)
-		Print "Author 1:   "&AUT(i,1)
-		Print "Author 2:   "&AUT(i,2)
-		Print "Author 3:   "&AUT(i,3)
-		Print "Subject:    "&SUBJ(i,1)
-		Print "Notes:      "&NTS(i,1)
+		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
+		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
+		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
+		Print "Subject:    "&zpSUBJ[(i-1)*bSUBJmax]
+		Print "Notes:      "&zpNTS[(i-1)*bNTSmax]
 		Print "Press any key to continue or 'Esc' to menu. ";
-		getK = GetKey
-		If getK = 27 Then 'Press 'Esc' to return to menu
+		wKey = GetKey
+		If wKey = 27 Then 'Press 'Esc' to return to menu
+			Cls
+			Goto Menu:
+		End If
+		Print
+	ElseIf Instr(Lcase$(zpAUT1[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
+		Print
+		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
+		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
+		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
+		Print "Subject:    "&zpSUBJ[(i-1)*bSUBJmax]
+		Print "Notes:      "&zpNTS[(i-1)*bNTSmax]
+		Print "Press any key to continue or 'Esc' to menu. ";
+		wKey = GetKey
+		If wKey = 27 Then 'Press 'Esc' to return to menu
+			Cls
+			Goto Menu:
+		End If
+		Print
+	ElseIf Instr(Lcase$(zpAUT2[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
+		Print
+		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
+		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
+		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
+		Print "Subject:    "&zpSUBJ[(i-1)*bSUBJmax]
+		Print "Notes:      "&zpNTS[(i-1)*bNTSmax]
+		Print "Press any key to continue or 'Esc' to menu. ";
+		wKey = GetKey
+		If wKey = 27 Then 'Press 'Esc' to return to menu
 			Cls
 			Goto Menu:
 		End If
 		Print
 	End If
-	Next
 Next
 Print
 Print"Finsihed searching.  Press any key to continue. ";

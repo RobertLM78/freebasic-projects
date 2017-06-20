@@ -1,75 +1,100 @@
 ' -----------------------------------------------------------------------------
-' Title: fileUpdate.bas - translation unit for LibMasterFBC.bas
-' Version: 0.1 - May 2017
+' Title: fileUpdate.bas - translation unit for LibMasterFBG.bas
+' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT(),RecNUM
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print "LibMasterFBC-0.1  -  Data Entry Mode"
+Print "LibMasterFBG-0.2  -  Data Entry Mode"
 Print "------------------------------------"
 Print
 ' Input number of records
 Input "How many records to enter?: ",sHowMuch
-iHowMuch = Val(sHowMuch)
-If iHowMuch = -1 Then
+lHowMuch = Val(sHowMuch)
+If lHowMuch = -1 Then
 	Cls
-	Goto Menu: 'Since there's no 'Return' from a translation unit :(
+	Goto Menu:
 End If
-While sHowMuch = "" or iHowMuch < 1
+While sHowMuch = "" or lHowMuch < 1
 	Print "Enter a positive integer. "
 	Input "How many records to enter?: ",sHowMuch
-	iHowMuch = Val(sHowMuch)
-	If iHowMuch = -1 Then
+	lHowMuch = Val(sHowMuch)
+	If lHowMuch = -1 Then
 		Cls
-		Goto Menu: 'Since there's no 'Return' from a translation unit :(
+		Goto Menu:
 	End If
 Wend
+
+' Reallocate memory
+wRecNumMem = wRecNum + lHowMuch
+#include "./units/allocate.bas"
+
 ' Start inputting data
-For i = RecNum + 1 to RecNum + iHowMuch
-	Print Str$(i-RecNum)&":[Rec: "&Str$(i)&"]"
+For i = wRecNum + 1 to wRecNum + lHowMuch
+	Print Str$(i-wRecNum)&":[Rec: "&Str$(i)&"]"
+
 	' Enter title
-	Input "Enter a title(110 char):  ",TITtmp
-	TITtmp = Trim$(TITtmp)
-	While TITtmp = ""
-		Input "Enter a title(110 char):  ",TITtmp
-		TITtmp = Trim$(TITtmp)
+	Input "Enter a title(110 char):  ",zTIT
+	zTIT = Trim$(zTIT)
+	While zTIT = ""
+		Input "Enter a title(110 char):  ",zTIT
+		zTIT = Trim$(zTIT)
 	Wend
 	' Check if the title is there already
-	For k = 1 to RecNum
-		If Instr(Lcase$(TIT(k,1)),Lcase$(TITtmp)) = 1 Then
+	For k = 1 to wRecNum
+		If Instr(Lcase$(zpTIT[(k-1)*bTITmax]),Lcase$(zTIT)) = 1 Then
 			Print "Title already entered!!  Press any key to return to menu. ";
 			Sleep
 			Cls
 			Goto Menu:
 		End If
 	Next
-	TIT(i,1) = TITtmp
-	' Enter Authors
-	For k = 1 to 3
-		Input "Enter Author(Singly, up to 3,(20 char)): ",AUT(i,k)
-		AUT(i,k) = Trim$(AUT(i,k))
-		If AUT(i,k) = "" Then
-			AUT(i,k) = " "
-		End If
-	Next
-	Input "Enter a subject:   ",SUBJ(i,1)
-	SUBJ(i,1) = Ucase$(Trim$(SUBJ(i,1)))
-	If SUBJ(i,1) = "" Then
-		SUBJ(i,1) = "NOSUB"
+	zpTIT[(i-1)*bTITmax] = zTIT
+
+	' Enter authors
+	Input "Enter Author(Singly, up to 3,(20 char)): ",zAUT
+	zAUT = Trim$(zAUT)
+	If zAUT = "" Then
+		zAUT = " "
 	End If
-	Input "Enter notes:    ",NTS(i,1)
-	NTS(i,1) = Trim$(NTS(i,1))
-	If NTS(i,1) = "" Then
-		NTS(i,1) = " "
+	zpAUT0[(i-1)*bAUTmax] = zAUT
+	Input "Enter Author(Singly, up to 3,(20 char)): ",zAUT
+	zAUT = Trim$(zAUT)
+	If zAUT = "" Then
+		zAUT = " "
 	End If
+	zpAUT1[(i-1)*bAUTmax] = zAUT
+	Input "Enter Author(Singly, up to 3,(20 char)): ",zAUT
+	zAUT = Trim$(zAUT)
+	If zAUT = "" Then
+		zAUT = " "
+	End If
+	zpAUT2[(i-1)*bAUTmax] = zAUT
+
+	' Enter subject
+	Input "Enter a subject:   ",zSUBJ
+	zSUBJ = Ucase$(Trim$(zSUBJ))
+	If zSUBJ = "" Then
+		zSUBJ = "NOSUB"
+	End If
+	zpSUBJ[(i-1)*bSUBJmax] = zSUBJ
+
+	' Enter notes
+	Input "Enter notes:    ",zNTS
+	zNTS = Trim$(zNTS)
+	If zNTS = "" Then
+		zNTS = " "
+	End If
+	zpNTS[(i-1)*bNTSmax] = zNTS
+
 	Print
 Next
 
-' Update RecNum
-RecNum = RecNum + iHowMuch
-' Update CAT()
+' Update wRecNum
+wRecNum = wRecNum + lHowMuch
+' Update zpCAT[]
 #include "./units/strCat.bas"
 
 ' Finished updating
@@ -80,25 +105,25 @@ While Inkey$ <> "": Wend ' Flush the buffer
 ' ==============================
 
 ' Input file name
-Input "Enter a file name (type <DEF> for default file name): ",fileName
-While fileName = ""
-	Input "Enter a file name (type <DEF> for default file name): ",fileName
+Input "Enter a file name (type <DEF> for default file name): ",sFileName
+While sFileName = ""
+	Input "Enter a file name (type <DEF> for default file name): ",sFileName
 Wend
 ' Then check to see if we want the default
-If Lcase$(fileName) = "<def>" Then
-	fileName = "catalog.dat"
+If Lcase$(sFileName) = "<def>" Then
+	sFileName = "catalog.dat"
 End If
 
 ' ==== Append File ====
-fileHandle = FreeFile() ' grab a free filehandle number
+wFileHandle = FreeFile() ' grab a free filehandle number
 
-Open fileName For Append As #fileHandle
-For i = RecNum - iHowMuch + 1 to RecNum
-	Print #fileHandle, CAT(i,1)
+Open sFileName For Append As #wFileHandle
+For i = wRecNum - lHowMuch + 1 to wRecNum
+	Print #wFileHandle, zpCAT[(i-1)*bCATmax]
 Next
-    Close #fileHandle
-	Print "File saved successfully.  Press any key to continue. ";
-	Sleep
-	Cls
+Close #wFileHandle
+Print "File saved successfully.  Press any key to continue. ";
+Sleep
+Cls
 ' =====================
 ' -----------------------------------------------------------------------------
