@@ -43,9 +43,30 @@ If iNumArgs >= 1 Then
 		Print "     -h, --help"," Show options"
 		Print "     -v, --version"," Show version"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
+		Print "     -w, --warranty"," Warranty and license conditions"
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
 		Print "GematriaFBC - version 0.6"
+		System 0
+	ElseIf Command$(i) = "-w" orElse Command$(i) = "--warranty" Then
+		Print "GematriaFBC-0.6; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+		Print "This program comes with ABSOLUTELY NO WARRANTY."
+		Print "This is free software, and you are welcome to redistribute it under certain conditions."
+		Print
+		Print "GematriaFBC-0.6 - a simple gemtria calculator"
+		Print
+		Print "This program is distributed in the hope that it will be useful,"
+		Print "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+		Print "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
+		Print "GNU General Public License for more details."
+		Print
+		Print "You should have received a copy of the GNU General Public License"
+		Print "along with this program.  If not, see <http://www.gnu.org/licenses/>."
+		Print
+		Print "This program is free software: you can redistribute it and/or modify"
+		Print "it under the terms of the GNU General Public License as published by "
+		Print "the Free Software Foundation, either version 3 of the License, or"
+		Print "(at your option) any later version."
 		System 0
 	Else
 		Print Command$(i) &"  is not a vaild parameter"
@@ -54,6 +75,7 @@ If iNumArgs >= 1 Then
 		Print "     -h, --help"," Show options"
 		Print "     -v, --version"," Show version"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
+		Print "     -w, --warranty"," Warranty and license conditions"
 		System 0 ' quit if there's any invalid parameter
 	End If
 	Next

@@ -38,6 +38,7 @@ There are three possible option parameters
      -h, --help              Show options
      -v, --version           Show version
      -l, --log               Log session (as GematriaFBC.log)
+     -w, --warranty          Warranty and license conditions
 
 #########################
 #  General Information  #
