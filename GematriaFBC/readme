@@ -1,5 +1,5 @@
 ===============================================================================
-| GematriaFBC 0.6; A simple gematria calculator - console ver.                |
+| GematriaFBC 1.0; A simple gematria calculator - console ver.                |
 |      readme file                                                            |
 ===============================================================================
 This package contains 1 FreeBASIC file:
@@ -46,6 +46,8 @@ There are three possible option parameters
 Enter a phrase to find the gematria.  Enter !q to quit.
 Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
 and Reduced.
+As of version 1.0, the program will calculate dates and numbers, which had
+previously been ignored.
 
 Example:
 :> GematriaFBC
