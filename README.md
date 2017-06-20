@@ -1,7 +1,8 @@
 # freebasic-projects
 Various projects in FreeBASIC
 http://freebasic.net/
-                    --------------------------------------------------
+
+
 More about FreeBASIC (from the website)
 Compatibility
 
