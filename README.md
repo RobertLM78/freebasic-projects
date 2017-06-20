@@ -1,9 +1,10 @@
 # freebasic-projects
 Various projects in FreeBASIC
 http://freebasic.net/
-
-
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
 More about FreeBASIC (from the website)
+-------------------------------------------------------------------------------------------
 Compatibility
 
 FreeBASIC is not a "new" BASIC language. You don't need to learn much new if you are familiar with any Microsoft-BASIC variant. You can use either "-lang qb" for compatibility, or (default) "-lang fb" for some of the new features, but it also brings some restrictions and some similarity with the "C" programming language. FreeBASIC is case-insensitive; explicit "main" procedure is not required; most of the graphic and console statements and procedures found in Microsoft QuickBASIC are implemented, et cetera. Only with "-lang qb": scalar variables don't need to be dimensioned and suffixes can be used; line numbers are supported; On Error and Gosub supported.
