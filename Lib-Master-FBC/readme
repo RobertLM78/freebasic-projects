@@ -1,13 +1,14 @@
 ===============================================================================
-| Library Master FBC 0.1; Port of the RBL classic to FreeBASIC - console ver. |
+| Library Master FBG 0.2; Port of the RBL classic to FreeBASIC - console ver. |
 |      readme file                                                            |
 ===============================================================================
 This package contains 14 FreeBASIC files:
 
 1 Main Program (./):
-LibMasterFBC.bas
+LibMasterFBG.bas
 
-13 Translation Units (./units):
+14 Translation Units (./units):
+allocate.bas
 browseTitle.bas
 deleteRec.bas
 fileLoad.bas
@@ -28,20 +29,33 @@ strDiv.bas
 #####################
 #   Installation    #
 #####################
-The binary released with this package was compiled on 64-bit Linux using Free-
-BASIC compiler version 1.02.1.  A 32-bit version is also available.  Purely
-FreeBASIC in code, this program should readily compile on any platform
-available to FreeBASIC with no changes necessary.
+Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
+repository (LibMasterFBG-x86,LibMasterFBG-amd64,and LibMasterFBG.exe,
+respectively).
+
+To compile on Linux:
+fbc ./LibMasterFBG.bas
+
+To compile on Windows:
+fbc LibMasterFBG.bas
+
+(Binaries compiled with FB version 1.02.1)
 
 #########################
 #  General Information  #
 #########################
-A fork of the classic TI-Extended-BASIC/Myarc-BASIC (TIXB/MXB) program,
+A port of the classic TI-Extended-BASIC/Myarc-BASIC (TIXB/MXB) program,
 LIBRARY-x. This one however introduces some new functions, such as custom file-
 names and a record deleting ability (rather than having to overwrite a record).
 Also noteworthy is the fact that the search abilities are much more powerful
 given the string comparing abilities of FreeBASIC.
-Combined, this program makes up ~1300 lines of code (7.0 kB of source).
+
+As of version 0.2, up to ~65000 books can be entered.  The following limitations
+still apply to the lengths of fields in each record (book):
+TITLES may be up to 109 characters in length
+AUTHORS may be up to 19 characters in length (individually)
+SUBJECTS may be up to 4 characters in length
+NOTES may be up to 29 characters in length
 
 ######################
 #  Navigation Notes  #
