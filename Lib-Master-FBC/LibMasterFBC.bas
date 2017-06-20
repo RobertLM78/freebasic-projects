@@ -5,6 +5,11 @@
 ' License: GPL v3
 ' About: Console version
 ' -----------------------------------------------------------------------------
+' Define the console size, Windows-based systems
+#ifdef __FB_WIN32__
+	Const W = 125, H = 50
+	Width W, H
+#endif
 ' ==== Initializations ====
 Dim As Byte bCONT = 1 ' CONTinue with program
 Dim As String *4 sKey ' InKey$ variable
