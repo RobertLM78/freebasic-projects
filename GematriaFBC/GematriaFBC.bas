@@ -46,14 +46,20 @@ If iNumArgs >= 1 Then
 		Print "     -w, --warranty"," Warranty and license conditions"
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
+		Color 11
 		Print "GematriaFBC - version 1.0"
+		Color 15
 		System 0
 	ElseIf Command$(i) = "-w" orElse Command$(i) = "--warranty" Then
+		Color 11
 		Print "GematriaFBC-1.0; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+		Color 15
 		Print "This program comes with ABSOLUTELY NO WARRANTY."
 		Print "This is free software, and you are welcome to redistribute it under certain conditions."
 		Print
+		Color 11
 		Print "GematriaFBC-1.0 - a simple gemtria calculator"
+		Color 15
 		Print
 		Print "This program is distributed in the hope that it will be useful,"
 		Print "but WITHOUT ANY WARRANTY; without even the implied warranty of"
@@ -82,8 +88,10 @@ If iNumArgs >= 1 Then
 End If
 ' ======================================
 
+Color 11
 Print "GematriaFBC 1.0 - Enter !q to quit"
 Print "----------------------------------"
+Color 15
 Print
 ' ==============================================================================
 Do
