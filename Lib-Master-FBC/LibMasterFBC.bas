@@ -22,12 +22,12 @@ Dim As zString Ptr zpAUT1, zpA1tmp
 Dim As zString Ptr zpAUT2, zpA2tmp
 Dim As zString Ptr zpSUBJ, zpStmp
 Dim As zString Ptr zpNTS, zpNtmp
-zpCAT = Allocate(1)
-zpAUT0 = Allocate(1)
-zpAUT1 = Allocate(1)
-zpAUT2 = Allocate(1)
-zpSUBJ = Allocate(1)
-zpNTS = Allocate(1)
+zpCAT = Allocate(1) : *zpCAT = ""
+zpAUT0 = Allocate(1) : *zpAUT0 = ""
+zpAUT1 = Allocate(1) : *zpAUT1 = ""
+zpAUT2 = Allocate(1) : *zpAUT2 = ""
+zpSUBJ = Allocate(1) : *zpSUBJ = ""
+zpNTS = Allocate(1) : *zpNTS = ""
 
 Const As uByte bCATmax  = 205 ' max length of CAT string
 Const As uByte bTITmax  = 110
@@ -113,7 +113,7 @@ If Asc(sKey) = 97 Then
 	'==============================
 	'  OPTION A - Author Search   '
 	'==============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then '(*zpCat)[0] = 0 is equivalent to Len(*zpCAT) = 0
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -127,7 +127,7 @@ ElseIf Asc(sKey) = 98 Then
 	'=============================
 	'  OPTION B - Title Search   '
 	'=============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -141,7 +141,7 @@ ElseIf	Asc(sKey) = 99 Then
 	'=============================
 	'  OPTION C - Title Browse   '
 	'=============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -155,7 +155,7 @@ ElseIf	Asc(sKey) = 100 Then
 	'===============================
 	'  OPTION D - Subject Search   '
 	'===============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -169,7 +169,7 @@ ElseIf	Asc(sKey) = 101 Then
 	'==============================
 	'  OPTION E - Sort by Title   '
 	'==============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -190,7 +190,7 @@ ElseIf	Asc(sKey) = 103 Then
 	'================================
 	'  OPTION G - Delete a Record   '
 	'================================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -211,7 +211,7 @@ ElseIf	Asc(sKey) = 105 Then
 	'=========================
 	'  OPTION I - Save File  '
 	'=========================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
@@ -226,7 +226,7 @@ ElseIf	Asc(sKey) = 106 Then
 	'============================
 	'  OPTION J - Save & Quit   '
 	'============================
-	If zpCAT[0] = "" Then
+	If (*zpCat)[0] = 0 Then
 		Print
 		Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
