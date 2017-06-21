@@ -20,7 +20,7 @@ While zSUBJ = ""
 Wend
 zSUBJ = Trim$(zSUBJ)
 ' Check to see if we want to go back to main menu
-If	Lcase$(zSUBJ) = "<back>" Then
+If	Lcase$(zSUBJ) = "<bac" Then
 	Cls
 	Goto Menu:
 End If
