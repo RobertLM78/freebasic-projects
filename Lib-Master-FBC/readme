@@ -34,10 +34,10 @@ repository (LibMasterFBG-x86,LibMasterFBG-amd64,and LibMasterFBG.exe,
 respectively).
 
 To compile on Linux:
-fbc ./LibMasterFBG.bas
+fbc ./LibMasterFBC.bas
 
 To compile on Windows:
-fbc LibMasterFBG.bas
+fbc LibMasterFBC.bas
 
 (Binaries compiled with FB version 1.02.1)
 
