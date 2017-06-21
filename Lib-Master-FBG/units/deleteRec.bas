@@ -72,6 +72,9 @@ Select Case sConfirmDel
 		Next
 		' Reallocate memory
 		wRecNumMem = wRecNum
+		If wRecNumMem = 0 Then
+			wRecNumMem = 1
+		End If
 		#include "./units/allocate.bas"
 		#include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 		Print "Record deleted.  Press any key to continue. ";
