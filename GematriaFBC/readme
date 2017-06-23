@@ -1,11 +1,19 @@
 ===============================================================================
-| GematriaFBC 1.0; A simple gematria calculator - console ver.                |
+| GematriaFBC 1.2; A simple gematria calculator - console ver.                |
 |      readme file                                                            |
 ===============================================================================
-This package contains 1 FreeBASIC file:
+This package contains 7 FreeBASIC file:
 
 1 Main Program (./):
-GematriaFBC.bas
+GematriaM.bas
+
+6 Translation Units (./units):
+Chaldean.bas
+Jewish.bas
+Pythag.bas
+Reduced.bas
+Septenary.bas
+SimpleAndReg.bas
 
 ===============================================================================
 | User guide                                                                  |
@@ -31,14 +39,17 @@ fbc GematriaFBC.bas
 Linux:
 It is suggested to make a symbolic link to the binary in /home/foo/bin/, that
 way the program can be run from anywhere.
+
 Windows:
 Double click the .exe or call the program from the command prompt.
 
-There are three possible option parameters
+
+Usage:
      -h, --help              Show options
      -v, --version           Show version
      -l, --log               Log session (as GematriaFBC.log)
      -w, --warranty          Warranty and license conditions
+     -V, --verbose           Verbose output
 
 #########################
 #  General Information  #
@@ -46,10 +57,14 @@ There are three possible option parameters
 Enter a phrase to find the gematria.  Enter !q to quit.
 Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
 and Reduced.
+Note that the verbose option comes at a cost of speed, but will display the
+entered string and then letter values in a sum format.  This is good for those
+whose are learning the values of letters in the different systems.
 As of version 1.0, the program will calculate dates and numbers, which had
 previously been ignored.
 
-Example:
+
+Example (terse):
 :> GematriaFBC
 Simple:      85
 Regular:     510
@@ -58,4 +73,34 @@ Septenary:   43
 Chaldean:    34
 Pythagorian: 49
 Reduced:     4
+
+
+Example (verbose):
+:> GematriaFBC
+Simple:      85
+Regular:     510
+G  E  M  A  T  R  I  A  F  B  C
+7 +5 +13+1 +20+18+9 +1 +6 +2 +3
+G   E   M   A   T   R   I   A   F   B   C
+42 +30 +78 +6  +120+108+54 +6  +36 +12 +18
+
+Jewish:      244
+G   E   M   A   T   R   I   A   F   B   C
+7  +5  +30 +1  +100+80 +9  +1  +6  +2  +3
+
+Septenary:   43
+G E M A T R I A F B C
+7+5+1+1+7+5+5+1+6+2+3
+
+Chaldean:    34
+G E M A T R I A F B C
+3+5+4+1+4+2+1+1+8+2+3
+
+Pythagorian: 49
+G E M A T R I A F B C
+7+5+4+1+2+9+9+1+6+2+3
+
+Reduced:     4
+4+9
+1+3
 ===============================================================================

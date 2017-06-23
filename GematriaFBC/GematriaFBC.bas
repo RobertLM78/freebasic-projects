@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
-' Title: GematriaFBC.bas - a simple gemtria calculator
-' Version: 1.0 - June 2017
+' Title: GematriaFBC.bas - a simple gemtaria calculator
+' Version: 1.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
@@ -15,6 +15,7 @@ Dim As uLong lSumLength
 Dim As uLong lSumReduce
 Dim As uLong lRegSum
 Dim As Integer Ptr ipSumDigits
+Dim As uLong lSumTmp
 ' ===  Command$ variables  ===
 Dim As Integer iNumArgs
 Dim As String sArg
@@ -38,27 +39,30 @@ If iNumArgs >= 1 Then
 	If Command$(i) = "-l" orElse Command$(i) = "--log" Then
 		bState = bState xor &b00000001
 		Print "This session will be logged in ";CurDir
+	ElseIf Command$(i) = "-V" orElse  Command$(i) = "--verbose" Then
+		bState = bState xor &b00000010
 	ElseIf Command$(i) = "-h" orElse Command$(i) = "--help" Then
 		Print "Valid parameters are:"
 		Print "     -h, --help"," Show options"
 		Print "     -v, --version"," Show version"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
 		Print "     -w, --warranty"," Warranty and license conditions"
+		Print "     -V, --verbose"," Verbose output"
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
-		Color 11
-		Print "GematriaFBC - version 1.0"
+		Color 10
+		Print "GematriaFBC - version 1.2"
 		Color 15
 		System 0
 	ElseIf Command$(i) = "-w" orElse Command$(i) = "--warranty" Then
-		Color 11
-		Print "GematriaFBC-1.0; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+		Color 10
+		Print "GematriaFBC-1.2; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
 		Color 15
 		Print "This program comes with ABSOLUTELY NO WARRANTY."
 		Print "This is free software, and you are welcome to redistribute it under certain conditions."
 		Print
-		Color 11
-		Print "GematriaFBC-1.0 - a simple gemtria calculator"
+		Color 10
+		Print "GematriaFBC-1.2 - a simple gemtria calculator"
 		Color 15
 		Print
 		Print "This program is distributed in the hope that it will be useful,"
@@ -82,26 +86,27 @@ If iNumArgs >= 1 Then
 		Print "     -v, --version"," Show version"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
 		Print "     -w, --warranty"," Warranty and license conditions"
+		Print "     -V, --verbose"," Verbose output"
 		System 0 ' quit if there's any invalid parameter
 	End If
 	Next
 End If
 ' ======================================
-
 Color 11
-Print "GematriaFBC 1.0 - Enter !q to quit"
+Print "GematriaFBC 1.2 - Enter !q to quit"
 Print "----------------------------------"
 Color 15
 Print
 ' ==============================================================================
 Do
-
+Color 11
 Line Input ":> ", sWordIn
 zWordIn = Ucase$(sWordIn)
 While Len(zWordIn) = 0
 	Line Input ":> ", sWordIn
 	zWordIn = Ucase$(sWordIn)
 Wend
+Color 15
 If zWordIn = "!Q" Then
 	Exit Do
 End If
@@ -113,9 +118,8 @@ ipAscII = Allocate(lWordLen*SizeOf(Integer))
 For i = 1 to lWordLen
 	ipAscII[i-1] = Asc(zWordIn,i)
 Next
-
 ' Open the log file
-If bState = 1 Then
+If bState = 1 orElse bState = 3 Then
 	lFileHandle = FreeFile()
 	If Open("GematriaFBC.log" For Append As #lFileHandle) <> 0 Then
 		Print "Error with filesytem.  Quitting to shell..."
@@ -126,158 +130,25 @@ If bState = 1 Then
 End If
 
 ' Simple and Regular English gematria
-lSum = 0
-For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	Else
-		lSum += ipAscII[i-1] - 64 ': Print ipAscII[i-1] - 64 : Print lSum
-	End If
-Next
-lRegSum = lSum*6
-Print "Simple:      ";lSum
-Print "Regular:     ";lRegSum
-If bState = 1 Then
-	Print #lFileHandle, "Simple:      ";lSum
-	Print #lFileHandle, "Regular:     ";lRegSum
-End If
-
+#include "./units/SimpleAndReg.bas"
 ' Jewish
-lSum = 0
-For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 73 Then
-		lSum += ipAscII[i-1] - 64 ': Print ipAscII[i-1] - 64,"A - I"
-	ElseIf Abs(ipAscII[i-1]) = 74 Then
-		lSum += 600 ': Print 600,"J"
-	ElseIf Abs(ipAscII[i-1]) >= 75 and Abs(ipAscII[i-1]) <= 83 Then
-		lSum += (ipAscII[i-1] - 74)*10 ': Print (ipAscII[i-1] - 74)*10,"K - S"
-	ElseIf Abs(ipAscII[i-1]) = 84 orElse Abs(ipAscII[i-1]) = 85 Then
-		lSum += (ipAscII[i-1] - 83)*100 ': Print (ipAscII[i-1] - 83)*100,"T,U"
-	ElseIf Abs(ipAscII[i-1]) = 86 Then
-		lSum += 700 ': Print 700,"V"
-	ElseIf Abs(ipAscII[i-1]) = 87 Then
-		lSum += 900 ': Print 900,"W"
-	ElseIf Abs(ipAscII[i-1]) >= 88 and Abs(ipAscII[i-1]) <= 90 Then
-		lSum += (ipAscII[i-1] - 85)*100 ': Print (ipAscII[i-1] - 85)*100,"X - Z"
-	End If
-Next
-Print "Jewish:      ";lSum
-If bState = 1 Then
-	Print #lFileHandle, "Jewish:      ";lSum
-End If
-
+#include "./units/Jewish.bas"
 ' Septenary
-lSum = 0
-For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 71 Then 'A-G
-		lSum += ipAscII[i-1] - 64 ': Print ipAscII[i-1] - 64,"A - G"
-	ElseIf Abs(ipAscII[i-1]) >= 72 and Abs(ipAscII[i-1]) <= 77 Then 'H-M
-		lSum += 78 - ipAscII[i-1] ': Print 78 - ipAscII[i-1],"H - M"
-	ElseIf Abs(ipAscII[i-1]) >= 78 and Abs(ipAscII[i-1]) <= 84 Then 'N-T
-		lSum += ipAscII[i-1] - 77 ': Print ipAscII[i-1] - 77,"N - T"
-	ElseIf Abs(ipAscII[i-1]) >= 85 and Abs(ipAscII[i-1]) <= 90 Then 'U-Z
-		lSum += 91 - ipAscII[i-1] ': Print 91 - ipAscII[i-1],"U - Z"
-	End If
-Next
-Print "Septenary:   ";lSum
-If bState = 1 Then
-	Print #lFileHandle, "Septenary:   ";lSum
-End If
-
+#include "./units/Septenary.bas"
 ' Chaldean
-lSum = 0
-For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 69 Then 'A-E = 1,2,3,4,5
-		lSum += ipAscII[i-1] - 64 ': Print ipAscII[i-1] - 64,"A - E"
-	ElseIf Abs(ipAscII[i-1]) = 70 orElse Abs(ipAscII[i-1]) = 80 Then 'F,P = 8
-		lSum += 8 ': Print 8,"F,P"
-	ElseIf Abs(ipAscII[i-1]) = 71 orElse Abs(ipAscII[i-1]) = 76 orElse Abs(ipAscII[i-1]) = 83  Then 'G,L,S = 3
-		lSum += 3 ': Print 3,"G,L,S"
-	ElseIf Abs(ipAscII[i-1]) = 72 orElse Abs(ipAscII[i-1]) = 78 orElse Abs(ipAscII[i-1]) = 88  Then 'H,N,X = 5
-		lSum += 5 ': Print 5,"H,N,X"
-	ElseIf Abs(ipAscII[i-1]) >= 85 and Abs(ipAscII[i-1]) <= 87  Then 'U,V,W = 6
-		lSum += 6 ': Print 6,"U,V,W"
-	ElseIf Abs(ipAscII[i-1]) = 79 orElse Abs(ipAscII[i-1]) = 90 Then 'O,Z = 7
-		lSum += 7 ': Print 7,"O,Z"
-	ElseIf Abs(ipAscII[i-1]) = 73 orElse Abs(ipAscII[i-1]) = 74 orElse Abs(ipAscII[i-1]) = 81 orElse Abs(ipAscII[i-1]) = 89  Then 'I,J,Q,Y = 1
-		lSum += 1 ': Print 1,"I,J,Q,Y"
-	ElseIf Abs(ipAscII[i-1]) = 75 orElse Abs(ipAscII[i-1]) = 82 Then 'K,R = 2
-		lSum += 2 ': Print 2,"K,R"
-	ElseIf Abs(ipAscII[i-1]) = 77 orElse Abs(ipAscII[i-1]) = 84 Then 'M,T = 4
-		lSum += 4 ': Print 4,"M,T"
-	End If
-Next
-Print "Chaldean:    ";lSum
-If bState = 1 Then
-	Print #lFileHandle, "Chaldean:    ";lSum
-End If
-
+#include "./units/Chaldean.bas"
 ' Pythagorian
-lSum = 0
-For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 73 Then
-		lSum += ipAscII[i-1] - 64 ': Print ipAscII[i-1] - 64,"A - I"
-	ElseIf Abs(ipAscII[i-1]) >= 74 and Abs(ipAscII[i-1]) <= 82 Then
-		lSum += ipAscII[i-1] - 73 ': Print ipAscII[i-1] - 73,"J - R"
-	ElseIf Abs(ipAscII[i-1]) >= 83 and Abs(ipAscII[i-1]) <= 90 Then
-		lSum += ipAscII[i-1] - 82 ': Print ipAscII[i-1] - 64,"S - Z"
-	End If
-Next
-Print "Pythagorian: ";lSum
-If bState = 1 Then
-	Print #lFileHandle, "Pythagorian: ";lSum
-End If
-
+#include "./units/Pythag.bas"
 ' Reduced
-While Len(Str$(lSum)) > 1
-	lSumReduce = 0
-	ipSumDigits = Allocate(Len(Str$(lSum))*SizeOf(Integer))
-	For i = 1 to Len(Str$(lSum))
-		ipSumDigits[i-1] = Val(Mid$(Str$(lSum), i , 1))
-		lSumReduce += ipSumDigits[i-1]
-	Next
-	lSum = lSumReduce
-	DeAllocate(ipSumDigits)
-Wend
-Print "Reduced:     ";lSum
-If bState = 1 Then
-	Print #lFileHandle, "Reduced:     ";lSum
-	Print #lFileHandle,
-End If
+#include "./units/Reduced.bas"
 
-If bState = 1 Then
+' Close the log file
+If bState = 1 orElse bState = 3 Then
 	Close #lFileHandle
 End If
-
+' Clear memory
 DeAllocate(ipAscII)
-Print
+
 Loop
 ' ==============================================================================
+' ---- EOF ---------------------------------------------------------------------
