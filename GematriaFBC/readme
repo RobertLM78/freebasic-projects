@@ -1,5 +1,5 @@
 ===============================================================================
-| GematriaFBC 1.2; A simple gematria calculator - console ver.                |
+| GematriaFBC 1.3; A simple gematria calculator - console ver.                |
 |      readme file                                                            |
 ===============================================================================
 This package contains 7 FreeBASIC file:
@@ -39,6 +39,9 @@ fbc GematriaFBC.bas
 Linux:
 It is suggested to make a symbolic link to the binary in /home/foo/bin/, that
 way the program can be run from anywhere.
+Also suggested is to remove the suffix from the binary name (i.e. the '-x86' or
+'-amd64'), however it will still work without doing so.  For example:
+$ ln -s /home/foo/download/path/GematriaFBC/GematriaFBC /home/foo/bin/GematriaFBC
 
 Windows:
 Double click the .exe or call the program from the command prompt.
@@ -54,9 +57,11 @@ Usage:
 #########################
 #  General Information  #
 #########################
-Enter a phrase to find the gematria.  Enter !q to quit.
+Enter a phrase to find the gematria.  Enter !q to quit or !clr to clear the
+screen.
 Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
-and Reduced.
+and Reduced. (For now - though additional systems as well as reverse systems
+will likely be added in future).
 Note that the verbose option comes at a cost of speed, but will display the
 entered string and then letter values in a sum format.  This is good for those
 whose are learning the values of letters in the different systems.
@@ -103,4 +108,27 @@ G E M A T R I A F B C
 Reduced:     4
 4+9
 1+3
+
+##########################
+#  License and Warranty  #
+##########################
+GNU PUBLIC LICENSE - Version 3
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+A copy of the license is in the tarball, and in the Git repository.
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
+
+###################################
+#  Bug Reporting and Suggestions  #
+###################################
+Please email me if you find a bug or would like to suggest a feature.
+
+beannachtai@homtail.com
 ===============================================================================
