@@ -95,6 +95,6 @@ If bState = 2 orElse bState = 3 Then
 			End If
 		End If
 	Next
-	Print : Print
+	Print
 End If
 ' ------------------------------------------------------------------------------
