@@ -62,9 +62,13 @@ screen.
 Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
 and Reduced. (For now - though additional systems as well as reverse systems
 will likely be added in future).
-Note that the verbose option comes at a cost of speed, but will display the
-entered string and then letter values in a sum format.  This is good for those
-whose are learning the values of letters in the different systems.
+
+Note that in a Linux (ANSI emulated) terminal, the verbose option comes at a
+cost of speed, but will display the entered string and then letter values in a
+sum format.  This is good for those whose are learning the values of letters in
+the different systems.  If you're running under Linux, and would like better
+performance, switch to a true text-only console (TTY).
+
 As of version 1.0, the program will calculate dates and numbers, which had
 previously been ignored.
 
