@@ -5,7 +5,7 @@
 This package contains 7 FreeBASIC file:
 
 1 Main Program (./):
-GematriaM.bas
+GematriaFBC.bas
 
 6 Translation Units (./units):
 Chaldean.bas
