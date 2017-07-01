@@ -2,7 +2,7 @@
 | GematriaFBC 1.3; A simple gematria calculator - console ver.                 |
 |      readme file                                                             |
 ================================================================================
-This package contains 7 FreeBASIC file:
+This package contains 7 FreeBASIC files:
 
 1 Main Program (./):
 GematriaFBC.bas
