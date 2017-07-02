@@ -2,12 +2,12 @@
 | GematriaFBC 1.3; A simple gematria calculator - console ver.                 |
 |      readme file                                                             |
 ================================================================================
-This package contains 7 FreeBASIC files:
+This package contains 7 FreeBASIC source files:
 
 1 Main Program (./):
 GematriaFBC.bas
 
-6 Translation Units (./units):
+6 Translation units (./units):
 Chaldean.bas
 Jewish.bas
 Pythag.bas
