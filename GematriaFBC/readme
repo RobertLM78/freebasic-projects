@@ -23,15 +23,28 @@ SimpleAndReg.bas
 #####################
 Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
 repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.   If
-you are unsure which Linux binary you need, download the -x86 version.
+you are unsure which Linux binary you need, download the -x86 version.  These
+are ready to use, 'right out of the box', with no other action needed.
+(Binaries compiled with FreeBASIC version 1.02.1)
+
+
+If you are adventurous and would rather compile it yourself, follow these in-
+stuctions (assuming you already have the FreeBASIC compiler - version 1.02.1 or
+lower is suggested):
+
+Download the source tarball (.tar.gz file) and extract to where ever you would
+like to keep the files (Windows users can use 7-zip or a variety of other
+utilities to unpack the archive).
+
+Open a terminal (Linux) or command window (Windows) in the folder that was
+created extracting the archive (which should be named something like
+'GematriaFBC-1.x-src').
 
 To compile on Linux:
 fbc ./GematriaFBC.bas
 
 To compile on Windows:
 fbc GematriaFBC.bas
-
-(Binaries compiled with FB version 1.02.1)
 
 #########################
 #  Running the Program  #
@@ -41,7 +54,7 @@ It is suggested to make a symbolic link to the binary in /home/foo/bin/, that
 way the program can be run from anywhere.
 Also suggested is to remove the suffix from the binary name (i.e. the '-x86' or
 '-amd64'), however it will still work without doing so.  For example:
-$ ln -s /home/foo/download/path/GematriaFBC/GematriaFBC /home/foo/bin/GematriaFBC
+$ ln -s /home/foo/downloaded/path/GematriaFBC /home/foo/bin/GematriaFBC
 
 Windows:
 Double click the .exe or call the program from the command prompt.
@@ -73,7 +86,7 @@ As of version 1.0, the program will calculate dates and numbers, which had
 previously been ignored.
 
 
-Example (terse):
+Example (terse [default]):
 :> GematriaFBC
 Simple:      85
 Regular:     510
@@ -92,23 +105,18 @@ G  E  M  A  T  R  I  A  F  B  C
 7 +5 +13+1 +20+18+9 +1 +6 +2 +3
 G   E   M   A   T   R   I   A   F   B   C
 42 +30 +78 +6  +120+108+54 +6  +36 +12 +18
-
 Jewish:      244
 G   E   M   A   T   R   I   A   F   B   C
 7  +5  +30 +1  +100+80 +9  +1  +6  +2  +3
-
 Septenary:   43
 G E M A T R I A F B C
 7+5+1+1+7+5+5+1+6+2+3
-
 Chaldean:    34
 G E M A T R I A F B C
 3+5+4+1+4+2+1+1+8+2+3
-
 Pythagorian: 49
 G E M A T R I A F B C
 7+5+4+1+2+9+9+1+6+2+3
-
 Reduced:     4
 4+9
 1+3
