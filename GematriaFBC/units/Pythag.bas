@@ -22,9 +22,9 @@ For i = 1 to lWordLen
 	End If
 Next
 Color 10
-Print "Pythagorian: "; : Color 15 : Print lSum
+Print "Pythagorean: "; : Color 15 : Print lSum
 If bState = 1 orElse bState = 3 Then
-	Print #lFileHandle, "Pythagorian: ";lSum
+	Print #lFileHandle, "Pythagorean: ";lSum
 End If
 
 If bState = 2 orElse bState = 3 Then
