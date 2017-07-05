@@ -72,7 +72,7 @@ Usage:
 #########################
 Enter a phrase to find the gematria.  Enter !q to quit or !clr to clear the
 screen.
-Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorian
+Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorean
 and Reduced. (For now - though additional systems as well as reverse systems
 will likely be added in future).
 
