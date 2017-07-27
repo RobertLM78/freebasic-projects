@@ -2,6 +2,7 @@ Miscellaneous little projects
 -----------------------------
 
 beautyofmath.bas prints the following math property:
+
         1 x 8 + 1 =         9
        12 x 8 + 2 =        98
       123 x 8 + 3 =       987
