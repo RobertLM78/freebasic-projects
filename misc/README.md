@@ -9,6 +9,7 @@ beautyofmath.bas prints the following math property:
      1234 x 8 + 4 =      9876
     12345 x 8 + 5 =     98765
    123456 x 8 + 6 =    987654
+   
   1234567 x 8 + 7 =   9876543
  12345678 x 8 + 8 =  98765432
 123456789 x 8 + 9 = 987654321
