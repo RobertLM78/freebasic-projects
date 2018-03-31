@@ -1,19 +1,25 @@
 ================================================================================
-| GematriaFBC 1.3; A simple gematria calculator - console ver.                 |
+| GematriaFBC 1.4; A simple gematria calculator - console version              |
 |      readme file                                                             |
 ================================================================================
-This package contains 7 FreeBASIC source files:
+This package contains 12 FreeBASIC source files:
 
 1 Main Program (./):
 GematriaFBC.bas
 
-6 Translation units (./units):
+11 Translation units (./units):
 Chaldean.bas
+Extended.bas
 Jewish.bas
 Pythag.bas
 Reduced.bas
+RevPythag.bas
+RevReduced.bas
+RevSimpleAndReg.bas
+Satanic.bas
 Septenary.bas
 SimpleAndReg.bas
+
 
 ================================================================================
 | User guide                                                                   |
@@ -26,7 +32,6 @@ repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.   If
 you are unsure which Linux binary you need, download the -x86 version.  These
 are ready to use, 'right out of the box', with no other action needed.
 (Binaries compiled with FreeBASIC version 1.02.1)
-
 
 If you are adventurous and would rather compile it yourself, follow these in-
 stuctions (assuming you already have the FreeBASIC compiler - version 1.02.1 or
@@ -61,43 +66,58 @@ Double click the .exe or call the program from the command prompt.
 
 
 Usage:
-     -h, --help              Show options
-     -v, --version           Show version
-     -l, --log               Log session (as GematriaFBC.log)
-     -w, --warranty          Warranty and license conditions
-     -V, --verbose           Verbose output
+-h, --help"," Show options
+-v, --version"," Show version
+-w, --warranty"," Warranty and license conditions
+-l, --log"," Log session (as GematriaFBC.log)
+-r, --reverse","Use reversed forms as well.
+-V, --verbose"," Verbose output
+
+Example, in a shell console type:
+GematriaFBC.exe -l -r -V
+Which will log the session, give reverse forms, and verbose output.
 
 #########################
 #  General Information  #
 #########################
 Enter a phrase to find the gematria.  Enter !q to quit or !clr to clear the
 screen.
-Gives Simple English, Regular English, Jewish, Septenary, Chaldean, Pythagorean
-and Reduced. (For now - though additional systems as well as reverse systems
-will likely be added in future).
+The default setting (no reverse option) has the following systems:
+Simple (English Ordinal), Regular (Sumerian), Jewish, Satanic, Extended,
+Septenary, Chaldean, Pythagorean (Full Reduction), and Reduced.
+With the reverse option on the following systems are appended to the output:
+Reverse Simple (Reverse Ordinal), Reverse Regular (Reverse Sumerian), and
+Reverse Pythagorean (Reverse Full Reduction).
 
 Note that in a Linux (ANSI emulated) terminal, the verbose option comes at a
 cost of speed, but will display the entered string and then letter values in a
 sum format.  This is good for those whose are learning the values of letters in
 the different systems.  If you're running under Linux, and would like better
-performance, switch to a true text-only console (TTY).
+performance, switch to a true text-only console (TTY) - or Konsole from the KDE
+desktop performs well.
 
 As of version 1.0, the program will calculate dates and numbers, which had
 previously been ignored.
 
 
-Example (terse [default]):
+Example (terse [default] with reverse):
 :> GematriaFBC
 Simple:      85
 Regular:     510
 Jewish:      244
+Satanic:     470
+Extended:    364
 Septenary:   43
 Chaldean:    34
-Pythagorian: 49
+Pythagorean: 49
 Reduced:     4
+RevSimple:   212
+RevRegular:  1272
+RevPythag.:  68
+RevReduced:  5
 
 
-Example (verbose):
+Example (verbose and reverse):
 :> GematriaFBC
 Simple:      85
 Regular:     510
@@ -108,18 +128,37 @@ G   E   M   A   T   R   I   A   F   B   C
 Jewish:      244
 G   E   M   A   T   R   I   A   F   B   C
 7  +5  +30 +1  +100+80 +9  +1  +6  +2  +3
+Satanic:     470
+G  E  M  A  T  R  I  A  F  B  C
+42+40+48+36+55+53+44+36+41+37+38
+Extended:    364
+G   E   M   A   T   R   I   A   F   B   C
+7  +5  +40 +1  +200+90 +9  +1  +6  +2  +3
 Septenary:   43
 G E M A T R I A F B C
 7+5+1+1+7+5+5+1+6+2+3
 Chaldean:    34
 G E M A T R I A F B C
 3+5+4+1+4+2+1+1+8+2+3
-Pythagorian: 49
+Pythagorean: 49
 G E M A T R I A F B C
 7+5+4+1+2+9+9+1+6+2+3
 Reduced:     4
 4+9
 1+3
+RevSimple:   212
+RevRegular:  1272
+G  E  M  A  T  R  I  A  F  B  C
+20+22+14+26+7 +9 +18+26+21+25+24
+G   E   M   A   T   R   I   A   F   B   C
+120+132+84 +156+42 +54 +108+156+126+150+144
+RevPythag.:  68
+G E M A T R I A F B C
+2+4+5+8+7+9+9+8+3+7+6
+RevReduced:  5
+6+8
+1+4
+
 
 ##########################
 #  License and Warranty  #
