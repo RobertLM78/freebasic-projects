@@ -1,36 +1,35 @@
 ' ------------------------------------------------------------------------------
-' Title: Septenary.bas - translation unit for GematriaFBC.bas
+' Title: RevPythag.bas - translation unit for GematriaFBC.bas
 ' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
+' Reversed Phythagoren
 ' ------------------------------------------------------------------------------
 ' Calculate the sum ============================================================
 lSum = 0
 For i = 1 to lWordLen
 	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
+			lSum += ipAscII[i-1] - 48
 		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
+			lSum += 0
 		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 71 Then 'A-G
-		lSum += ipAscII[i-1] - 64
-	ElseIf Abs(ipAscII[i-1]) >= 72 and Abs(ipAscII[i-1]) <= 77 Then 'H-M
-		lSum += 78 - ipAscII[i-1]
-	ElseIf Abs(ipAscII[i-1]) >= 78 and Abs(ipAscII[i-1]) <= 84 Then 'N-T
-		lSum += ipAscII[i-1] - 77
-	ElseIf Abs(ipAscII[i-1]) >= 85 and Abs(ipAscII[i-1]) <= 90 Then 'U-Z
-		lSum += 91 - ipAscII[i-1]
+	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 72 Then
+		lSum += -(ipAscII[i-1]) + 73
+	ElseIf Abs(ipAscII[i-1]) >= 73 and Abs(ipAscII[i-1]) <= 81 Then
+		lSum += -(ipAscII[i-1]) + 82
+	ElseIf Abs(ipAscII[i-1]) >= 82 and Abs(ipAscII[i-1]) <= 90 Then
+		lSum += -(ipAscII[i-1]) + 91
 	End If
 Next
 Color 10
-Print "Septenary:   "; : Color 15 : Print lSum
+Print "RevPythag.:  "; : Color 15 : Print lSum
 If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
-	Print #lFileHandle, "Septenary:   ";lSum
+	Print #lFileHandle, "RevPyth.:    ";lSum
 End If
 
 If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
-	' Print Characters (Septenary) =============================================
+	' Print Characters (RevPythagorian) ===========================================
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -41,7 +40,7 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 		End If
 	Next
 	Print
-	' Print digits to be summed (Septenary)
+	' Print digits to be summed (RevPythagorian)
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -51,23 +50,18 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 				End If
 			End If
 		Else
-			If Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 71 Then 'A-G
-				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 64);
+			If Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 72 Then
+				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 73);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) >= 72 and Abs(ipAscII[i-1]) <= 77 Then 'H-M
-				Locate ,2*i - 1 : Print Str$(78 - ipAscII[i-1]);
+			ElseIf Abs(ipAscII[i-1]) >= 73 and Abs(ipAscII[i-1]) <= 81 Then
+				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 82);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) >= 78 and Abs(ipAscII[i-1]) <= 84 Then 'N-T
-				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 77);
-				If i <= lWordLen - 1 Then
-					Locate ,i*2 : Print "+";
-				End If
-			ElseIf Abs(ipAscII[i-1]) >= 85 and Abs(ipAscII[i-1]) <= 90 Then 'U-Z
-				Locate ,2*i - 1 : Print Str$(91 - ipAscII[i-1]);
+			ElseIf Abs(ipAscII[i-1]) >= 82 and Abs(ipAscII[i-1]) <= 90 Then
+				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 91);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If

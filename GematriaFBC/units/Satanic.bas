@@ -1,9 +1,8 @@
 ' ------------------------------------------------------------------------------
-' Title: SimpleAndReg.bas - translation unit for GematriaFBC.bas
+' Title: Satanic.bas - translation unit for GematriaFBC.bas
 ' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
-' About: Simple (Ordinal) and Regular (Sumerian) English Gematria
 ' ------------------------------------------------------------------------------
 ' Calculate the sum ============================================================
 lSum = 0
@@ -15,21 +14,18 @@ For i = 1 to lWordLen
 			lSum += 0
 		End If
 	Else
-		lSum += ipAscII[i-1] - 64
+		lSum += ipAscII[i-1] - 29
 	End If
 Next
 lRegSum = lSum*6
 Color 10
-Print "Simple:      "; : Color 15 : Print lSum
-Color 10
-Print "Regular:     "; : Color 15 : Print lRegSum
+Print "Satanic:     "; : Color 15 : Print lSum
 If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
-	Print #lFileHandle, "Simple:      ";lSum
-	Print #lFileHandle, "Regular:     ";lRegSum
+	Print #lFileHandle, "Satanic:     ";lSum
 End If
 
 If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
-	' Print Characters (Simple) ================================================
+	' Print Characters (Satanic) ================================================
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -40,7 +36,7 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 		End If
 	Next
 	Print
-	' Print digits to be summed (Simple)
+	' Print digits to be summed (Satanic)
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -50,38 +46,9 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 				End If
 			End If
 		Else
-			Locate ,3*i - 2 : Print Str$(ipAscII[i-1] -64);
+			Locate ,3*i - 2 : Print Str$(ipAscII[i-1] -29);
 			If i <= lWordLen - 1 Then
 				Locate ,i*3 : Print "+";
-			End If
-		End If
-	Next
-	Print
-
-	' Print Characters (Regular) ===============================================
-	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 48)*6);
-			End If
-		Else
-			Locate ,4*i - 3 : Print Chr$(ipAscII[i-1]);
-		End If
-	Next
-	Print
-	' Print digits to be summed (Regular)
-	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
-				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 48)*6);
-				If i <= lWordLen - 1 Then
-					Locate ,i*4 : Print "+";
-				End If
-			End If
-		Else
-			Locate ,4*i - 3 : Print Str$((ipAscII[i-1] -64)*6);
-			If i <= lWordLen - 1 Then
-				Locate ,i*4 : Print "+";
 			End If
 		End If
 	Next

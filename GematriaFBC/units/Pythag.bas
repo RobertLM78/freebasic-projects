@@ -1,13 +1,13 @@
 ' ------------------------------------------------------------------------------
 ' Title: Pythag.bas - translation unit for GematriaFBC.bas
-' Version: 0.1 - June 2017
+' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' ------------------------------------------------------------------------------
-' Calculate the sum ========================================================
+' Calculate the sum ============================================================
 lSum = 0
 For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
+	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
 			lSum += ipAscII[i-1] - 48
 		Else
@@ -23,14 +23,14 @@ For i = 1 to lWordLen
 Next
 Color 10
 Print "Pythagorean: "; : Color 15 : Print lSum
-If bState = 1 orElse bState = 3 Then
+If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
 	Print #lFileHandle, "Pythagorean: ";lSum
 End If
 
-If bState = 2 orElse bState = 3 Then
+If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
 	' Print Characters (Pythagorian) ===========================================
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
+		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
 				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 48);
 			End If
@@ -41,7 +41,7 @@ If bState = 2 orElse bState = 3 Then
 	Print
 	' Print digits to be summed (Pythagorian)
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then '@ orElse [
+		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
 				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 48);
 				If i <= lWordLen - 1 Then

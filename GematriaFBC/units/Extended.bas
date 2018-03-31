@@ -1,5 +1,5 @@
 ' ------------------------------------------------------------------------------
-' Title: Jewish.bas - translation unit for GematriaFBC.bas
+' Title: Extended.bas - translation unit for GematriaFBC.bas
 ' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
@@ -15,28 +15,20 @@ For i = 1 to lWordLen
 		End If
 	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 73 Then
 		lSum += ipAscII[i-1] - 64
-	ElseIf Abs(ipAscII[i-1]) = 74 Then
-		lSum += 600
-	ElseIf Abs(ipAscII[i-1]) >= 75 and Abs(ipAscII[i-1]) <= 83 Then
-		lSum += (ipAscII[i-1] - 74)*10
-	ElseIf Abs(ipAscII[i-1]) = 84 orElse Abs(ipAscII[i-1]) = 85 Then
-		lSum += (ipAscII[i-1] - 83)*100
-	ElseIf Abs(ipAscII[i-1]) = 86 Then
-		lSum += 700
-	ElseIf Abs(ipAscII[i-1]) = 87 Then
-		lSum += 900
-	ElseIf Abs(ipAscII[i-1]) >= 88 and Abs(ipAscII[i-1]) <= 90 Then
-		lSum += (ipAscII[i-1] - 85)*100
+	ElseIf Abs(ipAscII[i-1]) >= 74 and Abs(ipAscII[i-1]) <= 82 Then
+		lSum += (ipAscII[i-1] - 73)*10
+	ElseIf Abs(ipAscII[i-1]) >= 83 and Abs(ipAscII[i-1]) <= 90 Then
+		lSum += (ipAscII[i-1] - 82)*100
 	End If
 Next
 Color 10
-Print "Jewish:      "; : Color 15 : Print lSum
+Print "Extended:    "; : Color 15 : Print lSum
 If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
-	Print #lFileHandle, "Jewish:      ";lSum
+	Print #lFileHandle, "Extended:    ";lSum
 End If
 
 If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
-	' Print Characters (Jewish) ================================================
+	' Print Characters (Extended) ===========================================
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -47,7 +39,7 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 		End If
 	Next
 	Print
-	' Print digits to be summed (Jewish)
+	' Print digits to be summed (Extended)
 	For i = 1 to lWordLen
 		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
 			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
@@ -62,33 +54,13 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 				If i <= lWordLen - 1 Then
 					Locate ,i*4 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) = 74 Then
-				Locate ,4*i - 3 : Print Str$(600);
+			ElseIf Abs(ipAscII[i-1]) >= 74 and Abs(ipAscII[i-1]) <= 82 Then
+				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 73)*10);
 				If i <= lWordLen - 1 Then
 					Locate ,i*4 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) >= 75 and Abs(ipAscII[i-1]) <= 83 Then
-				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 74)*10);
-				If i <= lWordLen - 1 Then
-					Locate ,i*4 : Print "+";
-				End If
-			ElseIf Abs(ipAscII[i-1]) = 84 orElse Abs(ipAscII[i-1]) = 85 Then
-				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 83)*100);
-				If i <= lWordLen - 1 Then
-					Locate ,i*4 : Print "+";
-				End If
-			ElseIf Abs(ipAscII[i-1]) = 86 Then
-				Locate ,4*i - 3 : Print Str$(700);
-				If i <= lWordLen - 1 Then
-					Locate ,i*4 : Print "+";
-				End If
-			ElseIf Abs(ipAscII[i-1]) = 87 Then
-				Locate ,4*i - 3 : Print Str$(900);
-				If i <= lWordLen - 1 Then
-					Locate ,i*4 : Print "+";
-				End If
-			ElseIf Abs(ipAscII[i-1]) >= 88 and Abs(ipAscII[i-1]) <= 90 Then
-				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 85)*100);
+			ElseIf Abs(ipAscII[i-1]) >= 83 and Abs(ipAscII[i-1]) <= 90 Then
+				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 82)*100);
 				If i <= lWordLen - 1 Then
 					Locate ,i*4 : Print "+";
 				End If
