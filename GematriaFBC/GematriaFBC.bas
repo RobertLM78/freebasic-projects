@@ -49,7 +49,7 @@ If iNumArgs >= 1 Then
 		Print "     -v, --version"," Show version"
 		Print "     -w, --warranty"," Warranty and license conditions"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
-		Print "     -r, --reverse","Use reversed forms as well."
+		Print "     -r, --reverse"," Append reversed forms to output"
 		Print "     -V, --verbose"," Verbose output"
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
@@ -89,7 +89,7 @@ If iNumArgs >= 1 Then
 		Print "     -v, --version"," Show version"
 		Print "     -w, --warranty"," Warranty and license conditions"
 		Print "     -l, --log"," Log session (as GematriaFBC.log)"
-		Print "     -r, --reverse","Use reversed forms as well."
+		Print "     -r, --reverse"," Append reversed forms to output"
 		Print "     -V, --verbose"," Verbose output"
 		System 0 ' quit if there's any invalid parameter
 	End If
