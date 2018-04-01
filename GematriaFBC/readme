@@ -66,12 +66,13 @@ Double click the .exe or call the program from the command prompt.
 
 
 Usage:
--h, --help"," Show options
--v, --version"," Show version
--w, --warranty"," Warranty and license conditions
--l, --log"," Log session (as GematriaFBC.log)
--r, --reverse","Use reversed forms as well.
--V, --verbose"," Verbose output
+     -h, --help              Show options
+     -v, --version           Show version
+     -w, --warranty          Warranty and license conditions
+     -l, --log               Log session (as GematriaFBC.log)
+     -r, --reverse           Append reversed forms to output
+     -V, --verbose           Verbose output
+
 
 Example, in a shell console type:
 GematriaFBC.exe -l -r -V
