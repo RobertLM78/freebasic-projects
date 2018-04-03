@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: GematriaFBC.bas - a simple gemtaria calculator
-' Version: 1.4 - March 2018
+' Version: 1.4.1 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
@@ -54,18 +54,18 @@ If iNumArgs >= 1 Then
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
 		Color 10
-		Print "GematriaFBC - version 1.4"
+		Print "GematriaFBC - version 1.4.1"
 		Color 15
 		System 0
 	ElseIf Command$(i) = "-w" orElse Command$(i) = "--warranty" Then
 		Color 10
-		Print "GematriaFBC-1.4; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+		Print "GematriaFBC-1.4.1; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
 		Color 15
 		Print "This program comes with ABSOLUTELY NO WARRANTY."
 		Print "This is free software, and you are welcome to redistribute it under certain conditions."
 		Print
 		Color 10
-		Print "GematriaFBC-1.4 - a simple gemtria calculator"
+		Print "GematriaFBC-1.4.1 - a simple gemtria calculator"
 		Color 15
 		Print
 		Print "This program is distributed in the hope that it will be useful,"
@@ -95,10 +95,11 @@ If iNumArgs >= 1 Then
 	End If
 	Next
 End If
+
 ' ======================================
 Color 11
-Print "GematriaFBC 1.4 - Enter !q to quit"
-Print "----------------------------------"
+Print "GematriaFBC 1.4.1 - Enter !q to quit"
+Print "------------------------------------"
 Color 15
 Print
 ' ==============================================================================
