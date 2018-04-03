@@ -8,8 +8,8 @@
 ' Calculate the sum ============================================================
 lSum = 0
 For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 			lSum += ipAscII[i-1] - 48
 		Else
 			lSum += 0
@@ -31,8 +31,8 @@ End If
 If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
 	' Print Characters (Simple) ================================================
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,3*i - 2 : Print Str$(ipAscII[i-1] - 48);
 			End If
 		Else
@@ -42,8 +42,8 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 	Print
 	' Print digits to be summed (Simple)
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,3*i - 2 : Print Str$(ipAscII[i-1] - 48);
 				If i <= lWordLen - 1 Then
 					Locate ,i*3 : Print "+";
@@ -60,8 +60,8 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 
 	' Print Characters (Regular) ===============================================
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 48)*6);
 			End If
 		Else
@@ -71,8 +71,8 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 	Print
 	' Print digits to be summed (Regular)
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,4*i - 3 : Print Str$((ipAscII[i-1] - 48)*6);
 				If i <= lWordLen - 1 Then
 					Locate ,i*4 : Print "+";

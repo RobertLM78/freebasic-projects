@@ -3,7 +3,7 @@
 ' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
-' Reversed Full Reduction
+' About: Reversed Full Reduction
 ' ------------------------------------------------------------------------------
 ' Calculate the sum ============================================================
 lSumTmp = lSum

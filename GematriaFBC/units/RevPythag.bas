@@ -3,22 +3,22 @@
 ' Version: 0.2 - March 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
-' Reversed Phythagoren
+' About: Reversed Full Reduction
 ' ------------------------------------------------------------------------------
 ' Calculate the sum ============================================================
 lSum = 0
 For i = 1 to lWordLen
-	If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-		If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 			lSum += ipAscII[i-1] - 48
 		Else
 			lSum += 0
 		End If
-	ElseIf Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 72 Then
+	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 72 Then
 		lSum += -(ipAscII[i-1]) + 73
-	ElseIf Abs(ipAscII[i-1]) >= 73 and Abs(ipAscII[i-1]) <= 81 Then
+	ElseIf ipAscII[i-1] >= 73 and ipAscII[i-1] <= 81 Then
 		lSum += -(ipAscII[i-1]) + 82
-	ElseIf Abs(ipAscII[i-1]) >= 82 and Abs(ipAscII[i-1]) <= 90 Then
+	ElseIf ipAscII[i-1] >= 82 and ipAscII[i-1] <= 90 Then
 		lSum += -(ipAscII[i-1]) + 91
 	End If
 Next
@@ -31,8 +31,8 @@ End If
 If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
 	' Print Characters (RevPythagorian) ===========================================
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 48);
 			End If
 		Else
@@ -42,25 +42,25 @@ If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' comb
 	Print
 	' Print digits to be summed (RevPythagorian)
 	For i = 1 to lWordLen
-		If Abs(ipAscII[i-1]) < 65 orElse Abs(ipAscII[i-1]) > 90 Then
-			If Abs(ipAscII[i-1]) >=49 and Abs(ipAscII[i-1]) <= 57 Then
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
 				Locate ,2*i - 1 : Print Str$(ipAscII[i-1] - 48);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If
 			End If
 		Else
-			If Abs(ipAscII[i-1]) >= 65 and Abs(ipAscII[i-1]) <= 72 Then
+			If ipAscII[i-1] >= 65 and ipAscII[i-1] <= 72 Then
 				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 73);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) >= 73 and Abs(ipAscII[i-1]) <= 81 Then
+			ElseIf ipAscII[i-1] >= 73 and ipAscII[i-1] <= 81 Then
 				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 82);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
 				End If
-			ElseIf Abs(ipAscII[i-1]) >= 82 and Abs(ipAscII[i-1]) <= 90 Then
+			ElseIf ipAscII[i-1] >= 82 and ipAscII[i-1] <= 90 Then
 				Locate ,2*i - 1 : Print Str$(-(ipAscII[i-1]) + 91);
 				If i <= lWordLen - 1 Then
 					Locate ,i*2 : Print "+";
