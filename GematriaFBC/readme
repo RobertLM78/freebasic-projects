@@ -1,13 +1,19 @@
 ================================================================================
-| GematriaFBC 1.4.1; A simple gematria calculator - console version            |
+| GematriaFBC 2.0; A simple gematria calculator - console version              |
 |      readme file                                                             |
 ================================================================================
-This package contains 12 FreeBASIC source files:
+###########################
+#  About the Source Code  #
+###########################
+This package contains 14 FreeBASIC source files:
 
 1 Main Program (./):
 GematriaFBC.bas
 
-11 Translation units (./units):
+1 Function (./func)
+sIkInputFn.bas
+
+12 Translation units (./units):
 Chaldean.bas
 Extended.bas
 Jewish.bas
@@ -19,7 +25,7 @@ RevSimpleAndReg.bas
 Satanic.bas
 Septenary.bas
 SimpleAndReg.bas
-
+splash.bas
 
 ================================================================================
 | User guide                                                                   |
@@ -81,8 +87,21 @@ Which will log the session, give reverse forms, and verbose output.
 #########################
 #  General Information  #
 #########################
-Enter a phrase to find the gematria.  Enter !q to quit or !clr to clear the
-screen.
+Enter a phrase to find the gematria.  Enter !q to quit or !c to clear the
+screen.  The maxium allowable entry depends on your console size, with an
+'absolute maxium' entry of 127 characters.  Use the ESC button to erase an
+entire entry.
+
+Use the up and down arrow keys to scroll through previous entries.  A file named
+.GematriaFBC_hist will be created to save the entries.
+********************************************************************************
+A small bug exists with this scrolling: you must push HOME/END to begin editing
+a previous entry that has been fetched with the arrow keys.  I hope to have this
+removed soon.
+********************************************************************************
+
+As an extra control measure, no leading spaces are allowed in an entry.
+
 The default setting (no reverse option) has the following systems:
 Simple (English Ordinal), Regular (Sumerian), Jewish, Satanic, Extended,
 Septenary, Chaldean, Pythagorean (Full Reduction), and Reduced.
@@ -90,17 +109,26 @@ With the reverse option on the following systems are appended to the output:
 Reverse Simple (Reverse Ordinal), Reverse Regular (Reverse Sumerian), and
 Reverse Pythagorean (Reverse Full Reduction).
 
-Note that in a Linux (ANSI emulated) terminal, the verbose option comes at a
+Note that in some Linux (ANSI emulated) terminals, the verbose option comes at a
 cost of speed, but will display the entered string and then letter values in a
-sum format.  This is good for those whose are learning the values of letters in
-the different systems.  If you're running under Linux, and would like better
-performance, switch to a true text-only console (TTY) - or Konsole from the KDE
-desktop performs well.
+sum format.  If you're running under Linux, and would like better performance,
+switch to a true text-only console (TTY) - or try installing another terminal
+emulator.
+The following two emulators have shown good performance:
+KDE's Konsole
+Rox's ROXTerm
 
-As of version 1.0, the program will calculate dates and numbers, which had
-previously been ignored.
+##################################################
+# Important Note regarding version 2.0 and newer #
+##################################################
+As of version 2.0, with it's customized input method, GematriaFBC is, for now,
+incompatible with SSH.  Sorry for the inconvenience.  If you need to use this
+over SSH, please download version 1.4.1 or earlier from the archive.
 
 
+###################
+# Example outputs #
+###################
 Example (terse [default] with reverse):
 :> GematriaFBC
 Simple:      85
