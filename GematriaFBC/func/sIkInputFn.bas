@@ -59,7 +59,8 @@ Do
 					Close #lHstFileHandle
 					If iUpCnt > iHstLen Then
 						Locate ,Len(sPrompt) + 1,1
-					Else
+						iUpCnt = iHstLen  '===== STOP incrementing once it's to the top ====
+					ElseIf iUpCnt <= iHstLen Then
 						Open sHstFile For Input As #lHstFileHandle
 						Locate ,Len(sPrompt) + 1 : Print String$(loword(width()) - 4," ");
 						Locate ,Len(sPrompt) + 1,1
