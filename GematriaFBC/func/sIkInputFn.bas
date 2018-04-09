@@ -1,5 +1,5 @@
 ' Title: sIkInputFn.bas - Inkey$ Input Function
-' Version: 0.1 - April 2018
+' Version: 0.3 - April 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' sIkInputFn(Prompt,Length)
@@ -71,7 +71,6 @@ Do
 						Close #lHstFileHandle
 						Print sFinput;
 						iPosit = Len(sFinput)
-						iArrowCnt = -iPosit
 					End If
 				End If
 			Case -fb.SC_DOWN   'DOWN arrow
@@ -103,7 +102,6 @@ Do
 							Close #lHstFileHandle
 							Print sFinput;
 							iPosit = Len(sFinput)
-							iArrowCnt = -iPosit
 						End If
 					End If
 				End If
