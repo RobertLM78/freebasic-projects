@@ -52,7 +52,7 @@ created extracting the archive (which should be named something like
 'GematriaFBC-1.x-src').
 
 To compile on Linux:
-fbc ./GematriaFBC.bas
+fbc GematriaFBC.bas
 
 To compile on Windows:
 fbc GematriaFBC.bas
