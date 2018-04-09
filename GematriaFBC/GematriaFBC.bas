@@ -1,11 +1,11 @@
 ' ------------------------------------------------------------------------------
 ' Title: GematriaFBC.bas - a simple gemtaria calculator
-' Version: 2.0 - April 2018
+' Version: 2.1 - April 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
 ' ------------------------------------------------------------------------------
-Dim As zString *28   zGemTitle = "GematriaFBC-2.0"
+Dim As zString *28   zGemTitle = "GematriaFBC-2.1"
 Dim As zString *8    zPrompt   = ":> "
 Dim As Long          i
 Dim As String        sWordIn

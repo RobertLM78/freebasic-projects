@@ -1,5 +1,5 @@
 ================================================================================
-| GematriaFBC 2.0; A simple gematria calculator - console version              |
+| GematriaFBC 2.1; A simple gematria calculator - console version              |
 |      readme file                                                             |
 ================================================================================
 ###########################
@@ -94,11 +94,6 @@ entire entry.
 
 Use the up and down arrow keys to scroll through previous entries.  A file named
 .GematriaFBC_hist will be created to save the entries.
-********************************************************************************
-A small bug exists with this scrolling: you must push HOME/END to begin editing
-a previous entry that has been fetched with the arrow keys.  I hope to have this
-removed soon.
-********************************************************************************
 
 As an extra control measure, no leading spaces are allowed in an entry.
 
@@ -116,7 +111,8 @@ switch to a true text-only console (TTY) - or try installing another terminal
 emulator.
 The following two emulators have shown good performance:
 KDE's Konsole
-Rox's ROXTerm
+X11's urxvt (rxvt)
+
 
 ##################################################
 # Important Note regarding version 2.0 and newer #
