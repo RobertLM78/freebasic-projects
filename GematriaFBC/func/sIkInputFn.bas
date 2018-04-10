@@ -71,6 +71,7 @@ Do
 						Close #lHstFileHandle
 						Print sFinput;
 						iPosit = Len(sFinput)
+						iArrowCnt = 0
 					End If
 				End If
 			Case -fb.SC_DOWN   'DOWN arrow
@@ -102,6 +103,7 @@ Do
 							Close #lHstFileHandle
 							Print sFinput;
 							iPosit = Len(sFinput)
+							iArrowCnt = 0
 						End If
 					End If
 				End If
