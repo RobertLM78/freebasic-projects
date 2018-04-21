@@ -207,7 +207,7 @@ Ver:    Change
 --------------------------------------------------------------------------------
 2.1.1:  fixes what should be the last bug in the new custom input function
 2.1:    fixes bug in editing entries that were fetched with the UP/DOWN arrow
-		keys
+	keys
 2.0:    introduce UP/DOWN history scrolling
 1.4.1:  introduce reverse forms as well as two new 'default' systems
 
