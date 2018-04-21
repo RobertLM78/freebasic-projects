@@ -1,8 +1,8 @@
 ' Title: sIkInputFn.bas - Inkey$ Input Function
-' Version: 0.3 - April 2018
+' Version: 0.4 - April 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
-' sIkInputFn(Prompt,Length)
+' Function sIkInputFn(Prompt,Length) - returns a final entered string
 ' ==============================================================================
 #include "fbgfx.bi"
 Function sIkInputFn(sPrompt As String = "", iLen As Integer = 16) As String
@@ -57,8 +57,13 @@ Do
 						Line Input #lHstFileHandle, sFinput
 					Wend
 					Close #lHstFileHandle
-					If iUpCnt > iHstLen Then
-						Locate ,Len(sPrompt) + 1,1
+					If iUpCnt > iHstLen Then         'If to the first entry
+						Locate ,Len(sPrompt) + 1,1          'set cursor to default
+						Open sHstFile For Input As #lHstFileHandle
+						Line Input #lHstFileHandle, sFinput 'load up the first entry
+						Close #lHstFileHandle
+						iArrowCnt = -Len(sFinput)           'and set arrow count
+						iPosit = Len(sFinput)
 						iUpCnt = iHstLen  '===== STOP incrementing once it's to the top ====
 					ElseIf iUpCnt <= iHstLen Then
 						Open sHstFile For Input As #lHstFileHandle
