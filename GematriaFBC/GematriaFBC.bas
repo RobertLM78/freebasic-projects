@@ -5,7 +5,7 @@
 ' License: GPL v3
 ' About: Console version
 ' ------------------------------------------------------------------------------
-Dim As zString *28   zGemTitle = "GematriaFBC-2.1"
+Dim As zString *28   zGemTitle = "GematriaFBC-2.1.1"
 Dim As zString *8    zPrompt   = ":> "
 Dim As Long          i
 Dim As String        sWordIn

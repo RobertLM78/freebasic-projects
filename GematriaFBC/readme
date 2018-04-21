@@ -1,5 +1,5 @@
 ================================================================================
-| GematriaFBC 2.1; A simple gematria calculator - console version              |
+| GematriaFBC 2.1.1; A simple gematria calculator - console version            |
 |      readme file                                                             |
 ================================================================================
 ###########################
@@ -114,13 +114,6 @@ KDE's Konsole
 X11's urxvt (rxvt)
 
 
-##################################################
-# Important Note regarding version 2.0 and newer #
-##################################################
-As of version 2.0, with it's customized input method, GematriaFBC is, for now,
-incompatible with SSH.  Sorry for the inconvenience.  If you need to use this
-over SSH, please download version 1.4.1 or earlier from the archive.
-
 
 ###################
 # Example outputs #
@@ -205,6 +198,17 @@ version.
 #  Bug Reporting and Suggestions  #
 ###################################
 Please email me if you find a bug or would like to suggest a feature.
-
 beannachtai@homtail.com
+
+################
+#  Change log  #
+################
+Ver:    Change
+--------------------------------------------------------------------------------
+2.1.1:  fixes what should be the last bug in the new custom input function
+2.1:    fixes bug in editing entries that were fetched with the UP/DOWN arrow
+		keys
+2.0:    introduce UP/DOWN history scrolling
+1.4.1:  introduce reverse forms as well as two new 'default' systems
+
 ================================================================================
