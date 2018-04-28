@@ -1,5 +1,5 @@
 ' Title: sIkInputFn.bas - Inkey$ Input Function
-' Version: 0.4 - April 2018
+' Version: 0.5 - April 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' Function sIkInputFn(Prompt,Length) - returns a final entered string
@@ -13,12 +13,23 @@ Dim As String  sFinput
 Dim As Integer iPosit
 Dim As Integer iArrowCnt
 Dim As Integer iUpCnt
+Dim As String  sHome_Path
 Dim As String  sHstFile = ".GematriaFBC_hist"
 Dim As uLong   lHstFileHandle
 Dim As Integer iHstLen
+'=============  Get $HOME path for history file  =============
+#ifdef __FB_LINUX__
+	sHome_Path = Environ("HOME") & "/"
+#endif
+#ifdef __FB_WIN32__
+	sHome_Path = Environ("HOMEDRIVE") & Environ("HOMEPATH") & "\"
+#endif
+If sHome_Path <> "" Then
+	sHstFile = sHome_Path & sHstFile
+End If
+'=============================================================
 
 Print sPrompt;
-
 Do
 	sInput = Inkey$
 	If Len(sInput) Then
