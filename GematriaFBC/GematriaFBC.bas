@@ -5,7 +5,8 @@
 ' License: GPL v3
 ' About: Console version
 ' ------------------------------------------------------------------------------
-Dim As zString *28   zGemTitle = "GematriaFBC-2.1.2"
+Dim As zString *8    zVersion  = "2.1.2"
+Dim As zString *28   zGemTitle = "GematriaFBC-" + zVersion
 Dim As zString *8    zPrompt   = ":> "
 Dim As Long          i
 Dim As String        sWordIn
@@ -56,7 +57,7 @@ If iNumArgs >= 1 Then
 		System 0
 	ElseIf Command$(i) = "-v" orElse Command$(i) = "--version" Then
 		Color 11  ' Cyan
-		Print "GematriaFBC - version 2.0"
+		Print "GematriaFBC - version " + zVersion
 		Color 15  ' White
 		System 0
 	ElseIf Command$(i) = "-w" orElse Command$(i) = "--warranty" Then
