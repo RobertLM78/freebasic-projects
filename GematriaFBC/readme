@@ -1,10 +1,11 @@
 ================================================================================
-| GematriaFBC 2.1.1; A simple gematria calculator - console version            |
+| GematriaFBC 2.1.2; A simple gematria calculator - console version            |
 |      readme file                                                             |
 ================================================================================
 ###########################
 #  About the Source Code  #
 ###########################
+https://github.com/RobertLM78/freebasic-projects/tree/master/GematriaFBC
 This package contains 14 FreeBASIC source files:
 
 1 Main Program (./):
@@ -35,8 +36,17 @@ splash.bas
 #####################
 Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
 repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.   If
-you are unsure which Linux binary you need, download the -x86 version.  These
-are ready to use, 'right out of the box', with no other action needed.
+you are unsure which Linux binary you need, download the -x86 version.
+
+Runtime libraries are required.  Most of these are common, and may already be
+installed on your system.  For Debian-based Linux distributions, the following
+are required:
+libc6, libncurses5, libx11-6, libxext6, libxrender1, libxrandr2
+For Windows 98+, the following are required:
+msvcrt.dll, DirectX 5.0+
+The C runtime library msvcrt.dll can be downloaded here:
+https://www.microsoft.com/en-us/download/details.aspx?id=24417
+
 (Binaries compiled with FreeBASIC version 1.02.1)
 
 If you are adventurous and would rather compile it yourself, follow these in-
@@ -52,10 +62,10 @@ created extracting the archive (which should be named something like
 'GematriaFBC-1.x-src').
 
 To compile on Linux:
-fbc GematriaFBC.bas
+fbc GematriaFBC.bas -x gematriafbc
 
 To compile on Windows:
-fbc GematriaFBC.bas
+fbc GematriaFBC.bas -x gematriafbc.exe
 
 #########################
 #  Running the Program  #
@@ -82,18 +92,31 @@ Usage:
 
 Example, in a shell console type:
 GematriaFBC.exe -l -r -V
-Which will log the session, give reverse forms, and verbose output.
+Which will log the session, give reverse forms, and verbose output.  The log is
+saved to a relative path, depending on where the program was started.  This will
+likely remain for time being, though an absolute path may be introduced, as with
+the history file.
 
 #########################
 #  General Information  #
 #########################
 Enter a phrase to find the gematria.  Enter !q to quit or !c to clear the
-screen.  The maxium allowable entry depends on your console size, with an
-'absolute maxium' entry of 127 characters.  Use the ESC button to erase an
+screen.  The maximum allowable entry depends on your console size, with an
+'absolute maximum' entry of 127 characters.  Use the ESC button to erase an
 entire entry.
 
-Use the up and down arrow keys to scroll through previous entries.  A file named
-.GematriaFBC_hist will be created to save the entries.
+Use the up and down arrow keys to scroll through previous entries.  Previous
+entries are saved in a file with the name .GematriaFBC_hist in the user's home
+folder. This is now an absolute path, rather than a relative path (i.e., before
+version 2.1.2, the history file would be saved t
+o the path from which the
+program was called).
+So now, for Linux, the path should be something like:
+/home/foo/
+and for Windows, something *like*:
+C:\Documents and Settings\Foo\
+ -OR-
+C:\Users\Foo\
 
 As an extra control measure, no leading spaces are allowed in an entry.
 
@@ -205,9 +228,10 @@ beannachtai@homtail.com
 ################
 Ver:    Change
 --------------------------------------------------------------------------------
+2.1.2:  changes the history file path from a relative to absolute path
 2.1.1:  fixes what should be the last bug in the new custom input function
 2.1:    fixes bug in editing entries that were fetched with the UP/DOWN arrow
-	keys
+		keys
 2.0:    introduce UP/DOWN history scrolling
 1.4.1:  introduce reverse forms as well as two new 'default' systems
 
