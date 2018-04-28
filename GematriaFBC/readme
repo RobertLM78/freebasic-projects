@@ -108,8 +108,7 @@ entire entry.
 Use the up and down arrow keys to scroll through previous entries.  Previous
 entries are saved in a file with the name .GematriaFBC_hist in the user's home
 folder. This is now an absolute path, rather than a relative path (i.e., before
-version 2.1.2, the history file would be saved t
-o the path from which the
+version 2.1.2, the history file would be saved to the path from which the
 program was called).
 So now, for Linux, the path should be something like:
 /home/foo/
