@@ -105,8 +105,8 @@ the history file.
 #########################
 #  General Information  #
 #########################
-Enter a phrase to find the gematria.  Enter !q to quit or !c to clear the
-screen.  The maximum allowable entry depends on your console size, with an
+Enter a word or phrase to find the gematria.  Enter !q to quit or !c to clear
+the screen.  The maximum allowable entry depends on your console size, with an
 'absolute maximum' entry of 127 characters.  Use the ESC button to erase an
 entire entry.
 
