@@ -227,9 +227,9 @@ version.
 Please email me if you find a bug or would like to suggest a feature.
 beannachtai@homtail.com
 
-################
-#  Change log  #
-################
+############################
+#  Change log (incomplete) #
+############################
 Ver:    Change
 --------------------------------------------------------------------------------
 2.1.2:  changes the history file path from a relative to absolute path
