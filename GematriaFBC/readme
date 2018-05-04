@@ -47,12 +47,6 @@ msvcrt.dll, DirectX 5.0+
 The C runtime library msvcrt.dll can be downloaded here:
 https://www.microsoft.com/en-us/download/details.aspx?id=24417
 
-Debian installers are now available in the /deb/ folder.  Choose the one for
-your architecture.  Beyond the required runtime libraries (which are likely
-already installed on your system), these packages should work on just about any
-Debian-based distribution.  As before, if you are unsure, pick the i386 (x86)
-package.
-
 (Binaries compiled with FreeBASIC version 1.02.1)
 
 If you are adventurous and would rather compile it yourself, follow these in-
@@ -81,7 +75,7 @@ It is suggested to make a symbolic link to the binary in /home/foo/bin/, that
 way the program can be run from anywhere.
 Also suggested is to remove the suffix from the binary name (i.e. the '-x86' or
 '-amd64'), however it will still work without doing so.  For example:
-$ ln -s /home/foo/downloaded/path/GematriaFBC /home/foo/bin/GematriaFBC
+$ ln -s /home/foo/downloaded/path/gematriafbc /home/foo/bin/gematriafbc
 
 Windows:
 Double click the .exe or call the program from the command prompt.
@@ -96,8 +90,8 @@ Usage:
      -V, --verbose           Verbose output
 
 
-Example, in a shell console type:
-GematriaFBC.exe -l -r -V
+Example, in a console type:
+gematriafbc -l -r -V
 Which will log the session, give reverse forms, and verbose output.  The log is
 saved to a relative path, depending on where the program was started.  This will
 likely remain for time being, though an absolute path may be introduced, as with
