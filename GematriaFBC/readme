@@ -47,6 +47,11 @@ msvcrt.dll, DirectX 5.0+
 The C runtime library msvcrt.dll can be downloaded here:
 https://www.microsoft.com/en-us/download/details.aspx?id=24417
 
+Debian packages are also available in the /deb/ folder, and should run on any
+Debian-based Linux distribution.  Download this for a system-wide installation,
+complete with a manpage.  Pick the version for your architecture (if you are un-
+sure pick the i386 (x86) package).
+
 (Binaries compiled with FreeBASIC version 1.02.1)
 
 If you are adventurous and would rather compile it yourself, follow these in-
