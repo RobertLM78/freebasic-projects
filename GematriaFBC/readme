@@ -227,16 +227,27 @@ version.
 Please email me if you find a bug or would like to suggest a feature.
 beannachtai@homtail.com
 
-############################
-#  Change log (incomplete) #
-############################
+#################################
+#  Change log (mostly complete) #
+#################################
 Ver:    Change
 --------------------------------------------------------------------------------
 2.1.2:  changes the history file path from a relative to absolute path
 2.1.1:  fixes what should be the last bug in the new custom input function
 2.1:    fixes bug in editing entries that were fetched with the UP/DOWN arrow
 		keys
-2.0:    introduce UP/DOWN history scrolling
-1.4.1:  introduce reverse forms as well as two new 'default' systems
+2.0:    implement UP/DOWN history scrolling via custom input function
+1.4.1:  implement reverse forms as well as two new 'default' systems
+1.3:    ? bug fixes ?
+1.2:    implement --verbose option / split main program into units
+1.0:    implement digits to the sums (previously ignored)
+0.9:    ? bug fixes ?
+0.6:    implement Septenary system and --warranty option
+0.5:    implement first command options: --help, --version, --log
+0.4:    implement Chaldean system
+0.2:    first released version
 
+'Missing' versions were never released, or as in the case between 1.4.1 and 2.0,
+never existed.  In that case it was decided to skip up to the next whole number
+(2.0) since a long-term major design goal had been acheived.
 ================================================================================
