@@ -1,5 +1,5 @@
 ' Title: MatchDbFn.bas - Build database function
-' Version: 0.3 - May 2018
+' Version: 0.4 - May 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' Function MatchDb(word,filename)
@@ -28,239 +28,259 @@ Dim As String  sDbOutput = sInputWord + "-" + sDbInputFile
 
 ' First calculate the word passed via command line  ============================
 zWordIn = Trim$(Ucase$(sInputWord))
-
-' Allocate memory
-lWordLen = Len(zWordIn)
-ipAscII = Allocate(lWordLen*SizeOf(Integer))
-' Load memory of ASCII codes
-For i = 1 to lWordLen
-	ipAscII[i-1] = Asc(zWordIn,i)
-Next
-
-zRec = Trim$(sInputWord) + ":"
-
-' Simple and Regular
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	Else
-		lSum += ipAscII[i-1] - 64
-	End If
-Next
-lRegSum = lSum*6
-lSimple = lSum : lRegular = lRegSum
-zRec = zRec + Str$(lSum) + ":" + Str$(lRegSum) + ":"
-
-' Jewish
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
-		lSum += ipAscII[i-1] - 64
-	ElseIf ipAscII[i-1] = 74 Then
-		lSum += 600
-	ElseIf ipAscII[i-1] >= 75 and ipAscII[i-1] <= 83 Then
-		lSum += (ipAscII[i-1] - 74)*10
-	ElseIf ipAscII[i-1] = 84 orElse ipAscII[i-1] = 85 Then
-		lSum += (ipAscII[i-1] - 83)*100
-	ElseIf ipAscII[i-1] = 86 Then
-		lSum += 700
-	ElseIf ipAscII[i-1] = 87 Then
-		lSum += 900
-	ElseIf ipAscII[i-1] >= 88 and ipAscII[i-1] <= 90 Then
-		lSum += (ipAscII[i-1] - 85)*100
-	End If
-Next
-lJewish = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Satanic
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	Else
-		lSum += ipAscII[i-1] - 29
-	End If
-Next
-lSatanic = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Extended
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
-		lSum += ipAscII[i-1] - 64
-	ElseIf ipAscII[i-1] >= 74 and ipAscII[i-1] <= 82 Then
-		lSum += (ipAscII[i-1] - 73)*10
-	ElseIf ipAscII[i-1] >= 83 and ipAscII[i-1] <= 90 Then
-		lSum += (ipAscII[i-1] - 82)*100
-	End If
-Next
-lExtended = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Septenary
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 71 Then 'A-G
-		lSum += ipAscII[i-1] - 64
-	ElseIf ipAscII[i-1] >= 72 and ipAscII[i-1] <= 77 Then 'H-M
-		lSum += 78 - ipAscII[i-1]
-	ElseIf ipAscII[i-1] >= 78 and ipAscII[i-1] <= 84 Then 'N-T
-		lSum += ipAscII[i-1] - 77
-	ElseIf ipAscII[i-1] >= 85 and ipAscII[i-1] <= 90 Then 'U-Z
-		lSum += 91 - ipAscII[i-1]
-	End If
-Next
-lSeptenary = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Chaldean
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
-		Else
-			lSum += 0 ': Print "non-alphanumeric char @";i
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 69 Then 'A-E = 1,2,3,4,5
-		lSum += ipAscII[i-1] - 64
-	ElseIf ipAscII[i-1] = 70 orElse ipAscII[i-1] = 80 Then 'F,P = 8
-		lSum += 8
-	ElseIf ipAscII[i-1] = 71 orElse ipAscII[i-1] = 76 orElse ipAscII[i-1] = 83  Then 'G,L,S = 3
-		lSum += 3
-	ElseIf ipAscII[i-1] = 72 orElse ipAscII[i-1] = 78 orElse ipAscII[i-1] = 88  Then 'H,N,X = 5
-		lSum += 5
-	ElseIf ipAscII[i-1] >= 85 and ipAscII[i-1] <= 87  Then 'U,V,W = 6
-		lSum += 6
-	ElseIf ipAscII[i-1] = 79 orElse ipAscII[i-1] = 90 Then 'O,Z = 7
-		lSum += 7
-	ElseIf ipAscII[i-1] = 73 orElse ipAscII[i-1] = 74 orElse ipAscII[i-1] = 81 orElse ipAscII[i-1] = 89  Then
-		lSum += 1
-	ElseIf ipAscII[i-1] = 75 orElse ipAscII[i-1] = 82 Then 'K,R = 2
-		lSum += 2
-	ElseIf ipAscII[i-1] = 77 orElse ipAscII[i-1] = 84 Then 'M,T = 4
-		lSum += 4
-	End If
-Next
-lChaldean = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Pythagorean
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
-		lSum += ipAscII[i-1] - 64
-	ElseIf ipAscII[i-1] >= 74 and ipAscII[i-1] <= 82 Then
-		lSum += ipAscII[i-1] - 73
-	ElseIf ipAscII[i-1] >= 83 and ipAscII[i-1] <= 90 Then
-		lSum += ipAscII[i-1] - 82
-	End If
-Next
-lPythagorean = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Reduced
-lSumTmp = lSum
-While Len(Str$(lSum)) > 1
-	lSumReduce = 0
-	ipSumDigits = Allocate(Len(Str$(lSum))*SizeOf(Integer))
-	For i = 1 to Len(Str$(lSum))
-		ipSumDigits[i-1] = Val(Mid$(Str$(lSum), i , 1))
-		lSumReduce += ipSumDigits[i-1]
+' Checking whether a value, not a word or phrase, is entered
+If Val(zWordIn) <> 0 Then
+	lSimple = Val(zWordIn)
+	lRegular = Val(zWordIn)*6
+	lJewish = Val(zWordIn)
+	lSatanic = Val(zWordIn)
+	lExtended = Val(zWordIn)
+	lSeptenary = Val(zWordIn)
+	lChaldean = Val(zWordIn)
+	lPythagorean = Val(zWordIn)
+	lReduced = Val(zWordIn)
+	lRevSimple = Val(zWordIn)
+	lRevRegular = Val(zWordIn)*6
+	lRevPythag = Val(zWordIn)
+	lRevReduced = Val(zWordIn)
+	lDbOutHandle = FreeFile()
+	Open sDbOutput for Append As #lDbOutHandle
+	Print #lDbOutHandle, Str$(Val(zWordIn))
+	Close #lDbOutHandle
+Else
+	' Allocate memory
+	lWordLen = Len(zWordIn)
+	ipAscII = Allocate(lWordLen*SizeOf(Integer))
+	' Load memory of ASCII codes
+	For i = 1 to lWordLen
+		ipAscII[i-1] = Asc(zWordIn,i)
 	Next
-	lSum = lSumReduce
-	DeAllocate(ipSumDigits)
-Wend
-lReduced = lSum
-zRec = zRec + Str$(lSum) + ":"
 
-' Reverse Simple and Regular
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
+	zRec = Trim$(sInputWord) + ":"
+
+	' Simple and Regular
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
 		Else
-			lSum += 0
+			lSum += ipAscII[i-1] - 64
 		End If
-	Else
-		lSum += -(ipAscII[i-1]) + 91
-	End If
-Next
-lRegSum = lSum*6
-lRevSimple = lSum : lRevRegular = lRegSum
-zRec = zRec + Str$(lSum) + ":" + Str$(lRegSum) + ":"
-
-' Reverse Pythagorean
-lSum = 0
-For i = 1 to lWordLen
-	If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
-		If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
-			lSum += ipAscII[i-1] - 48
-		Else
-			lSum += 0
-		End If
-	ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 72 Then
-		lSum += -(ipAscII[i-1]) + 73
-	ElseIf ipAscII[i-1] >= 73 and ipAscII[i-1] <= 81 Then
-		lSum += -(ipAscII[i-1]) + 82
-	ElseIf ipAscII[i-1] >= 82 and ipAscII[i-1] <= 90 Then
-		lSum += -(ipAscII[i-1]) + 91
-	End If
-Next
-lRevPythag = lSum
-zRec = zRec + Str$(lSum) + ":"
-
-' Reverse Reduced
-lSumTmp = lSum
-While Len(Str$(lSum)) > 1
-	lSumReduce = 0
-	ipSumDigits = Allocate(Len(Str$(lSum))*SizeOf(Integer))
-	For i = 1 to Len(Str$(lSum))
-		ipSumDigits[i-1] = Val(Mid$(Str$(lSum), i , 1))
-		lSumReduce += ipSumDigits[i-1]
 	Next
-	lSum = lSumReduce
-	DeAllocate(ipSumDigits)
-Wend
-lRevReduced = lSum
-zRec = zRec + Str$(lSum) + ":"
-DeAllocate(ipAscII)
+	lRegSum = lSum*6
+	lSimple = lSum : lRegular = lRegSum
+	zRec = zRec + Str$(lSum) + ":" + Str$(lRegSum) + ":"
+
+	' Jewish
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
+			lSum += ipAscII[i-1] - 64
+		ElseIf ipAscII[i-1] = 74 Then
+			lSum += 600
+		ElseIf ipAscII[i-1] >= 75 and ipAscII[i-1] <= 83 Then
+			lSum += (ipAscII[i-1] - 74)*10
+		ElseIf ipAscII[i-1] = 84 orElse ipAscII[i-1] = 85 Then
+			lSum += (ipAscII[i-1] - 83)*100
+		ElseIf ipAscII[i-1] = 86 Then
+			lSum += 700
+		ElseIf ipAscII[i-1] = 87 Then
+			lSum += 900
+		ElseIf ipAscII[i-1] >= 88 and ipAscII[i-1] <= 90 Then
+			lSum += (ipAscII[i-1] - 85)*100
+		End If
+	Next
+	lJewish = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Satanic
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		Else
+			lSum += ipAscII[i-1] - 29
+		End If
+	Next
+	lSatanic = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Extended
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
+			lSum += ipAscII[i-1] - 64
+		ElseIf ipAscII[i-1] >= 74 and ipAscII[i-1] <= 82 Then
+			lSum += (ipAscII[i-1] - 73)*10
+		ElseIf ipAscII[i-1] >= 83 and ipAscII[i-1] <= 90 Then
+			lSum += (ipAscII[i-1] - 82)*100
+		End If
+	Next
+	lExtended = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Septenary
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
+			Else
+				lSum += 0 ': Print "non-alphanumeric char @";i
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 71 Then 'A-G
+			lSum += ipAscII[i-1] - 64
+		ElseIf ipAscII[i-1] >= 72 and ipAscII[i-1] <= 77 Then 'H-M
+			lSum += 78 - ipAscII[i-1]
+		ElseIf ipAscII[i-1] >= 78 and ipAscII[i-1] <= 84 Then 'N-T
+			lSum += ipAscII[i-1] - 77
+		ElseIf ipAscII[i-1] >= 85 and ipAscII[i-1] <= 90 Then 'U-Z
+			lSum += 91 - ipAscII[i-1]
+		End If
+	Next
+	lSeptenary = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Chaldean
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48 ': Print ipAscII[i-1] - 48,"1 - 9"
+			Else
+				lSum += 0 ': Print "non-alphanumeric char @";i
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 69 Then 'A-E = 1,2,3,4,5
+			lSum += ipAscII[i-1] - 64
+		ElseIf ipAscII[i-1] = 70 orElse ipAscII[i-1] = 80 Then 'F,P = 8
+			lSum += 8
+		ElseIf ipAscII[i-1] = 71 orElse ipAscII[i-1] = 76 orElse ipAscII[i-1] = 83  Then 'G,L,S = 3
+			lSum += 3
+		ElseIf ipAscII[i-1] = 72 orElse ipAscII[i-1] = 78 orElse ipAscII[i-1] = 88  Then 'H,N,X = 5
+			lSum += 5
+		ElseIf ipAscII[i-1] >= 85 and ipAscII[i-1] <= 87  Then 'U,V,W = 6
+			lSum += 6
+		ElseIf ipAscII[i-1] = 79 orElse ipAscII[i-1] = 90 Then 'O,Z = 7
+			lSum += 7
+		ElseIf ipAscII[i-1] = 73 orElse ipAscII[i-1] = 74 orElse ipAscII[i-1] = 81 orElse ipAscII[i-1] = 89  Then
+			lSum += 1
+		ElseIf ipAscII[i-1] = 75 orElse ipAscII[i-1] = 82 Then 'K,R = 2
+			lSum += 2
+		ElseIf ipAscII[i-1] = 77 orElse ipAscII[i-1] = 84 Then 'M,T = 4
+			lSum += 4
+		End If
+	Next
+	lChaldean = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Pythagorean
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 73 Then
+			lSum += ipAscII[i-1] - 64
+		ElseIf ipAscII[i-1] >= 74 and ipAscII[i-1] <= 82 Then
+			lSum += ipAscII[i-1] - 73
+		ElseIf ipAscII[i-1] >= 83 and ipAscII[i-1] <= 90 Then
+			lSum += ipAscII[i-1] - 82
+		End If
+	Next
+	lPythagorean = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Reduced
+	lSumTmp = lSum
+	While Len(Str$(lSum)) > 1
+		lSumReduce = 0
+		ipSumDigits = Allocate(Len(Str$(lSum))*SizeOf(Integer))
+		For i = 1 to Len(Str$(lSum))
+			ipSumDigits[i-1] = Val(Mid$(Str$(lSum), i , 1))
+			lSumReduce += ipSumDigits[i-1]
+		Next
+		lSum = lSumReduce
+		DeAllocate(ipSumDigits)
+	Wend
+	lReduced = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Reverse Simple and Regular
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		Else
+			lSum += -(ipAscII[i-1]) + 91
+		End If
+	Next
+	lRegSum = lSum*6
+	lRevSimple = lSum : lRevRegular = lRegSum
+	zRec = zRec + Str$(lSum) + ":" + Str$(lRegSum) + ":"
+
+	' Reverse Pythagorean
+	lSum = 0
+	For i = 1 to lWordLen
+		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then
+			If ipAscII[i-1] >=49 and ipAscII[i-1] <= 57 Then
+				lSum += ipAscII[i-1] - 48
+			Else
+				lSum += 0
+			End If
+		ElseIf ipAscII[i-1] >= 65 and ipAscII[i-1] <= 72 Then
+			lSum += -(ipAscII[i-1]) + 73
+		ElseIf ipAscII[i-1] >= 73 and ipAscII[i-1] <= 81 Then
+			lSum += -(ipAscII[i-1]) + 82
+		ElseIf ipAscII[i-1] >= 82 and ipAscII[i-1] <= 90 Then
+			lSum += -(ipAscII[i-1]) + 91
+		End If
+	Next
+	lRevPythag = lSum
+	zRec = zRec + Str$(lSum) + ":"
+
+	' Reverse Reduced
+	lSumTmp = lSum
+	While Len(Str$(lSum)) > 1
+		lSumReduce = 0
+		ipSumDigits = Allocate(Len(Str$(lSum))*SizeOf(Integer))
+		For i = 1 to Len(Str$(lSum))
+			ipSumDigits[i-1] = Val(Mid$(Str$(lSum), i , 1))
+			lSumReduce += ipSumDigits[i-1]
+		Next
+		lSum = lSumReduce
+		DeAllocate(ipSumDigits)
+	Wend
+	lRevReduced = lSum
+	zRec = zRec + Str$(lSum) + ":"
+	DeAllocate(ipAscII)
+End If
 ' End calculation  =============================================================
 
 ' Now start matching  ==========================================================
