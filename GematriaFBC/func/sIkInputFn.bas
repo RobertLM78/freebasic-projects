@@ -1,10 +1,10 @@
 ' Title: sIkInputFn.bas - Inkey$ Input Function
-' Version: 0.5 - April 2018
+' Version: 0.5 - May 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' Function sIkInputFn(Prompt,Length) - returns a final entered string
 ' ==============================================================================
-#include "fbgfx.bi"
+#include "fbgfx.bi" 'This is for processing the special keyboard keys like HOME
 Function sIkInputFn(sPrompt As String = "", iLen As Integer = 16) As String
 
 Dim As String  sInput
