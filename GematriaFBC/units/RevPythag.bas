@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: RevPythag.bas - translation unit for GematriaFBC.bas
-' Version: 0.2 - March 2018
+' Version: 0.3 - May 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Reversed Full Reduction
@@ -24,11 +24,11 @@ For i = 1 to lWordLen
 Next
 Color 10
 Print "RevPythag.:  "; : Color 15 : Print lSum
-If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
+If (bState and mask1) = 1 Then '--log
 	Print #lFileHandle, "RevPyth.:    ";lSum
 End If
 
-If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
+If (bState and mask2) = 2 Then '--verbose
 	' Print Characters (RevPythagorian) ===========================================
 	For i = 1 to lWordLen
 		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then

@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: Satanic.bas - translation unit for GematriaFBC.bas
-' Version: 0.2 - March 2018
+' Version: 0.3 - May 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' ------------------------------------------------------------------------------
@@ -17,14 +17,13 @@ For i = 1 to lWordLen
 		lSum += ipAscII[i-1] - 29
 	End If
 Next
-lRegSum = lSum*6
 Color 10
 Print "Satanic:     "; : Color 15 : Print lSum
-If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
+If (bState and mask1) = 1 Then '--log
 	Print #lFileHandle, "Satanic:     ";lSum
 End If
 
-If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
+If (bState and mask2) = 2 Then '--verbose
 	' Print Characters (Satanic) ================================================
 	For i = 1 to lWordLen
 		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then

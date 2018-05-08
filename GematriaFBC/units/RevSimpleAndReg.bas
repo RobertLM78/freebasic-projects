@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: RevSimpleAndReg.bas - translation unit for GematriaFBC.bas
-' Version: 0.2 - March 2018
+' Version: 0.3 - May 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Reversed Simple (Ordinal) and Regular (Sumerian) English Gematria
@@ -23,12 +23,12 @@ Color 10
 Print "RevSimple:   "; : Color 15 : Print lSum
 Color 10
 Print "RevRegular:  "; : Color 15 : Print lRegSum
-If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
+If (bState and mask1) = 1 Then '--log
 	Print #lFileHandle, "RevSimple:   ";lSum
 	Print #lFileHandle, "RevRegular:  ";lRegSum
 End If
 
-If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
+If (bState and mask2) = 2 Then '--verbose
 	' Print Characters (RevSimple) =============================================
 	For i = 1 to lWordLen
 		If ipAscII[i-1] < 65 orElse ipAscII[i-1] > 90 Then

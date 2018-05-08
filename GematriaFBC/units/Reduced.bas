@@ -1,6 +1,6 @@
 ' ------------------------------------------------------------------------------
 ' Title: Reduced.bas - translation unit for GematriaFBC.bas
-' Version: 0.2 - March 2018
+' Version: 0.3 - May 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' ------------------------------------------------------------------------------
@@ -18,12 +18,12 @@ While Len(Str$(lSum)) > 1
 Wend
 Color 10
 Print "Reduced:     "; : Color 15 : Print lSum
-If bState = 1 orElse bState = 3 orElse bState = 5 orElse bState = 7 Then  ' combinations with --log
+If (bState and mask1) = 1 Then '--log
 	Print #lFileHandle, "Reduced:     ";lSum
 	'Print #lFileHandle,
 End If
 
-If bState = 2 orElse bState = 3 orElse bState = 6 orElse bState = 7 Then  ' combinations with --verbose
+If (bState and mask2) = 2 Then '--verbose
 	' Print digits to be summed (Simple) =======================================
 	lSum = lSumTmp
 	While Len(Str$(lSum)) > 1
