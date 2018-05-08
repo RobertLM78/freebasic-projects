@@ -92,8 +92,8 @@ Usage:
 -h, --help                                      Report the command options and
                                                  exit.
 -v, --version                                   Report version and exit.
--w, --warranty                                  Report warranty and license.
-                                                 conditions then exit.
+-w, --warranty                                  Report warranty and license con-
+                                                 ditions then exit.
 -b [filename], --build [filename]               Build a database from file. Out-
                                                  puts to file.
 -l, --log                                       Log the session (to file in
