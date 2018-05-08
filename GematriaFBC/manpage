@@ -17,7 +17,7 @@ DESCRIPTION
 
 OPTIONS
        -b [filename], --build [filename]
-              Build a database from file.
+              Build a database from file.  Outputs to file.
 
        -h, --help
               Report the command  options and exit.
