@@ -1,17 +1,19 @@
 ================================================================================
-| GematriaFBC 2.1.2; A simple gematria calculator - console version            |
+| GematriaFBC 3.0; A simple gematria calculator - console version              |
 |      readme file                                                             |
 ================================================================================
 ###########################
 #  About the Source Code  #
 ###########################
 https://github.com/RobertLM78/freebasic-projects/tree/master/GematriaFBC
-This package contains 14 FreeBASIC source files:
+This package contains 16 FreeBASIC source files:
 
 1 Main Program (./):
 GematriaFBC.bas
 
-1 Function (./func)
+3 Functions (./func)
+BuildDbFn.bas
+MatchDbFn.bas
 sIkInputFn.bas
 
 12 Translation units (./units):
@@ -64,7 +66,7 @@ utilities to unpack the archive).
 
 Open a terminal (Linux) or command window (Windows) in the folder that was
 created extracting the archive (which should be named something like
-'GematriaFBC-1.x-src').
+'GematriaFBC-3.x-src').
 
 To compile on Linux:
 fbc GematriaFBC.bas -x gematriafbc
@@ -87,12 +89,20 @@ Double click the .exe or call the program from the command prompt.
 
 
 Usage:
-     -h, --help              Show options
-     -v, --version           Show version
-     -w, --warranty          Warranty and license conditions
-     -l, --log               Log session (as GematriaFBC.log)
-     -r, --reverse           Append reversed forms to output
-     -V, --verbose           Verbose output
+-h, --help                                      Report the command options and
+                                                 exit.
+-v, --version                                   Report version and exit.
+-w, --warranty                                  Report warranty and license.
+                                                 conditions then exit.
+-b [filename], --build [filename]               Build a database from file. Out-
+                                                 puts to file.
+-l, --log                                       Log the session (to file in
+                                                 current directory as
+                                                 GematriaFBC.log).
+-m [word] [filename], --match [word] [filename] Match a word, phrase or value to
+                                                 a database.  Outputs to file.
+-r, --reverse                                   Append reversed forms to output
+-V, --verbose                                   Verbose output.
 
 
 Example, in a console type:
@@ -140,7 +150,40 @@ The following two emulators have shown good performance:
 KDE's Konsole
 X11's urxvt (rxvt)
 
+As of version 3.0, there are now abilities to file-process databases.
 
+To build a database, use a plain-text file listing the words or phrases (one per
+line) you would like to include in the database.  On Linux systems, good files
+for database building can be found in the /usr/share/dict/ folder.  As an alter-
+native, a highly complete English word list can be found in here:
+https://github.com/RobertLM78/english-words
+which is just a fork of this repository:
+https://github.com/dwyl/english-words
+Once that's done, run gematriafbc --build [filename]
+(gematriafbc -b [filename] will of course work, too)
+It will take a up to 30 seconds for the above word list (3.9MB) to be built into
+a database.  Each record (line) in the database takes the form:
+[Word]:[Simple]:[Regular]:[Jewish]:...:[ReverseReduced]:
+For example:
+GematriaFBC:85:510:244:470:364:43:34:49:4:212:1272:68:5:
+Where the order of each 'cell' is the same as what is printing when running the
+program normally.
+
+To match a word a phrase to a database, you must obviously have already built a
+database.  The matches will be printed into a new database file with the name of
+the entered word as the root of the filename.  For example, typing:
+gematriafbc -m foo words.dat
+will save the output database to a file named foo-words.dat, with all matches in
+database, system by system.  So for foo, all words from words.dat with Simple =
+36, Regular = 216, Jewish = 106, and so on.
+IMPORTANT!:  Double quotes are necessary for phrase matching, for example:
+gematriafbc -m "foo bar" words.dat
+with the phrase enclosed in quotes.  PHRASES CAN BE NO LONGER THAN 67 CHARAC-
+TERS.  The .dat files created here aren't good for use as databases in their own
+right - they are more made for visual inspection via text editor.  To skip
+through different sections of the matched database, use a text editor's 'Find'
+function to search for '@' (without quotes).  Depeding on the size of the source
+database, they can get to be large (about 2-5 MB).
 
 ###################
 # Example outputs #
@@ -232,6 +275,7 @@ beannachtai@homtail.com
 #################################
 Ver:    Change
 --------------------------------------------------------------------------------
+3.0:    implement database building & word value matching (output to file)
 2.1.2:  changes the history file path from a relative to absolute path
 2.1.1:  fixes what should be the last bug in the new custom input function
 2.1:    fixes bug in editing entries that were fetched with the UP/DOWN arrow
@@ -247,7 +291,7 @@ Ver:    Change
 0.4:    implement Chaldean system
 0.2:    first released version
 
-'Missing' versions were never released, or as in the case between 1.4.1 and 2.0,
-never existed.  In that case it was decided to skip up to the next whole number
-(2.0) since a long-term major design goal had been acheived.
+Early (0.2 - 1.4) 'missing' versions were never released.
+All other jumps are indicative of when a major long-term design goal has been
+acheived.
 ================================================================================
