@@ -7,17 +7,17 @@ SYNOPSIS
        gematriafbc [OPTIONS] [WORD,PHRASE,VALUE] [FILENAME]
 
 DESCRIPTION
-       Enter  a word or phrase to find the gematria.  Enter !q to quit or !c to
-       clear the screen.  The maximum allowable entry depends on your console
-       size, with an absolute maximum entry of 127 characters. Use the up and
+       Enter  a  word or phrase to find the gematria.  Enter !q to quit or !c to
+       clear the screen.  The maximum allowable entry depends  on  your  console
+       size,  with  an  absolute maximum entry of 127 characters. Use the up and
        down arrow keys to scroll through previous entries.  Previous entries are
-       saved in a  file  in the user's home folder.  ESC clears the entry.  The
-       program can also build databases and match words or phrases without run-
+       saved  in  a  file in the user's home folder.  ESC clears the entry.  The
+       program can also build databases and match words or phrases without  run‐
        ning normally.
 
 OPTIONS
        -b [filename], --build [filename]
-              Build a database from file.  Outputs to file.
+              Build a database from file.
 
        -h, --help
               Report the command  options and exit.
@@ -49,8 +49,8 @@ DOCUMENTATION
        A copy of the readme is in /usr/share/doc/gematriafbc/
 
 BUGS
-       No known bugs.  Report found bugs to
-       https://github.com/RobertLM78/freebasic-projects/tree/master/GematriaFBC.
+       No  known bugs.  Report found bugs to https://github.com/RobertLM78/free‐
+       basic-projects/tree/master/GematriaFBC.
 
 AUTHOR
        Robert Lock (RobertLM78)
@@ -58,12 +58,12 @@ AUTHOR
        manpage by Robert Lock, ver. 0.3
 
 COPYRIGHT
-       Copyright © 2017 Robert Lock.  gematriafbc is free software; you can re-
-       distribute it and/or modify it under the terms of the GNU General Public
-       License as published by the Free Software Foundation; either version 3 of
-       the License, or (at your option) any later version.
+       Copyright © 2017 Robert Lock.  gematriafbc  is  free  software;  you  can
+       redistribute  it and/or modify it under the terms of the GNU General Pub‐
+       lic License as published by the Free Software Foundation; either  version
+       3 of the License, or (at your option) any later version.
 
-       This program is distributed in the hope that it will be useful, but WITH-
+       This program is distributed in the hope that it will be useful, but WITH‐
        OUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
        FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
        more details <http://gnu.org/licenses/gpl.html>.
