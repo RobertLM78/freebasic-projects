@@ -1,5 +1,5 @@
 ================================================================================
-| GematriaFBC 3.0; A simple gematria calculator - console version              |
+| GematriaFBC 3.1; A simple gematria calculator - console version              |
 |      readme file                                                             |
 ================================================================================
 ###########################
@@ -36,9 +36,13 @@ splash.bas
 #####################
 #   Installation    #
 #####################
-Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
-repository (/bin/ folder).  Each have -x86,-amd64, or .exe respectively.   If
-you are unsure which Linux binary you need, download the -x86 version.
+Linux amd64 and armhf binaries are included in the Git repository (/bin/ folder).
+Each has -amd64, or -armhf respectively.   If you are unsure which Linux binary
+you need, download the -amd64 version.
+
+For now, Linux -x86 and Windows 32-bit are no longer supported.  Windows 64-bit
+may later be introduced, though not for any foreseeable future.  The only 32-bit
+version now is the armhf for Linux.
 
 Runtime libraries are required.  Most of these are common, and may already be
 installed on your system.  For Debian-based Linux distributions, the following
@@ -68,8 +72,10 @@ Open a terminal (Linux) or command window (Windows) in the folder that was
 created extracting the archive (which should be named something like
 'GematriaFBC-3.x-src').
 
-To compile on Linux:
+To compile on Linux (Makefile included):
 fbc GematriaFBC.bas -x gematriafbc
+--OR--
+make
 
 To compile on Windows:
 fbc GematriaFBC.bas -x gematriafbc.exe
@@ -174,8 +180,8 @@ database.  The matches will be printed into a new database file with the name of
 the entered word as the root of the filename.  For example, typing:
 gematriafbc -m foo words.dat
 will save the output database to a file named foo-words.dat, with all matches in
-database, system by system.  So for foo, all words from words.dat with Simple =
-36, Regular = 216, Jewish = 106, and so on.
+words.dat, system by system.  So for 'foo', all words from words.dat with Simple
+= 36, Regular = 216, Jewish = 106, and so on.
 IMPORTANT!:  Double quotes are necessary for phrase matching, for example:
 gematriafbc -m "foo bar" words.dat
 with the phrase enclosed in quotes.  PHRASES CAN BE NO LONGER THAN 67 CHARAC-
@@ -275,6 +281,7 @@ beannachtai@homtail.com
 #################################
 Ver:    Change
 --------------------------------------------------------------------------------
+3.1:    improvements to docs and code
 3.0:    implement database building & word value matching (output to file)
 2.1.2:  changes the history file path from a relative to absolute path
 2.1.1:  fixes what should be the last bug in the new custom input function
@@ -282,10 +289,10 @@ Ver:    Change
 		keys
 2.0:    implement UP/DOWN history scrolling via custom input function
 1.4.1:  implement reverse forms as well as two new 'default' systems
-1.3:    ? bug fixes ?
+1.3:    ? bug fixes/refining code ?
 1.2:    implement --verbose option / split main program into units
 1.0:    implement digits to the sums (previously ignored)
-0.9:    ? bug fixes ?
+0.9:    ? bug fixes/refining code ?
 0.6:    implement Septenary system and --warranty option
 0.5:    implement first command options: --help, --version, --log
 0.4:    implement Chaldean system
