@@ -1,11 +1,11 @@
 ' ------------------------------------------------------------------------------
 ' Title: GematriaFBC.bas - a simple gemtaria calculator
-' Version: 3.0 - April 2018
+' Version: 3.1 - April 2018
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
 ' ------------------------------------------------------------------------------
-Dim As zString *8    zVersion  = "3.0"
+Dim As zString *8    zVersion  = "3.1"
 Dim As zString *28   zGemTitle = "GematriaFBC-" + zVersion
 Dim As zString *8    zPrompt   = ":> "
 Dim As Long          i
@@ -60,6 +60,9 @@ If iNumArgs >= 1 Then
 		bState = bState xor mask16
 		sWordIn = Command$(i+1)
 		sDbInputFile = Command$(i+2)
+		If sDbInputFile = "" Then
+			Print "Improper usage.  The correct usage is: --match [word] [filename]"
+		End If
 	ElseIf Command$(i) = "-h" orElse Command$(i) = "--help" Then
 		Print "Valid parameters are:"
 		Print "     -h, --help",,," Report the command options and exit."
