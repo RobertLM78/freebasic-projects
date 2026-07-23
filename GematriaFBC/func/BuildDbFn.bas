@@ -1,5 +1,5 @@
 ' Title: BuildDbFn.bas - Build database function
-' Version: 0.3 - May 2018
+' Version: 0.4 - May 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' Function BuildDb(input_filename)
@@ -30,7 +30,8 @@ If Open(sDbInput For Input As #lDbInHandle) <> 0 Then
 	Print "Input file not found. Quitting program."
 	System 0
 Else
-	Print "This may take a few seconds for large files...";
+	Print "Building database..."
+	Print "This may take several seconds for large files...";
 	While Eof(lDbInHandle) = 0
 		'iCnt += 1
 		Line Input #lDbInHandle, sWordIn
@@ -271,7 +272,13 @@ Else
 	Close #lDbInHandle
 	Print Using "####.##";Timer - dTime;
 	Print " seconds elapsed."
-	Print "File written to " + CurDir + "/" + sDbOutput
+	#ifdef __FB_LINUX__
+		Print "File written to " + CurDir + "/" + sDbOutput
+	#endif
+	#ifdef __FB_WIN32__
+		Print "File written to " + CurDir + "\" + sDbOutput
+	#endif
 	'Print
 End If
+Return ""
 End Function

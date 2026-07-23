@@ -1,5 +1,5 @@
-' Title: MatchDbFn.bas - Build database function
-' Version: 0.4 - May 2018
+' Title: MatchDbFn.bas - Match to database function
+' Version: 0.6 - May 2018
 ' Author: Robert Lock - beannachtai@hotmail.com
 ' License: GPL v3
 ' Function MatchDb(word,filename)
@@ -23,7 +23,7 @@ Dim As uLong   lSimple, lRegular, lJewish, lSatanic, lExtended, lSeptenary
 Dim As uLong   lChaldean, lPythagorean, lReduced, lRevSimple, lRevRegular
 Dim As uLong   lRevPythag, lRevReduced
 Dim As uByte   bDelim(1,2)
-Dim As uByte   bCnt
+Dim As uByte   bNumDelim
 Dim As String  sDbOutput = sInputWord + "-" + sDbInputFile
 
 ' First calculate the word passed via command line  ============================
@@ -279,504 +279,453 @@ Else
 	Wend
 	lRevReduced = lSum
 	zRec = zRec + Str$(lSum) + ":"
-	DeAllocate(ipAscII)
 End If
+DeAllocate(ipAscII)
 ' End calculation  =============================================================
+
+lDbInHandle = FreeFile()
+If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
+	'Print CurDir
+	'Print sDbInput, sDbOutput
+	Print "Input file not found. Quitting program."
+	System 0
+Else
+	Print "Comparing to database..."
+	Print "This may take several seconds for large files...";
+	' Print the matched phrase to file first
+	lDbOutHandle = FreeFile()
+	Open sDbOutput for Append As #lDbOutHandle
+	Print #lDbOutHandle, zRec
+	Close #lDbOutHandle
+End If
 
 ' Now start matching  ==========================================================
 ' Match Simple (and Regular)
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
-	Print "This may take a few seconds for large files...";' Unique to this test
-	' Print the matched phrase to file first                '
-	lDbOutHandle = FreeFile()                               '
-	Open sDbOutput for Append As #lDbOutHandle              '
-	Print #lDbOutHandle, zRec                               '
-	Close #lDbOutHandle                                     ' ====================
-	' Then print a section title
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Simple = " + Str$(lSimple) + " and Regular English = " + Str$(lRegular)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 1 Then    'First Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 2 Then    'Second Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSimple Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Simple = " + Str$(lSimple) + " and Regular English = " + Str$(lRegular)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 1 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 2 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSimple Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Jewish
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Jewish = " + Str$(lJewish)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 3 Then    'Third Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 4 Then    'Forth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lJewish Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Jewish = " + Str$(lJewish)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 3 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 4 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lJewish Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Satanic
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Satanic = " + Str$(lSatanic)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 4 Then    'Forth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 5 Then    'Fifth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSatanic Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Satanic = " + Str$(lSatanic)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 4 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 5 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSatanic Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Extended
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Extended = " + Str$(lExtended)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 5 Then    'Fifth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 6 Then    'Sixth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lExtended Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Extended = " + Str$(lExtended)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 5 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 6 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lExtended Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Septenary
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Septenary = " + Str$(lSeptenary)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 6 Then    'Sixth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 7 Then    'Seventh Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSeptenary Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Septenary = " + Str$(lSeptenary)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 6 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 7 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lSeptenary Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Chaldean
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Chaldean = " + Str$(lChaldean)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 7 Then    'Seventh Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 8 Then    'Eighth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lChaldean Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Chaldean = " + Str$(lChaldean)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 7 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 8 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lChaldean Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Pythagorean
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Pythagorean = " + Str$(lPythagorean)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 8 Then    'Eighth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 9 Then    'Ninth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lPythagorean Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Pythagorean = " + Str$(lPythagorean)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 8 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 9 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lPythagorean Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match Reduced
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Reduced = " + Str$(lReduced)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 9 Then    'Ninth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 10 Then    'Tenth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lReduced Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Reduced = " + Str$(lReduced)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 9 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 10 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lReduced Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match RevSimple
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Rev. Simple = " + Str$(lRevSimple) + " and Rev. Regular English = " + Str$(lRevRegular)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 10 Then    'Tenth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 11 Then    'Eleventh Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevSimple Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Rev. Simple = " + Str$(lRevSimple) + " and Rev. Regular English = " + Str$(lRevRegular)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 10 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 11 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevSimple Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match RevPythag
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Reverse Pythagorean = " + Str$(lRevPythag)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 12 Then    'Twelfth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 13 Then    'Thirteenth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevPythag Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Reverse Pythagorean = " + Str$(lRevPythag)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 12 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 13 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevPythag Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 ' Match lRevReduced
 lDbInHandle = FreeFile()
-If Open(sDbInputFile For Input As #lDbInHandle) <> 0 Then
-	'Print CurDir
-	'Print sDbInput, sDbOutput
-	Print "Input file not found. Quitting program."
-	System 0
-Else
+lDbOutHandle = FreeFile()
+Open sDbOutput for Append As #lDbOutHandle
+Print #lDbOutHandle, " @ Reverse Reduced = " + Str$(lRevReduced)
+Print #lDbOutHandle, "================================================================================"
+Close #lDbOutHandle
+Open sDbInputFile For Input As #lDbInHandle
+While Eof(lDbInHandle) = 0
+Line Input #lDbInHandle, sInputWord
+zWordIn = Trim$(sInputWord)
+bNumDelim = 0
+For k = 1 to 128
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 13 Then    'Thirteenth Delimiter
+		bDelim(1,1) = k
+		Exit For
+	End If
+Next
+For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
+	If Mid$(zWordIn,k,1) = ":" Then
+		bNumDelim += 1
+	End If
+	If bNumDelim = 14 Then    'Fourteenth Delimiter
+		bDelim(1,2) = k
+		Exit For
+	End If
+Next
+If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevReduced Then
 	lDbOutHandle = FreeFile()
 	Open sDbOutput for Append As #lDbOutHandle
-	Print #lDbOutHandle, " @ Reverse Reduced = " + Str$(lRevReduced)
-	Print #lDbOutHandle, "================================================================================"
+	Print #lDbOutHandle, zWordIn
 	Close #lDbOutHandle
-	While Eof(lDbInHandle) = 0
-	Line Input #lDbInHandle, sInputWord
-	zWordIn = Trim$(sInputWord)
-	bCnt = 0
-	For k = 1 to 128
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 13 Then
-			bDelim(1,1) = k
-			Exit For
-		End If
-	Next
-	For k = (bDelim(1,1) + 1) to bDelim(1,1) + 5
-		If Mid$(zWordIn,k,1) = ":" Then
-			bCnt += 1
-		End If
-		If bCnt = 14 Then
-			bDelim(1,2) = k
-			Exit For
-		End If
-	Next
-	If Val(Mid$(zWordIn,bDelim(1,1)+1,bDelim(1,2)-bDelim(1,1)-1)) = lRevReduced Then
-		lDbOutHandle = FreeFile()
-		Open sDbOutput for Append As #lDbOutHandle
-		Print #lDbOutHandle, zWordIn
-		Close #lDbOutHandle
-	End If
-	Wend
 End If
+Wend
 Close #lDbInHandle
 Print Using "####.##";Timer - dTime;
 Print " seconds elapsed."
-Print "File written to " + CurDir + "/" + sDbOutput
+#ifdef __FB_LINUX__
+	Print "File written to " + CurDir + "/" + sDbOutput
+#endif
+#ifdef __FB_WIN32__
+	Print "File written to " + CurDir + "\" + sDbOutput
+#endif
 ' Finish matching  =============================================================
+Return ""
 End Function
