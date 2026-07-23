@@ -51,7 +51,7 @@ libc6, libncurses5, libx11-6, libxext6, libxrender1, libxrandr2
 For Windows 98+, the following are required:
 msvcrt.dll, DirectX 5.0+
 The C runtime library msvcrt.dll can be downloaded here:
-https://www.microsoft.com/en-us/download/details.aspx?id=24417
+https://www.dll-files.com/msvcrt.dll.html
 
 Debian packages are also available in the /deb/ folder, and should run on any
 Debian-based Linux distribution.  Download this for a system-wide installation,
