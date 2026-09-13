@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBC.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
@@ -11,6 +11,7 @@
 	Width W, H
 #endif
 ' ==== Initializations ====
+Dim As String sLibMsterTitle = "LibMasterFBC-0.3"
 Dim As Byte bCONT = 1 ' CONTinue with program
 Dim As String *4 sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
@@ -82,7 +83,7 @@ While bCONT <> 0
 
 Menu:
 ' ==== Menu & Input ====
-Print "LibMasterFBC-0.2"
+Print sLibMsterTitle
 Print "----------------"
 Print
 Print "  [A] Author Search"
