@@ -33,6 +33,15 @@ Unpack the tar where you would like it.  Prebuilt binaries are in the ./bin/
 folder.  Included binaries are for linux amd64 and armhf.  For now, Windows
 users will have to compile using the instruction below.
 
+Runtime libraries are required.  Most of these are common, and may already be
+installed on your system.  For Debian-based Linux distributions, the following
+are required:
+libc6, libncurses6, libx11-6, libxext6, libxrender1, libxrandr2
+For Windows 98+, the following are required:
+msvcrt.dll, DirectX 5.0+
+The C runtime library msvcrt.dll can be downloaded here:
+https://www.dll-files.com/msvcrt.dll.html
+
 To compile on Linux:
 fbc ./LibMasterFBG.bas ./LibMasterFBG.xpm
 
