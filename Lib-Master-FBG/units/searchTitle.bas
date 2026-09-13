@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Title Search"
+Print sLibMsterTitle &"  -  Title Search"
 Print "---------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
@@ -31,7 +31,6 @@ Color rgbWhite, rgbBlack 'White on Black
 ' ==== Perform the search ====
 For i = 1 to wRecNum
 	Locate 6,5 : Print i;
-	Sleep 5
 	If Instr(Lcase$(zpTIT[(i-1)*bTITmax]),Lcase$(zTIT)) >= 1 Then
 		Locate 8,10 : Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Locate 10,10 : Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]

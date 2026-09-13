@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Data Entry Mode"
+Print sLibMsterTitle &"  -  Data Entry Mode"
 Print "------------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print

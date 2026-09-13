@@ -1,20 +1,25 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileSort.bas - translation unit for LibMasterFBG.bas
-' Version: 0.3 - June 2017
+' Version: 0.4 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT()
 ' -----------------------------------------------------------------------------
+Dim tik As Double   'Timer() variables
+Dim tok As Double
 ' ==== Unit title ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Sort by title (no changes written)"
+Print sLibMsterTitle &"  -  Sort by title (no changes written)"
 Print "-------------------------------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
 ' ====================
 
 Color rgbCyan, rgbBlack 'Cyan on Black
+
+tik = Timer()
+
 ' Break CAT() into arrays
 Print "Calling on strDiv routine..."
 Sleep 150
@@ -116,6 +121,7 @@ Goto Pcheck:
 LeaveSort:
 Print
 Color rgbCyan, rgbBlack 'Cyan on Black
+'Print Using "Sorted in #########, Passes.";n+1;  <---- see about generalizing this so that there isn't so many extra spaces for smaller numbers
 Print "Sorted in "&Str$(n+1)&" Passes.";
 Color rgbWhite, rgbBlack 'White on Black
 Sleep 150
@@ -166,9 +172,15 @@ Print : Print
 Color rgbCyan, rgbBlack 'Cyan on Black
 ' Concatenate CAT
 Print "Calling on strCat routine..."
-Color rgbWhite, rgbBlack 'White on Black
+'Color rgbWhite, rgbBlack 'White on Black  <--- remove fully once timer has been implemented fully
 Sleep 150
 #include "./units/strCat.bas"
+Print
+' === Print TIMER results ==============================
+tok = Timer()
+Print "Time elapsed: ";
+Color rgbWhite, rgbBlack 'White on Black
+Print Using "##.###";(tok-tik) ; : Print " seconds"
 Print
 
 Print "Catalog sorted.  Press any key to continue. ";

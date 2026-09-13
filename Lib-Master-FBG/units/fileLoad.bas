@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileLoad.bas - translation unit for LibMasterFBG.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs zpCAT[ ], wRecNum
@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Load File"
+Print sLibMsterTitle &"  -  Load File"
 Print "------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
@@ -53,7 +53,7 @@ Else ' DE - set wRecNum and load file into memory
 	wRecNum = 0 ' Reset record numbers
 	While Eof(wFileHandle) = 0
 		wRecNum += 1
-		Line Input #wFileHandle, zpCAT[(wRecNum-1)*bCATmax]
+		Line Input #wFileHandle, zpCAT[(wRecNum-1)*bCATmax], 205 'Line Input # for ptr now requires a max_length (205 here)
 	Wend
     Close #wFileHandle
 	Print "File loaded successfully.  Press any key to continue. ";

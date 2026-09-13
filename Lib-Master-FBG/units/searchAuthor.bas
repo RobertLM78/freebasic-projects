@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Author Search"
+Print sLibMsterTitle &"  -  Author Search"
 Print "----------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
@@ -31,7 +31,6 @@ Color rgbWhite, rgbBlack 'White on Black
 ' ==== Perform the search ====
 For i = 1 to wRecNum
 	Locate 6,5 : Print i;
-	Sleep 5
 	'zpAUT0[(i-1)*bAUTmax] = zAUTsrch(1)
 	'zpAUT1[(i-1)*bAUTmax] = zAUTsrch(2)
 	'zpAUT0[(i-1)*bAUTmax] = zAUTsrch(3)

@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Save File"
+Print sLibMsterTitle &"  -  Save File"
 Print "------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print

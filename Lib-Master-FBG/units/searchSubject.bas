@@ -8,7 +8,7 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print "LibMasterFBG-0.2  -  Subject Search"
+Print sLibMsterTitle &"  -  Subject Search"
 Print "-----------------------------------"
 'Locate 7,10 : Print "Subjects are: "   ' Display your subjects here
 Color rgbWhite, rgbBlack 'White on Black
@@ -41,7 +41,6 @@ Color rgbWhite, rgbBlack 'White on Black
 ' ==== Perform the search ====
 For i = 1 to wRecNum
 	Locate 6,5 : Print i;
-	Sleep 5
 	If Instr(Lcase$(zpSUBJ[(i-1)*bSUBJmax]),Lcase$(zSUBJ)) >= 1 Then
 		Locate 8,10 : Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Locate 10,10 : Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
