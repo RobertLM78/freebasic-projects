@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBG.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: FBG == FreeBASIC 'Graphic' version (windowed)
@@ -17,6 +17,7 @@ Const rgbCyan = RGB(0, 255, 255)
 Const rgbWhite = RGB(255, 255, 255)
 Const rgbBlack = RGB(0, 0, 0)
 
+Dim As String sLibMsterTitle = "LibMasterFBG-0.3"
 Dim As Byte bCONT = 1 ' CONTinue with program
 Dim As String *4 sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
@@ -94,7 +95,7 @@ Menu:
 ' ==== Menu & Input ====
 Color rgbCyan, rgbBlack 'Cyan on Black
 Locate 1,1 : Print clrLine
-Locate 3,56 : Print "LibMasterFBG-0.2"
+Locate 3,56 : Print sLibMsterTitle
 Locate 4,56 : Print "----------------"
 Locate 5,1 : Print clrLine
 

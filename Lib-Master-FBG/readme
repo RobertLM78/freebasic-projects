@@ -1,5 +1,5 @@
 ===============================================================================
-| Library Master FBG 0.2; Port of the RBL classic to FreeBASIC - graphic ver. |
+| Library Master FBG 0.3; Port of the RBL classic to FreeBASIC - graphic ver. |
 |      readme file                                                            |
 ===============================================================================
 This package contains 14 FreeBASIC files:
@@ -15,7 +15,7 @@ fileLoad.bas
 fileSave.bas
 fileSort
 fileUpdate.bas
-helpFile.bas
+helpFile.bas   (generic)
 searchAuthor.bas
 searchSubject.bas
 searchTitle.bas
@@ -29,9 +29,9 @@ strDiv.bas
 #####################
 #   Installation    #
 #####################
-Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
-repository (LibMasterFBG-x86,LibMasterFBG-amd64,and LibMasterFBG.exe,
-respectively).
+Unpack the tar where you would like it.  Prebuilt binaries are in the ./bin/
+folder.  Included binaries are for linux amd64 and armhf.  For now, Windows
+users will have to compile using the instruction below.
 
 To compile on Linux:
 fbc ./LibMasterFBG.bas ./LibMasterFBG.xpm
@@ -39,7 +39,7 @@ fbc ./LibMasterFBG.bas ./LibMasterFBG.xpm
 To compile on Windows:
 fbc -s gui LibMasterFBG.bas LibMasterFBG.rc
 
-(Binaries compiled with FB version 1.02.1)
+(Binaries compiled with FB version 1.10.1)
 
 #########################
 #  General Information  #
