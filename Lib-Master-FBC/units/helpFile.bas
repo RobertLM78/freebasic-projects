@@ -1,5 +1,5 @@
 ' -----------------------------------------------------------------------------
-' Title: helpFile.bas - translation unit for LibMasterFBG.bas
+' Title: helpFile.bas - translation unit for LibMasterFBC.bas
 ' Version: 0.1 - May 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3

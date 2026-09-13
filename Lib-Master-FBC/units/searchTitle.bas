@@ -7,7 +7,7 @@
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print "LibMasterFBC-0.1  -  Title Search"
+Print sLibMsterTitle &"  -  Title Search"
 Print "---------------------------------"
 Print
 ' Input title
@@ -26,7 +26,6 @@ End If
 ' ==== Perform the search ====
 For i = 1 to wRecNum
 	Print i &" ";
-	Sleep 5
 	If Instr(Lcase$(zpTIT[(i-1)*bTITmax]),Lcase$(zTIT)) >= 1 Then
 		Print
 		Print "Title:  "&zpTIT[(i-1)*bTITmax]

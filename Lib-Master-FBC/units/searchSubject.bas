@@ -7,7 +7,7 @@
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print "LibMasterFBC-0.2  -  Subject Search"
+Print sLibMsterTitle &"  -  Subject Search"
 Print "-----------------------------------"
 'Print : Print
 'Print "Subjects are: "   ' Display your subjects here
@@ -29,7 +29,6 @@ End If
 ' ==== Perform the search ====
 For i = 1 to wRecNum
 	Print i &" ";
-	Sleep 5
 	If Instr(Lcase$(zpSUBJ[(i-1)*bSUBJmax]),Lcase$(zSUBJ)) >= 1 Then
 		Print
 		Print "Title:  "&zpTIT[(i-1)*bTITmax]

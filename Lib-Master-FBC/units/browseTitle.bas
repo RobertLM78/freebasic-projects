@@ -1,5 +1,5 @@
 ' -----------------------------------------------------------------------------
-' Title: browseTitle.bas - translation unit for LibMasterFBG.bas
+' Title: browseTitle.bas - translation unit for LibMasterFBC.bas
 ' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
@@ -7,7 +7,7 @@
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print "LibMasterFBG-0.2  -  Title Browser"
+Print sLibMsterTitle &"  -  Title Browser"
 Print "----------------------------------"
 Print
 ' ==============================

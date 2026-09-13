@@ -1,15 +1,19 @@
 ' -----------------------------------------------------------------------------
-' Title: fileSort.bas - translation unit for LibMasterFBG.bas
-' Version: 0.3 - June 2017
+' Title: fileSort.bas - translation unit for LibMasterFBC.bas
+' Version: 0.4 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT()
 ' -----------------------------------------------------------------------------
+Dim tik As Double   'Timer() variables
+Dim tok As Double
 ' ==== Unit title ====
 Cls
-Print "LibMasterFBG-0.2  -  Sort by title (no changes written)"
+Print sLibMsterTitle &"  -  Sort by title (no changes written)"
 Print "-------------------------------------------------------"
 Print
+
+tik = Timer()
 ' ====================
 
 ' Break CAT() into arrays
@@ -153,6 +157,10 @@ Print : Print
 Print "Calling on strCat routine..."
 Sleep 150
 #include "./units/strCat.bas"
+Print
+
+tok = Timer()
+Print "Time elapsed: "; : Print Using "###.###";(tok-tik) ; : Print " seconds"
 Print
 
 Print "Catalog sorted.  Press any key to continue. ";

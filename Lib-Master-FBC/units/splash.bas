@@ -5,7 +5,7 @@
 ' License: GPL v3
 ' -----------------------------------------------------------------------------
 Cls
-Print "LibMasterFBC-0.2; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+Print sLibMsterTitle &"; Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
 Print "This program comes with ABSOLUTELY NO WARRANTY; for details press 'w'."
 Print "This is free software, and you are welcome to redistribute it"
 Print "under certain conditions; press `c' for details.  Otherwise press any key. ";
@@ -18,7 +18,7 @@ If wKey = 99 Then
 	'#######################
 	Print
 	Print
-	Print "Library Master FBC 0.2 - A port of the RBL classic program to FreeBASIC"
+	Print sLibMsterTitle &" - A port of the RBL classic program to FreeBASIC"
 	Print "Copyright (C) 2017  Robert Lock (RobertLM78)"
 	Print
 	Print
@@ -73,7 +73,7 @@ ElseIf wKey = 119 Then
 		'#######################
 		Print
 		Print
-		Print "Library Master FBC 0.2 - A port of the RBL classic program to FreeBASIC"
+		Print sLibMsterTitle &" - A port of the RBL classic program to FreeBASIC"
 		Print "Copyright (C) 2017  Robert Lock (RobertLM78)"
 		Print
 		Print

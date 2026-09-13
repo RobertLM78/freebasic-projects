@@ -1,5 +1,5 @@
 ' -----------------------------------------------------------------------------
-' Title: strCat.bas - translation unit for LibMasterFBG.bas
+' Title: strCat.bas - translation unit for LibMasterFBC.bas
 ' Version: 0.2 - June 2017
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
