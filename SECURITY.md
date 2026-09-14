@@ -2,10 +2,12 @@
 
 ## Supported Versions
 
-|Program            | Version | Supported          |
-|-------------------| ------- | ------------------ |
-|LibmasterFBC/G     |   0.3   | :white_check_mark: |
-|LibmasterFBC/G     | < 0.2   | :x:                |
+|Program              | Version | Supported          |
+|---------------------| ------- | ------------------ |
+|GematriaFBC          |   3.1   | :white_check_mark: |
+|GematriaFBC          | < 3.0   | :x:                |
+|LibmasterFBC/G       |   0.3   | :white_check_mark: |
+|LibmasterFBC/G       | < 0.2   | :x:                |
 
 ## Reporting a Vulnerability
 
