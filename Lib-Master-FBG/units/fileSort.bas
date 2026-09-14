@@ -183,6 +183,7 @@ Color rgbWhite, rgbBlack 'White on Black
 Print Using "##.###";(tok-tik) ; : Print " seconds"
 Print
 
+While Inkey$ <> "": Wend ' Flush the buffer
 Print "Catalog sorted.  Press any key to continue. ";
 Sleep
 Cls
