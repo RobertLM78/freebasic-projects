@@ -30,8 +30,8 @@ strDiv.bas
 #   Installation    #
 #####################
 Unpack the tar where you would like it.  Prebuilt binaries are in the ./bin/
-folder.  Included binaries are for linux amd64 and armhf.  For now, Windows
-users will have to compile using the instruction below.
+folder.  Included binaries are GNU/Linux_amd64, GNU/Linux_armhf, win32, and
+win64. (The armhf is 32-bit).
 
 Runtime libraries are required.  Most of these are common, and may already be
 installed on your system.  For Debian-based Linux distributions, the following
