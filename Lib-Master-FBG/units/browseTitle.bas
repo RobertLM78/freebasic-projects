@@ -51,7 +51,7 @@ For i = 1 to wRecNum
 			' Display title and name of function
 			Cls
 			Color rgbCyan, rgbBlack 'Cyan on Black
-			Print "LibMasterFBG-0.3  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Locate 6,1 : Print "Rec: "
 			Color rgbWhite, rgbBlack 'White on Black
@@ -70,7 +70,7 @@ For i = 1 to wRecNum
 			End If
 			Cls
 			Color rgbCyan, rgbBlack 'Cyan on Black
-			Print "LibMasterFBG-0.3  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Color rgbWhite, rgbBlack 'White on Black
 			Print
@@ -78,7 +78,7 @@ For i = 1 to wRecNum
 			ContPltLP:
 			Cls
 			Color rgbCyan, rgbBlack 'Cyan on Black
-			Print "LibMasterFBG-0.3  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Color rgbWhite, rgbBlack 'White on Black
 			Print
@@ -114,7 +114,7 @@ For i = 1 to wRecNum
 			' Display title and name of function
 			Cls
 			Color rgbCyan, rgbBlack 'Cyan on Black
-			Print "LibMasterFBG-0.3  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Locate 6,1 : Print "Rec: "
 			Color rgbWhite, rgbBlack 'White on Black
@@ -134,7 +134,7 @@ For i = 1 to wRecNum
 			ContPLP:
 			Cls
 			Color rgbCyan, rgbBlack 'Cyan on Black
-			Print "LibMasterFBG-0.3  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Color rgbWhite, rgbBlack 'White on Black
 			Print
