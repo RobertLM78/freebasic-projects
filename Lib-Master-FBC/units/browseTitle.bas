@@ -49,7 +49,7 @@ For i = 1 to wRecNum
 		If bQuery >= 1 or bQuery <= 20 Then ' Max Number of rows
 			' Display title and name of function
 			Cls
-			Print "LibMasterFBG-0.2  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Print "Rec: ";wRecMat(1,bQuery)
 			Print
@@ -66,13 +66,13 @@ For i = 1 to wRecNum
 				Goto Menu:
 			End If
 			Cls
-			Print "LibMasterFBG-0.2  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Print
 		ElseIf bQuery = 0 Then
 			ContPltLP:
 			Cls
-			Print "LibMasterFBG-0.2  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Print
 		End If
@@ -106,7 +106,7 @@ For i = 1 to wRecNum
 		If bQuery >= 1 or bQuery <= bRowNum Then ' Max Number of rows
 			' Display title and name of function
 			Cls
-			Print "LibMasterFBG-0.2  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Print "Rec: ";wRecMat(1,bQuery)
 			Print
@@ -124,7 +124,7 @@ For i = 1 to wRecNum
 			End If
 			ContPLP:
 			Cls
-			Print "LibMasterFBG-0.2  -  Title Browser"
+			Print sLibMsterTitle &"  -  Title Browser"
 			Print "----------------------------------"
 			Print
 		End If
