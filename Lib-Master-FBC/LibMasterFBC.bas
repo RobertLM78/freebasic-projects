@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBC.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.3 - Sept 2026
+' Version: 0.4 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
@@ -11,9 +11,9 @@
 	Width W, H
 #endif
 ' ==== Initializations ====
-Dim As String sLibMsterTitle = "LibMasterFBC-0.3"
+Dim As String sLibMsterTitle = "LibMasterFBC-0.4"
 Dim As Byte bCONT = 1 ' CONTinue with program
-Dim As String *4 sKey ' InKey$ variable
+Dim As String sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
 ' -------------------------------------
 Dim As zString Ptr zpCAT, zpCtmp     ' Data pointers - up to 65000 books (about 27 MBytes)
@@ -70,6 +70,12 @@ Dim As String sConfirmDel
 ' -------------------------------------
 Dim As Zstring *90 zReadMeText ' Help/readme variable
 ' -------------------------------------
+Dim As Double dTime  ' Update time
+Sub updateTime()
+    Locate 19,9 : Print Date$
+    Locate 20,10 : Print Time
+End Sub
+'--------------------------------------
 '#include once "./inc/dir.bi" ' Only if using the file attribute definitions
 ' =========================
 ' ==== Splash ====
@@ -83,6 +89,7 @@ While bCONT <> 0
 
 Menu:
 ' ==== Menu & Input ====
+Locate ,,0  'Turn off cursor
 Print sLibMsterTitle
 Print "----------------"
 Print
@@ -101,22 +108,30 @@ Print "  [L] Help: display readme"
 Print
 Print "Press a menu item letter. ";
 
-sKey = InKey$
-Sleep 20 ' Take a little nap waiting for input
-While Asc(sKey) < 97 or Asc(sKey) > 97+12-1 '+12 menu items
-	sKey = InKey$
-	Sleep 20 ' Take a little nap waiting for input
-Wend
+Locate 19,9 : Print Date$
+Locate 20,10 : Print Time
+
+dTime = Timer()
+Do                                                                     
+    sKey = Lcase(Inkey$)
+    If Asc(sKey) >= 97 and Asc(sKey) <= 97+12-1 or bCONT = 0 Then 
+        Exit Do
+    End If
+    If Abs(Timer()-dTime) > 1 Then 
+        updateTime() : dTime = Timer()
+    End If
+    Sleep 200 ' Take a long nap waiting for input -- extended time for console issues not picking up keypress
+Loop
 ' ======================
 
 ' ==== Selections ====
-If Asc(sKey) = 97 Then
+If Asc(sKey) = Asc("a") Then
 	'==============================
 	'  OPTION A - Author Search   '
 	'==============================
-	If (*zpCat)[0] = 0 Then '(*zpCat)[0] = 0 is equivalent to Len(*zpCAT) = 0
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then '(*zpCAT)[0] = 0 is equivalent to Len(*zpCAT) = 0
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -124,13 +139,13 @@ If Asc(sKey) = 97 Then
 		#include "./units/searchAuthor.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf Asc(sKey) = 98 Then
+ElseIf Asc(sKey) = Asc("b") Then
 	'=============================
 	'  OPTION B - Title Search   '
 	'=============================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -138,13 +153,13 @@ ElseIf Asc(sKey) = 98 Then
 		#include "./units/searchTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 99 Then
+ElseIf	Asc(sKey) = Asc("c") Then
 	'=============================
 	'  OPTION C - Title Browse   '
 	'=============================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -152,13 +167,13 @@ ElseIf	Asc(sKey) = 99 Then
 		#include "./units/browseTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 100 Then
+ElseIf	Asc(sKey) = Asc("d") Then
 	'===============================
 	'  OPTION D - Subject Search   '
 	'===============================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -166,13 +181,13 @@ ElseIf	Asc(sKey) = 100 Then
 		#include "./units/searchSubject.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 101 Then
+ElseIf	Asc(sKey) = Asc("e") Then
 	'==============================
 	'  OPTION E - Sort by Title   '
 	'==============================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -180,20 +195,20 @@ ElseIf	Asc(sKey) = 101 Then
 		#include "./units/fileSort.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 102 Then
+ElseIf	Asc(sKey) = Asc("f") Then
 	'================================
 	'  OPTION F - Data Entry Mode   '
 	'================================
 	#include "./units/fileUpdate.bas" 'Outputs CAT(),RecNum
 	#include "./units/strDiv.bas"   'Outputs TIT(),AUT(),SUBJ(),NTS()
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(sKey) = 103 Then
+ElseIf	Asc(sKey) = Asc("g") Then
 	'================================
 	'  OPTION G - Delete a Record   '
 	'================================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -201,20 +216,20 @@ ElseIf	Asc(sKey) = 103 Then
 		#include "./units/deleteRec.bas" 'Outputs CAT(),RecNUM
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 104 Then
+ElseIf	Asc(sKey) = Asc("h") Then
 	'==========================
 	'  OPTION H - Load File   '
 	'==========================
 	#include "./units/fileLoad.bas" 'Outputs CAT(),RecNum
 	#include "./units/strDiv.bas"   'Outputs TIT(),AUT(),SUBJ(),NTS()
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(sKey) = 105 Then
+ElseIf	Asc(sKey) = Asc("i") Then
 	'=========================
 	'  OPTION I - Save File  '
 	'=========================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -223,13 +238,13 @@ ElseIf	Asc(sKey) = 105 Then
 		#include "./units/fileSave.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 106 Then
+ElseIf	Asc(sKey) = Asc("j") Then
 	'============================
 	'  OPTION J - Save & Quit   '
 	'============================
-	If (*zpCat)[0] = 0 Then
-		Print
-		Print "No data in memory. Press any key to continue. ";
+	If (*zpCAT)[0] = 0 Then
+		'Print
+		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -241,14 +256,14 @@ ElseIf	Asc(sKey) = 106 Then
 		Print "Quitting to shell..."
 		bCONT = 0
 	End If
-ElseIf	Asc(sKey) = 107 Then
+ElseIf	Asc(sKey) = Asc("k") Then
 	'=====================
 	'  OPTION K - Quit   '
 	'=====================
 	Cls
 	Print "Quitting to shell..."
 	bCONT = 0
-ElseIf	Asc(sKey) = 108 Then
+ElseIf	Asc(sKey) = Asc("l") Then
 	'====================================
 	'  OPTION L - Help: display readme  '
 	'====================================
