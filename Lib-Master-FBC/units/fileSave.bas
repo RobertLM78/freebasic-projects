@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Save File"
 Print "------------------------------"
 Print
 ' Input file name
+Locate ,,1  'Turn cursor on
 Input "Enter a file name (type <DEF> for default file name): ",sFileName
 While sFileName = ""
 	Input "Enter a file name (type <DEF> for default file name): ",sFileName
@@ -35,5 +36,6 @@ Next
 	Print "File saved successfully.  Press any key to continue. ";
 	Sleep
 	Cls
+    Locate ,,0  'Turn cursor off
 ' ===================
 ' -----------------------------------------------------------------------------

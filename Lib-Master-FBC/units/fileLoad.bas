@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Load File"
 Print "------------------------------"
 Print
 ' Input file name
+Locate ,,1  'Turn cursor on
 Input "Enter a file name (type <DEF> for default file name): ",sFileName
 While sFileName = ""
 	Input "Enter a file name (type <DEF> for default file name): ",sFileName
@@ -57,6 +58,7 @@ Else ' DE - set wRecNum and load file into memory
 	Print "File loaded successfully.  Press any key to continue. ";
 	Sleep
 	Cls
+    Locate ,,0  'Turn cursor off
 End If
 ' ===================
 ' -----------------------------------------------------------------------------

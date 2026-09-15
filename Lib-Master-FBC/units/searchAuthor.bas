@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Author Search"
 Print "----------------------------------"
 Print
 ' Input author
+Locate ,,1  'Turn cursor on
 Input "Search for author: ",zAUT
 While zAUT = ""
 	Input "Search for author: ",zAUT
@@ -28,7 +29,7 @@ For i = 1 to wRecNum
 	Print i &" ";
 	If Instr(Lcase$(zpAUT0[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
 		Print
-		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
 		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
 		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
@@ -43,7 +44,7 @@ For i = 1 to wRecNum
 		Print
 	ElseIf Instr(Lcase$(zpAUT1[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
 		Print
-		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
 		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
 		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
@@ -58,7 +59,7 @@ For i = 1 to wRecNum
 		Print
 	ElseIf Instr(Lcase$(zpAUT2[(i-1)*bAUTmax]),Lcase$(zAUT)) >= 1 Then
 		Print
-		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
 		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
 		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
@@ -77,5 +78,6 @@ Print
 Print"Finsihed searching.  Press any key to continue. ";
 Sleep
 Cls
+Locate ,,0  'Turn cursor off
 ' ============================
 ' -----------------------------------------------------------------------------

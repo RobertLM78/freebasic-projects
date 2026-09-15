@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Data Entry Mode"
 Print "------------------------------------"
 Print
 ' Input number of records
+Locate ,,1  'Turn cursor on
 Input "How many records to enter?: ",sHowMuch
 lHowMuch = Val(sHowMuch)
 If lHowMuch = -1 Then
@@ -125,5 +126,6 @@ Close #wFileHandle
 Print "File saved successfully.  Press any key to continue. ";
 Sleep
 Cls
+Locate ,,0  'Turn cursor off
 ' =====================
 ' -----------------------------------------------------------------------------

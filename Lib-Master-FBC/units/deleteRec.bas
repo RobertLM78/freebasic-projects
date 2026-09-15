@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Delete a Record (no changes written)"
 Print "---------------------------------------------------------"
 Print
 ' Input number of records
+Locate ,,1  'Turn cursor on
 Input "Record to Delete?: ",sDelRec
 lDelRec = Val(sDelRec)
 If lDelRec = -1 Then
@@ -76,5 +77,6 @@ Select Case sConfirmDel
 		Print "Record deleted.  Press any key to continue. ";
 		Sleep
 		Cls
+        Locate ,,0  'Turn cursor off
 End Select
 ' -----------------------------------------------------------------------------

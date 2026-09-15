@@ -11,6 +11,7 @@ Print sLibMsterTitle &"  -  Title Search"
 Print "---------------------------------"
 Print
 ' Input title
+Locate ,,1  'Turn cursor on
 Input "Search for title: ",zTIT
 While zTIT = ""
 	Input "Search for title: ",zTIT
@@ -28,7 +29,7 @@ For i = 1 to wRecNum
 	Print i &" ";
 	If Instr(Lcase$(zpTIT[(i-1)*bTITmax]),Lcase$(zTIT)) >= 1 Then
 		Print
-		Print "Title:  "&zpTIT[(i-1)*bTITmax]
+		Print "Title:      "&zpTIT[(i-1)*bTITmax]
 		Print "Author 1:   "&zpAUT0[(i-1)*bAUTmax]
 		Print "Author 2:   "&zpAUT1[(i-1)*bAUTmax]
 		Print "Author 3:   "&zpAUT2[(i-1)*bAUTmax]
@@ -47,5 +48,6 @@ Print
 Print"Finsihed searching.  Press any key to continue. ";
 Sleep
 Cls
+Locate ,,0  'Turn cursor off
 ' ============================
 ' -----------------------------------------------------------------------------

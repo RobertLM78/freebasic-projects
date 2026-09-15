@@ -14,6 +14,7 @@ Print
 bRowNum = 0
 wPageN = 0
 
+Locate ,,1  'Turn cursor on
 ' Begin printing screen pages (length 20 rows)
 For i = 1 to wRecNum
 	bRowNum += 1
@@ -135,4 +136,5 @@ Print "No more titles in catalog."
 Print "Press any key to continue. ";
 Sleep
 Cls
+Locate ,,0  'Turn cursor off
 ' -----------------------------------------------------------------------------
