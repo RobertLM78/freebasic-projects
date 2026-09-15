@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBG.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.3 - Sept 2026
+' Version: 0.4 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: FBG == FreeBASIC 'Graphic' version (windowed)
@@ -17,9 +17,9 @@ Const rgbCyan = RGB(0, 255, 255)
 Const rgbWhite = RGB(255, 255, 255)
 Const rgbBlack = RGB(0, 0, 0)
 
-Dim As String sLibMsterTitle = "LibMasterFBG-0.3"
+Dim As String sLibMsterTitle = "LibMasterFBG-0.4"
 Dim As Byte bCONT = 1 ' CONTinue with program
-Dim As String *4 sKey ' InKey$ variable
+Dim As String sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
 ' -------------------------------------
 Dim As zString Ptr zpCAT, zpCtmp     ' Data pointers - up to 65000 books (about 27 MBytes)
@@ -76,6 +76,14 @@ Dim As String sConfirmDel
 ' -------------------------------------
 Dim As Zstring *90 zReadMeText ' Help/readme variable
 ' -------------------------------------
+Dim As Double dTime  ' Update time
+Sub updateTime()
+    Color rgbCyan, rgbBlack 'Cyan on Black
+    Locate 46,59 : Print Date
+    Locate 47,60 : Print Time
+    Color rgbWhite, rgbBlack 'White on Black
+End Sub
+'--------------------------------------
 '#include once "./inc/dir.bi" ' Only if using the file attribute definitions
 'Screen Attributes --------------------
 'Mode 20	1024x768	 	128x48 or 128x96	8x16 or 8x8		256K colors
@@ -121,21 +129,26 @@ Locate 46,59 : Print Date
 Locate 47,60 : Print Time
 Color rgbWhite, rgbBlack 'White on Black
 
-sKey = InKey$
-Sleep 20 ' Take a little nap waiting for input
-While Asc(sKey) < 97 or Asc(sKey) > 97+12-1 and bCONT <> 0 '+12 menu items
-	sKey = InKey$
-	Sleep 20 ' Take a little nap waiting for input
-    If Len(sKey)=0 Then
+dTime = Timer()
+Do                                                                     
+    sKey = Lcase(Inkey$)                                                    
+    If Asc(sKey) >= 97 and Asc(sKey) <= 97+12-1 or bCONT = 0 Then 
+        Exit Do
+    End If
+    If Abs(Timer()-dTime) > 1 Then 
+        updateTime() : dTime = Timer()
+    End If
+    If sKey = "" Then
         Sleep 20 ' Take a little nap waiting for input
     ElseIf sKey = chr$(255)+"k" Then ' If the 'X' was clicked
         bCONT = 0                    ' quit the program
     End If
-Wend
+    sleep 20 ' Take a little nap waiting for input                        
+Loop
 ' ======================
 
 ' ==== Selections ====
-If Asc(sKey) = 97 Then
+If Asc(sKey) = Asc("a") Then
 	'==============================
 	'  OPTION A - Author Search   '
 	'==============================
@@ -148,7 +161,7 @@ If Asc(sKey) = 97 Then
 		#include "./units/searchAuthor.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf Asc(sKey) = 98 Then
+ElseIf Asc(sKey) = Asc("b") Then
 	'=============================
 	'  OPTION B - Title Search   '
 	'=============================
@@ -161,7 +174,7 @@ ElseIf Asc(sKey) = 98 Then
 		#include "./units/searchTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 99 Then
+ElseIf	Asc(sKey) = Asc("c") Then
 	'=============================
 	'  OPTION C - Title Browse   '
 	'=============================
@@ -174,7 +187,7 @@ ElseIf	Asc(sKey) = 99 Then
 		#include "./units/browseTitle.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 100 Then
+ElseIf	Asc(sKey) = Asc("d") Then
 	'===============================
 	'  OPTION D - Subject Search   '
 	'===============================
@@ -187,7 +200,7 @@ ElseIf	Asc(sKey) = 100 Then
 		#include "./units/searchSubject.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 101 Then
+ElseIf	Asc(sKey) = Asc("e") Then
 	'==============================
 	'  OPTION E - Sort by Title   '
 	'==============================
@@ -200,14 +213,14 @@ ElseIf	Asc(sKey) = 101 Then
 		#include "./units/fileSort.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 102 Then
+ElseIf	Asc(sKey) = Asc("f") Then
 	'================================
 	'  OPTION F - Data Entry Mode   '
 	'================================
 	#include "./units/fileUpdate.bas" 'Outputs zpCAT[ ],wRecNum
 	#include "./units/strDiv.bas"   '   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(sKey) = 103 Then
+ElseIf	Asc(sKey) = Asc("g") Then
 	'================================
 	'  OPTION G - Delete a Record   '
 	'================================
@@ -220,14 +233,14 @@ ElseIf	Asc(sKey) = 103 Then
 		#include "./units/deleteRec.bas" 'Outputs zpCAT[ ],RecNUM
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 104 Then
+ElseIf	Asc(sKey) = Asc("h") Then
 	'==========================
 	'  OPTION H - Load File   '
 	'==========================
 	#include "./units/fileLoad.bas" 'Outputs zpCAT[ ],wRecNum
 	#include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 	While Inkey$ <> "": Wend ' Flush the buffer
-ElseIf	Asc(sKey) = 105 Then
+ElseIf	Asc(sKey) = Asc("i") Then
 	'=========================
 	'  OPTION I - Save File  '
 	'=========================
@@ -241,7 +254,7 @@ ElseIf	Asc(sKey) = 105 Then
 		#include "./units/fileSave.bas" 'No Outputs
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
-ElseIf	Asc(sKey) = 106 Then
+ElseIf	Asc(sKey) = Asc("j") Then
 	'============================
 	'  OPTION J - Save & Quit   '
 	'============================
@@ -264,7 +277,7 @@ ElseIf	Asc(sKey) = 106 Then
 		DeAllocate(zpNTS)
 		bCONT = 0
 	End If
-ElseIf	Asc(sKey) = 107 Then
+ElseIf	Asc(sKey) = Asc("k") Then
 	'=====================
 	'  OPTION K - Quit   '
 	'=====================
@@ -277,7 +290,7 @@ ElseIf	Asc(sKey) = 107 Then
 	DeAllocate(zpSUBJ)
 	DeAllocate(zpNTS)
 	bCONT = 0
-ElseIf	Asc(sKey) = 108 Then
+ElseIf	Asc(sKey) = Asc("l") Then
 	'====================================
 	'  OPTION L - Help: display readme  '
 	'====================================
