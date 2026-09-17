@@ -1,5 +1,5 @@
 ===============================================================================
-| Lin-Regressor-0.1 ; A simple linear regression calculator                   |
+| Lin-Regressor-0.2 ; A simple linear regression calculator                   |
 |      readme file                                                            |
 ===============================================================================
 This package contains 12 FreeBASIC files:
@@ -31,9 +31,9 @@ License: GPL 3.0
 *********************
 *   Installation    *
 *********************
-Linux 32- and 64-bit and Windows (32-bit) binaries are included in the Git
-repository (Lin-Regressor-x86,Lin-Regressor-amd64,and Lin-Regressor.exe,
-respectively).
+Unpack the tar where you would like it.  Prebuilt binaries are in the ./bin/
+folder.  Included binaries are GNU/Linux_amd64, GNU/Linux_armhf, win32, and
+win64.
 
 To compile on Linux:
 fbc ./Lin-Regressor.bas ./Lin-Regressor.xpm
@@ -41,16 +41,16 @@ fbc ./Lin-Regressor.bas ./Lin-Regressor.xpm
 To compile on Windows:
 fbc -s gui Lin-Regressor.bas Lin-Regressor.rc
 
-(Binaries compiled with FB version 1.02.1)
+(Binaries compiled with FB version 1.10.1)
 
 It may come up that the window is too tall.  In that case make the following 3
 changes:
 
-1) & 2) from Lin-Regress.bas; Lines 56 & 57 change to:
+1) & 2) from Lin-Regress.bas; Lines 65 & 66 change to:
 ScreenRes 640,480,32                                   ' Short window
 Width 640\8, 480\8 ' 8x8 characters, 80columnsx60rows  ' Short window
 
-3) from calcNplot.bas; Line 92 change to:
+3) from calcNplot.bas; Line 101 change to:
 View (10, 64) - (630, 312),RGB(0,0,0),RGB(0,255,255)  ' Short window
 
 ***************************

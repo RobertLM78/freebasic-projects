@@ -1,17 +1,18 @@
 ' -----------------------------------------------------------------------------
 ' Title: Lin-Regressor.bas - a linear regression calcuator and plotter
-' Version: 0.1 - June 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About:
 ' -----------------------------------------------------------------------------
 ' ==== Initializations ====
+Dim As String sLinRegressorT_ = "Lin-Regressor 0.2"
 Dim As String Blnk =_
 !"                                        "_
 !"                                        "
 Dim As Integer CONT = 1 ' CONTinue with program
-Dim As String *4 sKey ' Inkey$ variable
-Dim As Integer iGkey 'GetKey variable
+Dim As String sKey   'Inkey$ variable
+'Dim As Integer iGkey 'GetKey variable
 ' -------------------------------------
 Dim As Zstring *80 sXYarray(5000,1)
 Dim As Double dXarray(5000,1)
@@ -23,6 +24,7 @@ Dim As Integer k
 ' -------------------------------------
 Dim As Integer fileHandle ' File load and save
 Dim As String fileName
+Dim As String tfileName
 Dim As String fileNameOutput
 ' -------------------------------------
 Dim As Integer Delim(1,4) ' String divide routine
@@ -52,13 +54,21 @@ Dim As Double dMinX, dMinY ' Plot window
 Dim As Double dMaxX, dMaxY
 Dim As Double dStep, dX, dY
 ' -------------------------------------
+Dim As Double dTime  ' Update time
+Sub updateTime()
+    Color RGB(255,255,0),RGB(0,0,128)
+    Locate 58,34 : Print Date$
+    Locate 59,35 : Print Time
+    Color RGB(255,255,255),RGB(0,0,128)
+End Sub
+'--------------------------------------
 ' Screen and window attributes
 ScreenRes 640,960,32
 Width 640\8, 960\16 ' 8x16 characters, 80columnsx60rows
 ' Set background color to blue
 Color RGB(0,0,128),RGB(0,0,128)
 Line (0,0)-(639,959), ,bf
-WindowTitle "Lin-Regressor 0.1"
+WindowTitle sLinRegressorT_
 
 ' ==== Splash ====
 #include "./units/splash.bas"
@@ -73,7 +83,7 @@ Menu:
 Color RGB(255,255,0),RGB(0,0,128) ' Yellow on med. blue
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,32 : Print "Lin-Regressor 0.1"
+Locate 2,32 : Print sLinRegressorT_
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,32 : Print "-----------------"
 
@@ -86,6 +96,15 @@ Locate 13,25 : Print "  [5] Calculate & plot regression"
 Locate 15,25 : Print "  [6] Quit"
 Locate 17,25 : Print "  [7] Help: display readme"
 Locate 20,25 : Print "Press a menu item letter. ";
+' Display the file name once one is loaded.
+Color RGB(255,255,0),RGB(0,0,128)
+Line (0,844)-(640,844)
+Color RGB(255,255,255),RGB(0,0,128)
+If fileName = "" Then
+    Locate 55,25 : Print "  Current File:  No File loaded"
+Else
+    Locate 55,25 : Print "  Current File: " &fileName
+End If
 
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,904)-(640,904)
@@ -93,10 +112,14 @@ Locate 58,34 : Print Date$
 Locate 59,35 : Print Time
 Color RGB(255,255,255),RGB(0,0,128)
 
+dTime = Timer()
 sKey = InKey$
-Sleep 20 ' Take a little nap waiting for input
 While Asc(sKey) < 49 or Asc(sKey) > 49+6 and CONT <> 0
 	sKey = InKey$
+    If Abs(Timer()-dTime) > 1 Then
+        updateTime()
+        dTime = Timer()
+    End If
 	Sleep 20 ' Take a little nap waiting for input
     If Len(sKey)=0 Then
         Sleep 20 ' Take a little nap waiting for input
@@ -173,7 +196,7 @@ ElseIf	Asc(sKey) = 54 Then
 	CONT = 0 ' Signal quit
 ElseIf	Asc(sKey) = 55 Then
 	'====================================
-	'  OPTION L - Help: display readme  '
+	'  OPTION 7 - Help: display readme  '
 	'====================================
 	#include "./units/helpFile.bas" 'No Outputs
 	While Inkey$ <> "": Wend ' Flush the buffer
@@ -182,6 +205,6 @@ End If
 ' ====================
 Wend
 ' ==== End Main Program Loop ==================================================
-Print
+'Print
 End
 ' -----------------------------------------------------------------------------
