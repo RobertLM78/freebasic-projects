@@ -8,7 +8,7 @@
 |GematriaFBC          | < 3.0   | :x:                |
 |LibmasterFBC/G       |   0.3   | :white_check_mark: |
 |LibmasterFBC/G       | < 0.2   | :x:                |
-|Lin-Regressor        |   0.1   | :white_check_mark: |
+|Lin-Regressor        |   0.2   | :white_check_mark: |
 |fgConvertFBC/G       |   0.1   | :white_check_mark: |
 
 ## Reporting a Vulnerability
