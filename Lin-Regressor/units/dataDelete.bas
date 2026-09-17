@@ -10,7 +10,7 @@ Cls
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,24 : Print "Lin-Regressor 0.1 - Delete point"
+Locate 2,24 : Print sLinRegressorT_ &" - Delete point"
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,24 : Print "--------------------------------"
 Color RGB(255,255,255),RGB(0,0,128)

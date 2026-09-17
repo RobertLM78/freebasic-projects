@@ -1,14 +1,14 @@
 ' -----------------------------------------------------------------------------
 ' Title: splash.bas - generic splash
-' Version: 0.1 - May 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' -----------------------------------------------------------------------------
 Cls
 Print : Print
 Color RGB(255,255,0),RGB(0,0,128)
-Print "   Lin-Regressor 0.1"
-Print "Copyright (C) 2017  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
+Print "   "&sLinRegressorT_
+Print "Copyright (C) 2017-2026  Robert Lock (RobertLM78) - beannachtai@hotmail.com"
 Print
 Color RGB(255,255,255),RGB(0,0,128)
 Print " This program comes with ABSOLUTELY NO WARRANTY."
@@ -17,8 +17,8 @@ Print " under certain conditions."
 Print
 Print
 Color RGB(255,255,0),RGB(0,0,128)
-Print "  Lin-Regressor 0.1 - A simple linear regression calculator and plotter"
-Print "  Copyright (C) 2017  Robert Lock (RobertLM78)"
+Print "  "&sLinRegressorT_ &" - A simple linear regression calculator and plotter"
+Print "  Copyright (C) 2017-2026  Robert Lock (RobertLM78)"
 Color RGB(255,255,255),RGB(0,0,128)
 Print
 Color RGB(255,255,0),RGB(0,0,128)

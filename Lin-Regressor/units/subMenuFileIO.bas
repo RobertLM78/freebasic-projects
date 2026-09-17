@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: subMenuFileIO.bas - a sub menu unit for Lin-Regressor.bas
-' Version: 0.1 - June 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About:
@@ -15,7 +15,7 @@ SubMenu:
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,22 : Print "Lin-Regressor 0.1 - Load/Save Points"
+Locate 2,22 : Print sLinRegressorT_ &" - Load/Save Points"
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,22 : Print "------------------------------------"
 Color RGB(255,255,255),RGB(0,0,128)
@@ -23,6 +23,15 @@ Locate 5,25 : Print "  [1] Load points"
 Locate 7,25 : Print "  [2] Save points"
 Locate 9,25 : Print "  [3] Back to main menu"
 Locate 12,25 : Print "Press a menu item letter. ";
+' Display the file name once one is loaded.
+Color RGB(255,255,0),RGB(0,0,128)
+Line (0,844)-(640,844)
+Color RGB(255,255,255),RGB(0,0,128)
+If fileName = "" Then
+    Locate 55,25 : Print "  Current File:  No File loaded"
+Else
+    Locate 55,25 : Print "  Current File: " &fileName
+End If
 
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,904)-(640,904)
@@ -30,10 +39,15 @@ Locate 58,34 : Print Date$
 Locate 59,35 : Print Time
 Color RGB(255,255,255),RGB(0,0,128)
 
+dTime = Timer()
 sKey = InKey$
 Sleep 20 ' Take a little nap waiting for input
 While Asc(sKey) < 49 or Asc(sKey) > 49+2
 	sKey = InKey$
+    If Abs(Timer()-dTime) > 1 Then
+        updateTime()
+        dTime = Timer()
+    End If
 	Sleep 20 ' Take a little nap waiting for input
 Wend
 ' ======================

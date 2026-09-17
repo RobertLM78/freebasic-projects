@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: dataEntry.bas - translation unit for Lin-Regressor.bas
-' Version: 0.1 - June 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs sXYarray(),NumDataPts
@@ -10,7 +10,7 @@ Cls
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,24 : Print "Lin-Regressor 0.1 - Enter Points"
+Locate 2,24 : Print sLinRegressorT_ &" - Enter Points"
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,24 : Print "--------------------------------"
 Color RGB(255,255,255),RGB(0,0,128)
@@ -22,7 +22,7 @@ Locate 59,35 : Print Time
 Color RGB(255,255,255),RGB(0,0,128)
 
 ' Input number of points
-Locate 5,3 : Input "How many points to enter?: ",sHowMuch
+Locate 5,3 : Input "How many points to enter (-1 back to menu)?: ",sHowMuch
 iHowMuch = Int(Val(sHowMuch))
 If iHowMuch = -1 Then
 	Cls
@@ -35,7 +35,7 @@ While iHowMuch < 1 or iHowMuch > 5000 or sHowMuch = ""
 	iHowMuch = Int(Val(sHowMuch))
 	If iHowMuch = -1 Then
 		Cls
-		Goto Menu: 'Since there's no 'Return' from a translation unit :(
+		Goto Menu:
 	End If
 Wend
 Locate 6,1 : Print Blnk
@@ -67,7 +67,12 @@ Sleep
 While Inkey$ <> "": Wend ' Flush the buffer
 ' ==============================
 
+If fileName <> "" Then
+    tfileName = fileName
+End If
 ' Input file name
+'Locate 10,57 : Print fileName
+Locate 11,6 : Print "Type <BACK> to return to the main menu."
 Locate 10,3 : Input "Enter a file name (type <DEF> for default file name): ",fileName
 While fileName = ""
 	Locate 10,3 : Input "Enter a file name (type <DEF> for default file name): ",fileName
@@ -76,6 +81,7 @@ Wend
 If Lcase$(fileName) = "<def>" Then
 	fileName = "points.dat"
 ElseIf	Lcase$(fileName) = "<back>" Then
+    fileName = tfileName : tfileName = ""
 	Cls
 	Goto Menu:
 End If

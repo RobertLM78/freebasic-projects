@@ -10,7 +10,7 @@ Cls
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,25 : Print "Lin-Regressor 0.1 - View Points"
+Locate 2,25 : Print sLinRegressorT_ &" - View Points"
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,25 : Print "-------------------------------"
 Color RGB(255,255,255),RGB(0,0,128)
@@ -33,14 +33,27 @@ For i = 1 to NumDataPts
 		PageN += 1    ' increment PageN
 		RowNum = 4    ' reset RowNum
 		Locate 55,4 : Print "Page: "&Str$(PageN)
+        Locate 55,30 : Print "File: " &fileName
 		Locate 56,15 : Print "Press any key to continue or 'Esc' to menu."
-		iGkey = GetKey
+		'iGkey = GetKey
+        dTime = Timer()
+        sKey = Lcase(Inkey$)
+        While sKey = ""
+            sKey = Lcase(Inkey$)
+            If Abs(Timer()-dTime) > 1 Then
+                updateTime()
+                dTime = Timer()
+            End If
+            Sleep 20 ' Take a little nap waiting for input
+        Wend
 		For k = 4 to 56
 			Locate k,1 : Print Blnk
 		Next
-		If iGkey = 27 Then 'Press 'Esc' to return to menu
+		'If iGkey = 27 Then 'Press 'Esc' to return to menu
+        If Asc(sKey) = 27 Then 'Press 'Esc' to return to menu
 			Cls
-			Goto Menu:
+            Exit For
+			'Goto Menu:
 		End If
 ' ===========================================
 ' ==== Last screen page ====
@@ -48,8 +61,19 @@ For i = 1 to NumDataPts
 		PageN += 1    ' increment PageN
 		RowNum = 4    ' reset RowNum
 		Locate 55,4 : Print "Page: "&Str$(PageN)
+        Locate 55,30 : Print "File: " &fileName
 		Locate 56,15 : Print "No more data points. Press any key to continue. ";
-		Sleep
+		'Sleep
+        dTime = Timer()
+        sKey = Lcase(Inkey$)
+        While sKey = ""
+            sKey = Lcase(Inkey$)
+            If Abs(Timer()-dTime) > 1 Then
+                updateTime()
+                dTime = Timer()
+            End If
+            Sleep 20 ' Take a little nap waiting for input
+        Wend        
 		Cls
 ' ==========================
 	End If

@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title:calcNplot.bas - translation unit for Lin-Regressor.bas
-' Version: 0.1 - June 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Calculate the regression and plot
@@ -10,7 +10,7 @@ Cls
 Color RGB(255,255,0),RGB(0,0,128)
 Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
-Locate 2,22 : Print "Lin-Regressor 0.1 - Calculate and plot"
+Locate 2,22 : Print sLinRegressorT_ &" - Calculate and plot"
 Color RGB(255,255,0),RGB(0,0,128)
 Locate 3,22 : Print "--------------------------------------"
 Color RGB(255,255,255),RGB(0,0,128)
@@ -153,11 +153,19 @@ Locate 53,5 : Print "Max X = ";dMaxX
 Locate 53,45 : Print "Max Y = ";dMaxY
 Locate 54,5 : Print "Step Size = ";dStep
 Locate 56,20 : Print "(S)ave ouput or press any key to continue. ";
-iGkey = GetKey
-If iGkey = 83 Then
-	iGkey = 115
-End If
-If iGkey = 115 Then
+
+dTime = Timer()
+sKey = Lcase(Inkey$)
+While sKey = ""
+    sKey = Lcase(Inkey$)
+    If Abs(Timer()-dTime) > 1 Then
+        updateTime()
+        dTime = Timer()
+    End If
+    Sleep 20 ' Take a little nap waiting for input
+Wend
+
+If Asc(sKey) = 115 Then
 	For k = 43 to 56
 		Locate k,1 : Print Blnk
 	Next
@@ -177,7 +185,18 @@ If iGkey = 115 Then
 	Print #fileHandle, "Y = " &Str$(dSlope) &" * X " &zSign &" " &Str$(dInterceptABS)
 	Close #fileHandle
 	Locate 44,6 : Print "File saved successfully.  Press any key to continue. ";
-	Sleep
+	'Sleep
+    dTime = Timer()
+    sKey = Lcase(Inkey$)
+    While sKey = ""
+        sKey = Lcase(Inkey$)
+        If Abs(Timer()-dTime) > 1 Then
+            updateTime()
+            dTime = Timer()
+        End If
+        Sleep 20 ' Take a little nap waiting for input
+    Wend
+    
 	For k = 43 to 44
 		Locate k,1 : Print Blnk
 	Next
@@ -194,7 +213,17 @@ If iGkey = 115 Then
 	Locate 53,45 : Print "Max Y = ";dMaxY
 	Locate 54,5 : Print "Step Size = ";dStep
 	Locate 56,25 : Print "Press any key to continue. ";
-	Sleep
+	'Sleep
+    dTime = Timer()
+    sKey = Lcase(Inkey$)
+    While sKey = ""
+        sKey = Lcase(Inkey$)
+        If Abs(Timer()-dTime) > 1 Then
+            updateTime()
+            dTime = Timer()
+        End If
+        Sleep 20 ' Take a little nap waiting for input
+    Wend
 	Cls
 End If
 Cls
