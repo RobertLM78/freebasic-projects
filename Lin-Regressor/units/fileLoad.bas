@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileLoad.bas - translation unit for Lin-Regressor.bas
-' Version: 0.2 - Sept 2026
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs sXYarray(), NumDataPts
@@ -12,7 +12,11 @@ Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
 Locate 2,25 : Print sLinRegressorT_ &" - Load Points"
 Color RGB(255,255,0),RGB(0,0,128)
-Locate 3,25 : Print "-------------------------------"
+If Len(sLinRegressorT_) > 17 Then
+Locate 3,25 : Print "-------------------------------"+"--"
+    Else Locate 3,25 : Print "-------------------------------"
+End If
+
 Color RGB(255,255,255),RGB(0,0,128)
 
 ' Display the file name once one is loaded.
@@ -58,6 +62,7 @@ fileHandle = FreeFile() ' grab a free filehandle number
 ' Now check to see if the file exists
 If Dir(fileName) = "" Then ' DNE
     Locate 6,6 : Print "File Not Found!  Press any key to return to the menu. ";
+    fileName = tfileName : tfileName = ""
 	Sleep
 	Cls
 Else ' DE - load sXYarray array and set NumDataPts

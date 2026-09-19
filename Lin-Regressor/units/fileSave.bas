@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileSave.bas - translation unit for Lin-Regressor.bas
-' Version: 0.2 - Sept 2026
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: No Outputs
@@ -12,7 +12,11 @@ Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
 Locate 2,25 : Print sLinRegressorT_ &" - Save Points"
 Color RGB(255,255,0),RGB(0,0,128)
-Locate 3,25 : Print "-------------------------------"
+If Len(sLinRegressorT_) > 17 Then
+Locate 3,25 : Print "-------------------------------"+"--"
+    Else Locate 3,25 : Print "-------------------------------"
+End If
+
 Color RGB(255,255,255),RGB(0,0,128)
 
 ' Display the file name once one is loaded.

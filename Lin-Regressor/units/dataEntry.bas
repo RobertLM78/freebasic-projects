@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: dataEntry.bas - translation unit for Lin-Regressor.bas
-' Version: 0.2 - Sept 2026
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs sXYarray(),NumDataPts
@@ -12,7 +12,11 @@ Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
 Locate 2,24 : Print sLinRegressorT_ &" - Enter Points"
 Color RGB(255,255,0),RGB(0,0,128)
-Locate 3,24 : Print "--------------------------------"
+If Len(sLinRegressorT_) > 17 Then
+Locate 3,24 : Print "--------------------------------"+"--"
+    Else Locate 3,24 : Print "--------------------------------"
+End If
+
 Color RGB(255,255,255),RGB(0,0,128)
 
 Color RGB(255,255,0),RGB(0,0,128)
