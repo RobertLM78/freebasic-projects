@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBG.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.4 - Sept 2026
+' Version: 1.0 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: FBG == FreeBASIC 'Graphic' version (windowed)
@@ -17,7 +17,7 @@ Const rgbCyan = RGB(0, 255, 255)
 Const rgbWhite = RGB(255, 255, 255)
 Const rgbBlack = RGB(0, 0, 0)
 
-Dim As String sLibMsterTitle = "LibMasterFBG-0.4"
+Dim As String sLibMsterTitle = "LibMasterFBG-1.0"
 Dim As Byte bCONT = 1 ' CONTinue with program
 Dim As String sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
@@ -56,6 +56,7 @@ Dim As uShort k
 ' -------------------------------------
 Dim As Short  wFileHandle    ' File load and save
 Dim As String sFileName
+Dim As String sTempFileName
 ' -------------------------------------
 Dim As uByte  bDelim(1,6)    ' String divide routine
 ' -------------------------------------
@@ -75,6 +76,7 @@ Dim As String sDelRec
 Dim As String sConfirmDel
 ' -------------------------------------
 Dim As Zstring *90 zReadMeText ' Help/readme variable
+Dim As String sReadMeFile
 ' -------------------------------------
 Dim As Double dTime  ' Update time
 Sub updateTime()
@@ -122,6 +124,13 @@ Locate 29,50 : Print "[K] Quit"
 Locate 31,50 : Print "[L] Help: display readme"
 
 Locate 40,50 : Print "Press a menu item letter. ";
+
+'
+If sFileName = "" Then
+    Locate 43,3 : Print "  Current database:  No File loaded"
+Else
+    Locate 43,3 : Print "  Current database: " &sFileName
+End If
 
 Color rgbCyan, rgbBlack 'Cyan on Black
 Locate 44,1 : Print clrLine
@@ -231,6 +240,7 @@ ElseIf	Asc(sKey) = Asc("g") Then
 		Cls
 	Else
 		#include "./units/deleteRec.bas" 'Outputs zpCAT[ ],RecNUM
+        #include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
 ElseIf	Asc(sKey) = Asc("h") Then
