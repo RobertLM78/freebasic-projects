@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileUpdate.bas - translation unit for LibMasterFBG.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT(),RecNUM
@@ -8,12 +8,12 @@
 ' ==== Unit title and Input ====
 Cls
 Color rgbCyan, rgbBlack 'Cyan on Black
-Print sLibMsterTitle &"  -  Data Entry Mode"
-Print "------------------------------------"
+Print sLibMsterTitle &"  -  Data Entry Mode (no changes written)"
+Print "---------------------------------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
 ' Input number of records
-Input "How many records to enter?: ",sHowMuch
+Input "How many records to enter (Enter -1 to go back to the menu)?: ",sHowMuch
 lHowMuch = Val(sHowMuch)
 If lHowMuch = -1 Then
 	Cls
@@ -21,7 +21,7 @@ If lHowMuch = -1 Then
 End If
 While sHowMuch = "" or lHowMuch < 1
 	Print "Enter a positive integer. "
-	Input "How many records to enter?: ",sHowMuch
+	Input "How many records to enter (Enter -1 to go back to the menu)?: ",sHowMuch
 	lHowMuch = Val(sHowMuch)
 	If lHowMuch = -1 Then
 		Cls
@@ -100,8 +100,9 @@ Next
 wRecNum = wRecNum + lHowMuch
 ' Update zpCAT[]
 #include "./units/strCat.bas"
+Print "Catalog updated. Press any key to continue. ";
 
-' Finished updating
+/'  This functionality has been dropped to match the behavior of deleteRec.bas
 Print "Catalog updated. Press any key to save. ";
 Sleep
 Print : Print
@@ -125,9 +126,12 @@ Open sFileName For Append As #wFileHandle
 For i = wRecNum - lHowMuch + 1 to wRecNum
 	Print #wFileHandle, zpCAT[(i-1)*bCATmax]
 Next
-    Close #wFileHandle
-	Print "File saved successfully.  Press any key to continue. ";
-	Sleep
-	Cls
+Close #wFileHandle
+Print "File saved successfully.  Press any key to continue. ";
+'/
+Sleep
+Cls
+
+
 ' =====================
 ' -----------------------------------------------------------------------------

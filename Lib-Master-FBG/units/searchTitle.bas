@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: searchTitle.bas - translation unit for LibMasterFBG.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for title - no outputs
@@ -13,15 +13,15 @@ Print "---------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
 ' Input title
-Locate 4,1 : Input "Search for title: ",zTIT
+Locate 4,1 : Input "Search for title (type <back> to return to the menu): ",zTIT
 While zTIT = ""
-	Locate 4,1 : Input "Search for title: ",zTIT
+	Locate 4,1 : Input "Search for title (type <back> to return to the menu): ",zTIT
 Wend
 zTIT = Trim$(zTIT)
 ' Check to see if we want to go back to main menu
 If	Lcase$(zTIT) = "<back>" Then
 	Cls
-	Goto Menu: 'Since there's no 'Return' from a translation unit :(
+	Goto Menu:
 End If
 ' ==============================
 

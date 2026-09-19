@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: searchAuthor.bas - translation unit for LibMasterFBG.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for author - no outputs
@@ -13,15 +13,15 @@ Print "----------------------------------"
 Color rgbWhite, rgbBlack 'White on Black
 Print
 ' Input author
-Locate 4,1 : Input "Search for author: ",zAUT
+Locate 4,1 : Input "Search for author (type <back> to return to the menu): ",zAUT
 While zAUT = ""
-	Locate 4,1 : Input "Search for author: ",zAUT
+	Locate 4,1 : Input "Search for author (type <back> to return to the menu): ",zAUT
 Wend
 zAUT = Trim$(zAUT)
 ' Check to see if we want to go back to main menu
 If	Lcase$(zAUT) = "<back>" Then
 	Cls
-	Goto Menu: 'Since there's no 'Return' from a translation unit :(
+	Goto Menu:
 End If
 ' ==============================
 
