@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: searchAuthor.bas - translation unit for LibMasterFBC.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for author - no outputs
@@ -12,9 +12,9 @@ Print "----------------------------------"
 Print
 ' Input author
 Locate ,,1  'Turn cursor on
-Input "Search for author: ",zAUT
+Input "Search for author (type <back> to return to the menu): ",zAUT
 While zAUT = ""
-	Input "Search for author: ",zAUT
+	Input "Search for author (type <back> to return to the menu): ",zAUT
 Wend
 zAUT = Trim$(zAUT)
 ' Check to see if we want to go back to main menu

@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: searchSubject.bas - translation unit for LibMasterFBC.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for title - no outputs
@@ -15,13 +15,13 @@ Print "-----------------------------------"
 
 ' Input subject
 Locate ,,1  'Turn cursor on
-Input "Search for subject: ",zSUBJ
+Input "Search for subject (type <back> to return to the menu): ",zSUBJ
 While zSUBJ = ""
-	Input "Search for subject: ",zSUBJ
+	Input "Search for subject (type <back> to return to the menu): ",zSUBJ
 Wend
 zSUBJ = Trim$(zSUBJ)
 ' Check to see if we want to go back to main menu
-If	Lcase$(zSUBJ) = "<bac" Then
+If	Lcase$(zSUBJ) = "<bac" Then 'Remember this effectively only 4 characters long
 	Cls
 	Goto Menu:
 End If

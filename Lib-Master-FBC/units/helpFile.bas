@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: helpFile.bas - translation unit for LibMasterFBC.bas
-' Version: 0.1 - May 2017
+' Version: 0.2 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: No Outputs
@@ -11,9 +11,9 @@ Print
 ' =====================
 bRowNum = 0
 ' ==== Load and print readme file ====
-sFileName = "readme"
+sReadMeFile = "readme"
 wFileHandle = FreeFile() ' grab a free filehandle number
-Open sFileName For Input As #wFileHandle
+Open sReadMeFile For Input As #wFileHandle
 While Eof(wFileHandle) = 0
 	bRowNum += 1
 	Line Input #wFileHandle, zReadMeText

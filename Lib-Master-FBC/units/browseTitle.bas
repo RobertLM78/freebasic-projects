@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: browseTitle.bas - translation unit for LibMasterFBC.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: search for title - no outputs
@@ -29,16 +29,16 @@ For i = 1 to wRecNum
 		Print
 		Print
 		' Enter a number on the list
-		 Input "Select Title (Enter NULL to continue): ",bQuery
+		 Input "Select Title (Enter NULL to continue or -1 to go back to the menu): ",bQuery
 		If bQuery = -1 Then ' Go back to Main Script
 			Cls
-			Goto Menu: 'Since there's no 'Return' from a translation unit :(
+			Goto Menu:
 		ElseIf bQuery = 0 Then
 			Goto ContPltLP: ' WTF?!!!  No other choice because 0 made it through if at 50
 		End If
-		While bQuery < 0 or bQuery > 35     ' Max Number of rows
+		While bQuery < 0 or bQuery > 20     ' Max Number of rows
 			Print "Choose an item number within range."
-			Input "Select Title (Enter NULL to continue): ",bQuery
+			Input "Select Title (Enter NULL to continue or -1 to go back to the menu): ",bQuery
 			If bQuery = -1 Then ' Go back to Main Script
 				Cls
 				Goto Menu:
@@ -60,7 +60,13 @@ For i = 1 to wRecNum
 			Print "Subject:    "&zpSUBJ[(wRecMat(1,bQuery)-1)*bSUBJmax]
 			Print "Notes:      "&zpNTS[(wRecMat(1,bQuery)-1)*bNTSmax]
 			Print "Press any key to continue or 'Esc' to menu. ";
-			wKey = GetKey
+            
+            '' Go back to the page the Query was called from
+            i = wRecMat(1,bQuery) - bQuery
+            wPageN -= 1
+            'locate 13,1 : print bQuery : print wRecMat(1,bQuery) : print i; : sleep 'DEBUG
+			''=====================================================================
+            wKey = GetKey
 			If wKey = 27 Then 'Press 'Esc' to return to menu
 				Cls
 				Goto Menu:
@@ -117,6 +123,11 @@ For i = 1 to wRecNum
 			Print "Subject:    "&zpSUBJ[(wRecMat(1,bQuery)-1)*bSUBJmax]
 			Print "Notes:      "&zpNTS[(wRecMat(1,bQuery)-1)*bNTSmax]
 			Print "Press any key to continue or 'Esc' to menu. ";
+
+            '' Go back to the page the Query was called from
+            i = wRecMat(1,bQuery) - bQuery
+            wPageN -= 1 : bRowNum = 0
+            
 			wKey = GetKey
 			If wKey = 27 Then 'Press 'Esc' to return to menu
 				Cls

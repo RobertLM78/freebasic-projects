@@ -1,6 +1,6 @@
 ' -----------------------------------------------------------------------------
 ' Title: deleteRec.bas - translation unit for LibMasterFBC.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT(),RecNUM
@@ -12,7 +12,7 @@ Print "---------------------------------------------------------"
 Print
 ' Input number of records
 Locate ,,1  'Turn cursor on
-Input "Record to Delete?: ",sDelRec
+Input "Record to Delete (Enter -1 to go back to the menu)?: ",sDelRec
 lDelRec = Val(sDelRec)
 If lDelRec = -1 Then
 	Cls
@@ -20,7 +20,7 @@ If lDelRec = -1 Then
 End If
 While sDelRec = "" or lDelRec < 1 or lDelRec > wRecNum
 	Print "Enter a positive integer. "
-	Input "Record to Delete?: ",sDelRec
+	Input "Record to Delete (Enter -1 to go back to the menu)?: ",sDelRec
 	lDelRec = Val(sDelRec)
 	If lDelRec = -1 Then
 		Cls
@@ -73,7 +73,6 @@ Select Case sConfirmDel
 			wRecNumMem = 1
 		End If
 		#include "./units/allocate.bas"
-		#include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 		Print "Record deleted.  Press any key to continue. ";
 		Sleep
 		Cls

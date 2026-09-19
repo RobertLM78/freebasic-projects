@@ -1,18 +1,18 @@
 ' -----------------------------------------------------------------------------
 ' Title: fileUpdate.bas - translation unit for LibMasterFBC.bas
-' Version: 0.2 - June 2017
+' Version: 0.3 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Outputs CAT(),RecNUM
 ' -----------------------------------------------------------------------------
 ' ==== Unit title and Input ====
 Cls
-Print sLibMsterTitle &"  -  Data Entry Mode"
-Print "------------------------------------"
+Print sLibMsterTitle &"  -  Data Entry Mode (no changes written)"
+Print "---------------------------------------------------------"
 Print
 ' Input number of records
 Locate ,,1  'Turn cursor on
-Input "How many records to enter?: ",sHowMuch
+Input "How many records to enter (Enter -1 to go back to the menu)?: ",sHowMuch
 lHowMuch = Val(sHowMuch)
 If lHowMuch = -1 Then
 	Cls
@@ -20,7 +20,7 @@ If lHowMuch = -1 Then
 End If
 While sHowMuch = "" or lHowMuch < 1
 	Print "Enter a positive integer. "
-	Input "How many records to enter?: ",sHowMuch
+	Input "How many records to enter (Enter -1 to go back to the menu)?: ",sHowMuch
 	lHowMuch = Val(sHowMuch)
 	If lHowMuch = -1 Then
 		Cls
@@ -97,7 +97,9 @@ Next
 wRecNum = wRecNum + lHowMuch
 ' Update zpCAT[]
 #include "./units/strCat.bas"
+Print "Catalog updated. Press any key to continue. ";
 
+/'  This functionality has been dropped to match the behavior of deleteRec.bas
 ' Finished updating
 Print "Catalog updated. Press any key to save. ";
 Sleep
@@ -124,6 +126,7 @@ For i = wRecNum - lHowMuch + 1 to wRecNum
 Next
 Close #wFileHandle
 Print "File saved successfully.  Press any key to continue. ";
+'/
 Sleep
 Cls
 Locate ,,0  'Turn cursor off
