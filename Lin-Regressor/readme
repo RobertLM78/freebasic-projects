@@ -1,5 +1,5 @@
 ===============================================================================
-| Lin-Regressor-0.2 ; A simple linear regression calculator                   |
+| Lin-Regressor-0.2.1 ; A simple linear regression calculator                 |
 |      readme file                                                            |
 ===============================================================================
 This package contains 12 FreeBASIC files:
@@ -21,8 +21,8 @@ strDiv.bas
 subMenuFileIO.bas
 
 
-By Robert Lock (RobertLM78, beannachtai@hotmail.com)
-June 2017
+By RobertLM78, beannachtai@hotmail.com
+ⓒ June 2017-2026
 License: GPL 3.0
 
 ===============================================================================

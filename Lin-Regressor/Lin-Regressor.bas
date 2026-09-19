@@ -1,12 +1,12 @@
 ' -----------------------------------------------------------------------------
 ' Title: Lin-Regressor.bas - a linear regression calcuator and plotter
-' Version: 0.2 - Sept 2026
+' Version: 0.2.1 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About:
 ' -----------------------------------------------------------------------------
 ' ==== Initializations ====
-Dim As String sLinRegressorT_ = "Lin-Regressor 0.2"
+Dim As String sLinRegressorT_ = "Lin-Regressor 0.2.1"
 Dim As String Blnk =_
 !"                                        "_
 !"                                        "
@@ -85,7 +85,11 @@ Line (0,8)-(640,8)
 Color RGB(255,255,255),RGB(0,0,128)
 Locate 2,32 : Print sLinRegressorT_
 Color RGB(255,255,0),RGB(0,0,128)
-Locate 3,32 : Print "-----------------"
+If Len(sLinRegressorT_) > 17 Then
+    Locate 3,32 : Print "-----------------"+"--"
+    Else
+        Locate 3,32 : Print "-----------------"
+End If
 
 Color RGB(255,255,255),RGB(0,0,128)
 Locate 5,25 : Print "  [1] Load/Save data points"
