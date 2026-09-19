@@ -1,17 +1,17 @@
 ' -----------------------------------------------------------------------------
 ' Title: LibMasterFBC.bas - A port of the RBL classic program to FreeBASIC
-' Version: 0.4 - Sept 2026
+' Version: 1.0 - Sept 2026
 ' Author: Robert Lock - beannachtai@homtail.com
 ' License: GPL v3
 ' About: Console version
 ' -----------------------------------------------------------------------------
-' Define the console size, Windows-based systems
-#ifdef __FB_WIN32__
+' Define the console size, Windows-based systems (doesn't seem necessary, in fact seems to break searches)
+/'#ifdef __FB_WIN32__
 	Const W = 125, H = 50
 	Width W, H
-#endif
+#endif'/
 ' ==== Initializations ====
-Dim As String sLibMsterTitle = "LibMasterFBC-0.4"
+Dim As String sLibMsterTitle = "LibMasterFBC-1.0"
 Dim As Byte bCONT = 1 ' CONTinue with program
 Dim As String sKey ' InKey$ variable
 Dim As Short wKey     'GetKey variable
@@ -50,6 +50,7 @@ Dim As uShort k
 ' -------------------------------------
 Dim As Short  wFileHandle    ' File load and save
 Dim As String sFileName
+Dim As String sTempFileName
 ' -------------------------------------
 Dim As uByte  bDelim(1,6)    ' String divide routine
 ' -------------------------------------
@@ -69,11 +70,12 @@ Dim As String sDelRec
 Dim As String sConfirmDel
 ' -------------------------------------
 Dim As Zstring *90 zReadMeText ' Help/readme variable
+Dim As String sReadMeFile
 ' -------------------------------------
 Dim As Double dTime  ' Update time
 Sub updateTime()
-    Locate 19,9 : Print Date$
-    Locate 20,10 : Print Time
+    Locate 22,9 : Print Date$
+    Locate 23,10 : Print Time
 End Sub
 '--------------------------------------
 '#include once "./inc/dir.bi" ' Only if using the file attribute definitions
@@ -108,8 +110,14 @@ Print "  [L] Help: display readme"
 Print
 Print "Press a menu item letter. ";
 
-Locate 19,9 : Print Date$
-Locate 20,10 : Print Time
+If sFileName = "" Then
+    Locate 20,1 : Print "Current database:  No File loaded"
+Else
+    Locate 20,1 : Print "Current database: " &sFileName
+End If
+
+Locate 22,9 : Print Date$
+Locate 23,10 : Print Time
 
 dTime = Timer()
 Do                                                                     
@@ -131,7 +139,7 @@ If Asc(sKey) = Asc("a") Then
 	'==============================
 	If (*zpCAT)[0] = 0 Then '(*zpCAT)[0] = 0 is equivalent to Len(*zpCAT) = 0
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -145,7 +153,7 @@ ElseIf Asc(sKey) = Asc("b") Then
 	'=============================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -159,7 +167,7 @@ ElseIf	Asc(sKey) = Asc("c") Then
 	'=============================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -173,7 +181,7 @@ ElseIf	Asc(sKey) = Asc("d") Then
 	'===============================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -187,7 +195,7 @@ ElseIf	Asc(sKey) = Asc("e") Then
 	'==============================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -208,12 +216,13 @@ ElseIf	Asc(sKey) = Asc("g") Then
 	'================================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
 	Else
 		#include "./units/deleteRec.bas" 'Outputs CAT(),RecNUM
+        #include "./units/strDiv.bas"   'Outputs zpTIT[ ],zpAUT# [ ],zpSUBJ[ ],zpNTS[ ]
 		While Inkey$ <> "": Wend ' Flush the buffer
 	End If
 ElseIf	Asc(sKey) = Asc("h") Then
@@ -229,7 +238,7 @@ ElseIf	Asc(sKey) = Asc("i") Then
 	'=========================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
@@ -244,7 +253,7 @@ ElseIf	Asc(sKey) = Asc("j") Then
 	'============================
 	If (*zpCAT)[0] = 0 Then
 		'Print
-		Locate 22,1 : Print "No data in memory. Press any key to continue. ";
+		Locate 21,1 : Print "No data in memory. Press any key to continue. ";
 		While Inkey$ <> "": Wend ' Flush the buffer
 		Sleep
 		Cls
